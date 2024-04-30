@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://df6nq0pn78vr6"]
+
+[ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
+[ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Scenes/test_scene.tscn" id="2_q1gkl"]
+[ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/hands.tscn" id="3_ia5al"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_8wflw")]
+
+[node name="Light" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Light"]
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="test_scene" parent="." instance=ExtResource("2_q1gkl")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hands" parent="CanvasLayer" instance=ExtResource("3_ia5al")]
