@@ -16,3 +16,4 @@ func _input(event):
 
 func raise_up():
 	Inventory.set_left_hand(id)
+	Saylog.add(ItemData.get_pickup_message(id))

@@ -17,6 +17,11 @@ func get_decription(id):
 		return
 	return content[id]["decription"]
 	
+func get_pickup_message(id):
+	if id == null:
+		return
+	return content[id]["pickup_message"]
+	
 func get_ground_texture_name(id):
 	if id == null:
 		return

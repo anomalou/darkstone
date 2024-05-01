@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=6 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Scenes/test_scene.tscn" id="2_q1gkl"]
 [ext_resource type="PackedScene" uid="uid://bhropuqe7fxmy" path="res://Components/item.tscn" id="2_yq5ap"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/hands.tscn" id="3_ia5al"]
+[ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/saylog.tscn" id="5_mgwva"]
 
 [node name="World" type="Node2D"]
 
@@ -27,3 +28,5 @@ color = Color(0.393086, 0.393086, 0.393085, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hands" parent="CanvasLayer" instance=ExtResource("3_ia5al")]
+
+[node name="Saylog" parent="CanvasLayer" instance=ExtResource("5_mgwva")]

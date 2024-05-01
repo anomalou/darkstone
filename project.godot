@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ItemData="*res://Scripts/ItemData.gd"
 Inventory="*res://Scripts/Inventory.gd"
+Saylog="*res://Scripts/Saylog.gd"
 
 [editor]
 

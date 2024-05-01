@@ -2,12 +2,14 @@
 	"toolbox": {
 		"name": "Toolbox",
 		"description": "Red toolbox. Looks familiar",
+		"pickup_message": "You became more robust",
 		"ground_texture": "toolbox",
 		"slot_texture": "toolbox"
 	},
 	"metal_bar": {
 		"name": "Metal bar",
 		"description": "Use it to break into place you not supposed to be",
+		"pickup_message": "Take kare",
 		"ground_texture": "metal_bar",
 		"slot_texture": "metal_bar"
 	}
