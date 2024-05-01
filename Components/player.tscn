@@ -4,21 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://ch7npbsqokmep" path="res://Sprites/tiles.png" id="2_1yq1m"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1peax"]
-radius = 14.0357
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rpq3"]
+radius = 9.0
+height = 28.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1wcc"]
 atlas = ExtResource("2_1yq1m")
 region = Rect2(0, 32, 32, 32)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 z_as_relative = false
 collision_layer = 2
 floor_block_on_wall = false
 script = ExtResource("1_1jf8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1peax")
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_3rpq3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_s1wcc")

@@ -1,0 +1,14 @@
+{
+	"toolbox": {
+		"name": "Toolbox",
+		"description": "Red toolbox. Looks familiar",
+		"ground_texture": "toolbox",
+		"slot_texture": "toolbox"
+	},
+	"metal_bar": {
+		"name": "Metal bar",
+		"description": "Use it to break into place you not supposed to be",
+		"ground_texture": "metal_bar",
+		"slot_texture": "metal_bar"
+	}
+}

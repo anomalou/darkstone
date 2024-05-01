@@ -1,28 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=6 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Scenes/test_scene.tscn" id="2_q1gkl"]
-[ext_resource type="PackedScene" uid="uid://bhropuqe7fxmy" path="res://Components/item.tscn" id="2_yq5ap"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/hands.tscn" id="3_ia5al"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="4_gye73"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bln5s"]
+light_mode = 2
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_8wflw")]
 
-[node name="Ground" type="Node2D" parent="."]
-
-[node name="item" parent="Ground" instance=ExtResource("2_yq5ap")]
-position = Vector2(47, 0)
+[node name="Item" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_bln5s")
+position = Vector2(52, -11)
+script = ExtResource("4_gye73")
 id = "toolbox"
 
 [node name="Light" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Light"]
-color = Color(0.393086, 0.393086, 0.393085, 1)
+color = Color(0.374139, 0.374139, 0.374139, 1)
 
-[node name="Map" type="Node2D" parent="."]
-
-[node name="test_scene" parent="Map" instance=ExtResource("2_q1gkl")]
+[node name="test_scene" parent="." instance=ExtResource("2_q1gkl")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
