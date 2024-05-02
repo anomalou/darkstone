@@ -1,10 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhropuqe7fxmy"]
+[gd_scene load_steps=4 format=3 uid="uid://dxtkkc5w4naq2"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_f5g2a"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bln5s"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xs4vr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c643q"]
 light_mode = 2
 
-[node name="item" type="Sprite2D"]
-material = SubResource("CanvasItemMaterial_bln5s")
+[node name="item" type="RigidBody2D"]
+collision_layer = 4
+input_pickable = true
+gravity_scale = 0.0
+linear_damp = 50.0
 script = ExtResource("1_f5g2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xs4vr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_c643q")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=8 format=3 uid="uid://cdvgyvt112yq4"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerControler.gd" id="1_1d8yq"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl.gd" id="1_1jf8j"]
+[ext_resource type="Texture2D" uid="uid://ch7npbsqokmep" path="res://Sprites/tiles.png" id="2_1yq1m"]
 [ext_resource type="Script" path="res://Scripts/Body.gd" id="2_4b17a"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1wcc"]
+atlas = ExtResource("2_1yq1m")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rpq3"]
 radius = 9.0
@@ -17,11 +22,13 @@ z_as_relative = false
 collision_layer = 2
 collision_mask = 5
 floor_block_on_wall = false
-script = ExtResource("1_1d8yq")
+script = ExtResource("1_1jf8j")
 
 [node name="Body" type="Node2D" parent="."]
 script = ExtResource("2_4b17a")
-race = "human"
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+texture = SubResource("AtlasTexture_s1wcc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

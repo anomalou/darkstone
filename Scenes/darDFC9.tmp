@@ -24,7 +24,7 @@ id = "toolbox"
 [node name="Light" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Light"]
-color = Color(0.341176, 0.341176, 0.341176, 1)
+color = Color(0.393086, 0.393086, 0.393085, 1)
 
 [node name="Map" type="Node2D" parent="."]
 

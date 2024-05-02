@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmsaanwq7oxuu"]
+
+[ext_resource type="Script" path="res://Scripts/BodyPart.gd" id="1_14u2v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dtir4"]
+light_mode = 2
+
+[node name="body_part" type="Sprite2D"]
+material = SubResource("CanvasItemMaterial_dtir4")
+script = ExtResource("1_14u2v")

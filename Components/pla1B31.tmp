@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=7 format=3 uid="uid://cdvgyvt112yq4"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerControler.gd" id="1_1d8yq"]
-[ext_resource type="Script" path="res://Scripts/Body.gd" id="2_4b17a"]
+[ext_resource type="Script" path="res://Scripts/PlayerControl.gd" id="1_1jf8j"]
+[ext_resource type="Texture2D" uid="uid://ch7npbsqokmep" path="res://Sprites/tiles.png" id="2_1yq1m"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rpq3"]
@@ -11,27 +11,28 @@ height = 28.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxy03"]
 radius = 42.0119
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1wcc"]
+atlas = ExtResource("2_1yq1m")
+region = Rect2(0, 32, 32, 32)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 z_as_relative = false
 collision_layer = 2
-collision_mask = 5
 floor_block_on_wall = false
-script = ExtResource("1_1d8yq")
-
-[node name="Body" type="Node2D" parent="."]
-script = ExtResource("2_4b17a")
-race = "human"
+script = ExtResource("1_1jf8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_3rpq3")
 
-[node name="DetectionArea" type="Area2D" parent="."]
-visible = false
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_dxy03")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_s1wcc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.015, 2.015)
