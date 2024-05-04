@@ -28,10 +28,9 @@ func _process(delta):
 	
 func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
 	if event.is_action_pressed("examine"):
-		Signals.show_medinfo(self)
-	elif event.is_action_pressed("left_click"):
-		#get_part("upper_body").eject("heart")
 		pass
+	elif event.is_action_pressed("left_click"):
+		Signals.interact_with(self)
 
 func build_body():
 	var race_data : Dictionary = RaceData.get_race(race)

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bt1jsnwr853lh"]
+[gd_scene load_steps=2 format=3 uid="uid://bt1jsnwr853lh"]
+
+[ext_resource type="Script" path="res://Components/IntentGUI.gd" id="1_8gxxw"]
 
 [node name="Intents" type="TabBar"]
 anchors_preset = 12
@@ -15,3 +17,6 @@ tab_0/title = "Help"
 tab_1/title = "Hurt"
 tab_2/title = "Resist"
 tab_3/title = "Grab"
+script = ExtResource("1_8gxxw")
+
+[connection signal="tab_clicked" from="." to="." method="_on_tab_clicked"]
