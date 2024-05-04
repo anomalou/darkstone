@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv1cioi761r18"]
+[gd_scene load_steps=3 format=3 uid="uid://copaeqnstnbha"]
 
-[ext_resource type="Script" path="res://Scripts/Body.gd" id="1_x3oum"]
+[ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_ixy80"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xljgu"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ounu7"]
 
 [node name="Body" type="Node2D"]
-script = ExtResource("1_x3oum")
+script = ExtResource("1_ixy80")
 
 [node name="HitArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-shape = SubResource("CapsuleShape2D_xljgu")
+shape = SubResource("CapsuleShape2D_ounu7")
 
 [connection signal="input_event" from="HitArea" to="." method="_on_hit_area_input_event"]

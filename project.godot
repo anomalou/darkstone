@@ -17,10 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ItemData="*res://Scripts/ItemData.gd"
-Saylog="*res://Scripts/Saylog.gd"
-RaceData="*res://Scripts/RaceData.gd"
-ReagentData="*res://Scripts/ReagentData.gd"
+ItemData="*res://Scripts/AutoLoad/ItemData.gd"
+Saylog="*res://Scripts/AutoLoad/Saylog.gd"
+RaceData="*res://Scripts/AutoLoad/RaceData.gd"
+ReagentData="*res://Scripts/AutoLoad/ReagentData.gd"
+Signals="*res://Scripts/AutoLoad/Signals.gd"
 
 [editor]
 
@@ -90,3 +91,4 @@ hand_switch={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)

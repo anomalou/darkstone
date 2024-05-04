@@ -1,13 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=8 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Scenes/test_scene.tscn" id="2_q1gkl"]
 [ext_resource type="PackedScene" uid="uid://dxtkkc5w4naq2" path="res://Components/item.tscn" id="2_yq5ap"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/hands.tscn" id="3_ia5al"]
 [ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/saylog.tscn" id="5_mgwva"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_we2g7"]
-bounce = 0.3
+[ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/body_status.tscn" id="6_d68g6"]
+[ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/intents.tscn" id="7_ea30d"]
 
 [node name="World" type="Node2D"]
 
@@ -17,7 +16,6 @@ bounce = 0.3
 
 [node name="item" parent="Ground" instance=ExtResource("2_yq5ap")]
 position = Vector2(55, 0)
-physics_material_override = SubResource("PhysicsMaterial_we2g7")
 linear_damp = 5.0
 id = "toolbox"
 
@@ -46,3 +44,7 @@ offset_right = 0.0
 offset_bottom = 300.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="BodyStatus" parent="CanvasLayer" instance=ExtResource("6_d68g6")]
+
+[node name="Intents" parent="CanvasLayer" instance=ExtResource("7_ea30d")]

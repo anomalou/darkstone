@@ -3,6 +3,7 @@
 		"min_temperature" : 33.0,
 		"max_temperature" : 40.0,
 		"head": {
+			"name": "Head",
 			"texture": "head",
 			"size": 10,
 			"has_bone": true,
@@ -13,19 +14,22 @@
 			],
 			"organs": [
 				{
-					"name": "brain",
+					"id": "brain",
+					"name": "Brain",
 					"tags": [
 						"brain"
 					]
 				},
 				{
-					"name": "eyes",
+					"id": "eyes",
+					"name": "Eyes",
 					"tags": [
 						"eyes"
 					]
 				},
 				{
-					"name": "ears",
+					"id": "ears",
+					"name": "Ears",
 					"tags": [
 						"ears"
 					]
@@ -33,6 +37,7 @@
 			]
 		},
 		"upper_body": {
+			"name": "Upper body",
 			"texture": "upper_body",
 			"size": 25,
 			"has_bone": true,
@@ -42,13 +47,15 @@
 			],
 			"organs": [
 				{
-					"name": "heart",
+					"id": "heart",
+					"name": "Heart",
 					"tags": [
 						"heart"
 					]
 				},
 				{
-					"name": "lungs",
+					"id": "lungs",
+					"name": "Lungs",
 					"tags": [
 						"lungs"
 					]
@@ -56,16 +63,19 @@
 			]
 		},
 		"left_arm": {
+			"name": "Left arm",
 			"texture": "left_arm",
 			"size": 15,
 			"has_bone": true
 		},
 		"right_arm": {
+			"name": "Right arm",
 			"texture": "right_arm",
 			"size": 15,
 			"has_bone": true
 		},
 		"groin": {
+			"name": "Groin",
 			"texture": "groin",
 			"size": 15,
 			"allowed_organs": [
@@ -74,13 +84,15 @@
 			],
 			"organs": [
 				{
-					"name": "liver",
+					"id": "liver",
+					"name": "Liver",
 					"tags": [
 						"liver"
 					]
 				},
 				{
-					"name": "appendix",
+					"id": "appendix",
+					"name": "Appendix",
 					"tags": [
 						"other"
 					]
@@ -88,11 +100,13 @@
 			]
 		},
 		"left_leg": {
+			"name": "Left leg",
 			"texture": "left_leg",
 			"size": 20,
 			"has_bone": true
 		},
 		"right_leg": {
+			"name": "Right leg",
 			"texture": "right_leg",
 			"size": 20,
 			"has_bone": true

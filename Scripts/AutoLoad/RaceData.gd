@@ -23,3 +23,30 @@ func create_body_part():
 	
 func create_organ():
 	return organ_scene.instantiate()
+
+func get_race_body_part_texture(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		return race[part_id]["texture"]
+
+func get_race_body_part_size(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		return race[part_id]["size"]
+
+func get_race_body_part_allowed_organs(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		return race[part_id]["allowed_organs"]
+
+func get_race_body_part_organs(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		var part = race[part_id]
+		if part.has("organs"):
+			return part["organs"]
+
+func get_race_body_part_name(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		return race[part_id]["name"]

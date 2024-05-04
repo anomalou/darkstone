@@ -6,8 +6,6 @@ var blood_level : float
 @export var max_blood_level : float = 100.0
 var blood_group : String
 
-var brute_damage : float
-var burn_damage : float
 var toxin_damage : float
 var suff_damage : float # Suffocation damage
 
@@ -29,8 +27,10 @@ func _process(delta):
 	process_injures(delta)
 	
 func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
-	if event.is_action_pressed("left_click"):
-		# process hit here
+	if event.is_action_pressed("examine"):
+		Signals.show_medinfo(self)
+	elif event.is_action_pressed("left_click"):
+		#get_part("upper_body").eject("heart")
 		pass
 
 func build_body():
@@ -71,14 +71,15 @@ func build_body():
 	cached_parts["right_leg"] = right_leg
 #endregion
 
-func create_body_part(parts : Dictionary, part_name : String):
+func create_body_part(parts : Dictionary, part_id : String):
 	var obj = RaceData.create_body_part()
-	var data : Dictionary = parts[part_name]
-	obj.name = part_name
-	obj.texture_name = data["texture"]
-	obj.size = data["size"]
-	if data.has("organs"):
-		for organ in create_organs(data["organs"]):
+	var data : Dictionary = parts[part_id]
+	obj.name = part_id
+	obj.texture_name = RaceData.get_race_body_part_texture(race, part_id)
+	obj.size = RaceData.get_race_body_part_size(race, part_id)
+	var organs = RaceData.get_race_body_part_organs(race, part_id)
+	if organs:
+		for organ in create_organs(organs):
 			obj.inject(organ)
 	
 	return obj
@@ -88,7 +89,7 @@ func create_organs(organs : Array):
 	
 	for organ : Dictionary in organs:
 		var organ_obj = RaceData.create_organ()
-		organ_obj.name = organ["name"]
+		organ_obj.name = organ["id"]
 		if organ.has("tags"):
 			organ_obj.tags.append_array(organ["tags"])
 		pack.append(organ_obj)
@@ -117,26 +118,43 @@ func process_blood(blood, absorbed):
 	else:
 		toxin_damage += absorbed * 1.5
 
+# need move reagent behaviour to separated class
 func process_sorbent(sorbent, absorbed):
 	# sorbent behaviour realization
 	pass
-	
+
+@warning_ignore("unused_parameter")
 func process_injures(tick_coef):
-	if not get_part("upper_body").is_organ_alive_by_tag("heart"):
-		suff_damage += tick_coef * 10
-	if not get_part("upper_body").is_organ_alive_by_tag("lungs"):
-		suff_damage += tick_coef * 10
-	
+	pass
 
 func attach_part(part):
 	# attach missing part here
 	pass
 
+func detache_part(part):
+	# detache body part here
+	pass
+
 func get_part(part : String):
 	if part in cached_parts.keys():
 		return cached_parts[part]
-		
 
-func get_body_status():
-	# return final evaluation of body
-	pass
+func do_brute_damage(value : float, target : String = ""):
+	var part = get_part(target)
+	part.do_brute_damage(value)
+
+func do_burn_damage(value : float, target : String = ""):
+	var part = get_part(target)
+	part.do_burn_damage(value)
+
+func get_brute_damage():
+	var total = 0.0
+	for part in cached_parts.values():
+		total += part.brute_damage
+	return total
+
+func get_burn_damage():
+	var total = 0.0
+	for part in cached_parts.values():
+		total += part.burn_damage
+	return total

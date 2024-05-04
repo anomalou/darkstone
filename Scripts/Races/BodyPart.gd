@@ -2,6 +2,9 @@ extends Sprite2D
 
 var race : String = "human" # later update to make another race
 
+var brute_damage : float
+var burn_damage : float
+
 var health : float = 1.0
 var has_bone : bool = false
 var is_bone_broken : bool = false
@@ -21,6 +24,13 @@ func _ready():
 func load_texture():
 	return load("res://Sprites/Body/" + race + "/" + name + ".tres")
 
+# check this out later. Added only couse bug with Dictionary convert to EncodedObjectAsID dictionary
+func decode(encoded_organ):
+	if encoded_organ is EncodedObjectAsID:
+		return instance_from_id(encoded_organ.object_id)
+	else:
+		return encoded_organ
+
 func inject(organ : Node2D):
 	if "organ" in organ.tags:
 		add_child(organ)
@@ -34,26 +44,38 @@ func eject(organ : String):
 func is_organ_alive(organ : String):
 	if not cached_organs.has(organ):
 		return false
-	if cached_organs[organ].health <= 0.0:
+	var obj = decode(cached_organs[organ])
+	if obj.health <= 0.0:
 		return false
 	return true
 
 func get_organ_status(organ : String):
 	if cached_organs.has(organ):
-		return cached_organs[organ].health
+		var obj = decode(cached_organs[organ])
+		return obj.health
 
 func is_organ_alive_by_tag(tag : String):
-	for organ in cached_organs:
-		if tag in cached_organs[organ].tags:
-			if cached_organs[organ].health <= 0.0:
+	var temp = cached_organs.values().duplicate()
+	for organ in temp:
+		var obj = decode(organ)
+		if tag in obj.tags:
+			if obj.health <= 0.0:
 				return false
 			return true
 	return false
 
 func get_organ_status_by_tag(tag : String):
-	for organ in cached_organs:
-		if tag in cached_organs[organ].tags:
-			return cached_organs[organ].health
+	var temp = cached_organs.values().duplicate()
+	for organ in temp:
+		var obj = decode(organ)
+		if tag in obj.tags:
+			return obj.health
+
+func do_brute_damage(value : float):
+	brute_damage += value
+
+func do_burn_damage(value : float):
+	burn_damage += value
 
 func get_slot():
 	if slot == null:
