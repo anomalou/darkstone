@@ -1,0 +1,46 @@
+{
+	"human_blood_0": {
+		"name": "Blood (0)",
+		"description": "Human blood",
+		"absorbability": 10,
+		"tags": [
+			"blood",
+			"0"
+		]
+	},
+	"human_blood_A": {
+		"name": "Blood (A)",
+		"description": "Human blood",
+		"absorbability": 10,
+		"tags": [
+			"blood",
+			"A"
+		]
+	},
+	"human_blood_B": {
+		"name": "Blood (B)",
+		"description": "Human blood",
+		"absorbability": 10,
+		"tags": [
+			"blood",
+			"B"
+		]
+	}, 
+	"human_blood_AB": {
+		"name": "Blood (AB)",
+		"description": "Human blood",
+		"absorbability": 10,
+		"tags": [
+			"blood",
+			"AB"
+		]
+	},
+	"charcoal": {
+		"name": "Medical charcoal",
+		"description": "The most simple medical drug. Can help with intoxication. Remove toxines",
+		"absorbability": 4,
+		"tags": [
+			"sorbent"
+		]
+	}
+}

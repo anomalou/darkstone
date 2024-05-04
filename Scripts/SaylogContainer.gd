@@ -15,7 +15,7 @@ func update_log(erase_first):
 			remove_child(first_child)
 	
 	var instance : Label = log_line.instantiate()
-	instance.text = Saylog.log.back()
+	instance.text = Saylog.saylog.back()
 	
 	add_child(instance)
 		

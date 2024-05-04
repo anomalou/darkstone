@@ -15,10 +15,19 @@ func _process(_delta):
 		sprite.texture = tex
 
 func raise_up():
-	Inventory.set_left_hand(id)
-	Saylog.add(ItemData.get_pickup_message(id))
-	queue_free()
+	var player_body : Node2D = get_node(NodePath("/root/World/Player")).body
+	if player_body != null:
+		var left_arm = player_body.get_part("left_arm")
+		if left_arm != null:
+			left_arm.slot = id
+			Saylog.add(ItemData.get_pickup_message(id))
+			queue_free()
+			
+func examine():
+	Saylog.add(ItemData.get_description(id))
 
-func _on_input_event(viewport, event : InputEvent, shape_idx):
-	if event.is_action_pressed("left_click"):
+func _on_input_event(_viewport, event : InputEvent, _shape_idx):
+	if event.is_action_pressed("examine"):
+		examine()
+	elif event.is_action_pressed("left_click"):
 		raise_up()

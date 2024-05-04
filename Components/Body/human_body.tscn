@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djlnadhhgss68"]
+
+[ext_resource type="PackedScene" uid="uid://dv1cioi761r18" path="res://Components/Body/body.tscn" id="1_0mpto"]
+
+[node name="Body" instance=ExtResource("1_0mpto")]
+race = "human"

@@ -1,0 +1,101 @@
+{
+	"human": {
+		"min_temperature" : 33.0,
+		"max_temperature" : 40.0,
+		"head": {
+			"texture": "head",
+			"size": 10,
+			"has_bone": true,
+			"allowed_organs": [
+				"brain",
+				"eyes",
+				"ears"
+			],
+			"organs": [
+				{
+					"name": "brain",
+					"tags": [
+						"brain"
+					]
+				},
+				{
+					"name": "eyes",
+					"tags": [
+						"eyes"
+					]
+				},
+				{
+					"name": "ears",
+					"tags": [
+						"ears"
+					]
+				}
+			]
+		},
+		"upper_body": {
+			"texture": "upper_body",
+			"size": 25,
+			"has_bone": true,
+			"allowed_organs": [
+				"heart",
+				"lungs"
+			],
+			"organs": [
+				{
+					"name": "heart",
+					"tags": [
+						"heart"
+					]
+				},
+				{
+					"name": "lungs",
+					"tags": [
+						"lungs"
+					]
+				}
+			]
+		},
+		"left_arm": {
+			"texture": "left_arm",
+			"size": 15,
+			"has_bone": true
+		},
+		"right_arm": {
+			"texture": "right_arm",
+			"size": 15,
+			"has_bone": true
+		},
+		"groin": {
+			"texture": "groin",
+			"size": 15,
+			"allowed_organs": [
+				"liver",
+				"other"
+			],
+			"organs": [
+				{
+					"name": "liver",
+					"tags": [
+						"liver"
+					]
+				},
+				{
+					"name": "appendix",
+					"tags": [
+						"other"
+					]
+				}
+			]
+		},
+		"left_leg": {
+			"texture": "left_leg",
+			"size": 20,
+			"has_bone": true
+		},
+		"right_leg": {
+			"texture": "right_leg",
+			"size": 20,
+			"has_bone": true
+		}
+	}
+}

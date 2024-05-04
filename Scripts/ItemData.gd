@@ -3,7 +3,7 @@ extends Node
 var content : Dictionary
 
 func _ready():
-	var data = FileAccess.open("res://Resources/ItemData.json", FileAccess.READ)
+	var data = FileAccess.open("res://Resources/Items.json", FileAccess.READ)
 	content = JSON.parse_string(data.get_as_text())
 	data.close()
 	
@@ -12,10 +12,10 @@ func get_item_name(id):
 		return
 	return content[id]["name"]
 	
-func get_decription(id):
+func get_description(id):
 	if id == null:
 		return
-	return content[id]["decription"]
+	return content[id]["description"]
 	
 func get_pickup_message(id):
 	if id == null:

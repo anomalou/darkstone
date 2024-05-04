@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv1cioi761r18"]
+
+[ext_resource type="Script" path="res://Scripts/Body.gd" id="1_x3oum"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xljgu"]
+
+[node name="Body" type="Node2D"]
+script = ExtResource("1_x3oum")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CapsuleShape2D_xljgu")
+
+[connection signal="input_event" from="HitArea" to="." method="_on_hit_area_input_event"]

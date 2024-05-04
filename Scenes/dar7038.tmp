@@ -35,14 +35,3 @@ color = Color(0.341176, 0.341176, 0.341176, 1)
 [node name="Hands" parent="CanvasLayer" instance=ExtResource("3_ia5al")]
 
 [node name="Saylog" parent="CanvasLayer" instance=ExtResource("5_mgwva")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -400.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 300.0
-grow_horizontal = 0
-grow_vertical = 1
