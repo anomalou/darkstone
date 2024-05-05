@@ -1,16 +1,21 @@
-extends CharacterBody2D
+extends Node2D
+
+# multiplayer configuration
+var username : String
 
 @export var speed : float = 3000.0
 @export var push_force : float = 100.0
 @export var power : float = 30.0
 
-@export var in_body_fov : Node2D
+@export var in_body_fov : PointLight2D
+@export var ghost_fov : DirectionalLight2D
+@export var camera : Node2D
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
 var is_ghost : bool = true
-var pickup_zone : Area2D
-var body : Node2D
+@export var pickup_zone : Area2D
+@export var body : CharacterBody2D
 var brain : Node2D # for future
 
 
@@ -18,38 +23,47 @@ var brain : Node2D # for future
 func _ready():
 	Signals.interact.connect(interact_with)
 	Signals.intent_change.connect(change_intent)
-	
-	pickup_zone = find_child("DetectionArea")
 
 func _physics_process(delta):
-	velocity = Vector2.ZERO
+	if not body:
+		return
+	
+	body.velocity = Vector2.ZERO
 	
 	var result_speed : float = speed
-	var reslut_force : float = push_force
+	var result_force : float = push_force
 	
 	if Input.is_action_pressed("run"):
 		result_speed *= 2.0
-		reslut_force *= 1.5
+		result_force *= 1.5
 	
 	if Input.is_action_pressed("up"):
-		velocity.y = -(delta * result_speed)
+		body.velocity.y = -(delta * result_speed)
 	if Input.is_action_pressed("down"):
-		velocity.y = delta * result_speed
+		body.velocity.y = delta * result_speed
 	if Input.is_action_pressed("left"):
-		velocity.x = -(delta * result_speed)
+		body.velocity.x = -(delta * result_speed)
 	if Input.is_action_pressed("right"):
-		velocity.x = delta * result_speed
+		body.velocity.x = delta * result_speed
 		
-	if move_and_slide():
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
+	if body.move_and_slide():
+		for i in body.get_slide_collision_count():
+			var collision = body.get_slide_collision(i)
 			if collision.get_collider() is RigidBody2D:
-				collision.get_collider().apply_force(collision.get_normal() * -reslut_force)
-
-func _process(delta):
-	pass
+				collision.get_collider().apply_force(collision.get_normal() * -result_force)
+	
+	camera.transform = body.transform
 
 func interact_with(body):
+	if is_ghost:
+		if intent == 3:
+			in_body_fov.show()
+			ghost_fov.hide()
+			self.body.free()
+			self.body = body
+			is_ghost = false
+		return
+
 	match intent:
 		0:
 			Signals.show_medinfo(body)

@@ -14,8 +14,12 @@ func _process(_delta):
 		var sprite : Sprite2D = get_child(1)
 		sprite.texture = tex
 
+# rewrite to signal
 func raise_up():
-	var player_body : Node2D = get_node(NodePath("/root/World/Player")).body
+	var player = get_node(NodePath("/root/World/Player"))
+	if player.is_ghost:
+		return
+	var player_body : Node2D = player.body
 	if player_body != null:
 		var left_arm = player_body.get_part("left_arm")
 		if left_arm != null:

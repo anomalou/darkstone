@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=6 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Scenes/test_scene.tscn" id="2_q1gkl"]
 [ext_resource type="PackedScene" uid="uid://dxtkkc5w4naq2" path="res://Components/item.tscn" id="2_yq5ap"]
-[ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/hands.tscn" id="3_ia5al"]
-[ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/saylog.tscn" id="5_mgwva"]
-[ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/body_status.tscn" id="6_d68g6"]
-[ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/intents.tscn" id="7_ea30d"]
+[ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game_control.tscn" id="4_xvxp1"]
+[ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/configuration_menu.tscn" id="5_vs0bm"]
 
 [node name="World" type="Node2D"]
 
@@ -28,23 +26,9 @@ color = Color(0.341176, 0.341176, 0.341176, 1)
 
 [node name="test_scene" parent="Map" instance=ExtResource("2_q1gkl")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Hands" parent="CanvasLayer" instance=ExtResource("3_ia5al")]
+[node name="GameControl" parent="GUI" instance=ExtResource("4_xvxp1")]
 
-[node name="Saylog" parent="CanvasLayer" instance=ExtResource("5_mgwva")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-offset_left = -400.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 300.0
-grow_horizontal = 0
-grow_vertical = 1
-
-[node name="BodyStatus" parent="CanvasLayer" instance=ExtResource("6_d68g6")]
-
-[node name="Intents" parent="CanvasLayer" instance=ExtResource("7_ea30d")]
+[node name="ConfigurationMenu" parent="GUI" instance=ExtResource("5_vs0bm")]
+visible = false

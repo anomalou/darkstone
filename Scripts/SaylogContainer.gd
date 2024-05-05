@@ -6,7 +6,7 @@ var log_line : PackedScene
 func _ready():
 	Saylog.connect("log_update", Callable(self, "update_log"))
 	
-	log_line = load("res://Components/log_line.tscn")
+	log_line = load("res://Components/GUI/log_line.tscn")
 
 func update_log(erase_first):
 	if get_child_count() > 0:

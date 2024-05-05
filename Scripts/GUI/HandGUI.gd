@@ -2,7 +2,7 @@ extends TextureRect
 
 @export var is_left_hand : bool = true
 
-var player : CharacterBody2D
+var player : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var id : String
-	if player.body != null:
+	if not player.is_ghost:
 		if is_left_hand:
 			var left_arm = player.body.get_part("left_arm")
 			if left_arm != null:

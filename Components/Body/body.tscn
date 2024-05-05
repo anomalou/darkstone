@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://copaeqnstnbha"]
+[gd_scene load_steps=4 format=3 uid="uid://copaeqnstnbha"]
 
 [ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_ixy80"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ounu7"]
 
-[node name="Body" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
+
+[node name="Body" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_block_on_wall = false
 script = ExtResource("1_ixy80")
 
 [node name="HitArea" type="Area2D" parent="."]
@@ -13,5 +18,8 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource("CapsuleShape2D_ounu7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lamsy")
 
 [connection signal="input_event" from="HitArea" to="." method="_on_hit_area_input_event"]
