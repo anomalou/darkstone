@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://copaeqnstnbha"]
+[gd_scene load_steps=5 format=3 uid="uid://copaeqnstnbha"]
 
 [ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_ixy80"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ounu7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_523fx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Body" type="CharacterBody2D"]
 collision_layer = 2
@@ -21,5 +26,8 @@ shape = SubResource("CapsuleShape2D_ounu7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lamsy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_523fx")
 
 [connection signal="input_event" from="HitArea" to="." method="_on_hit_area_input_event"]

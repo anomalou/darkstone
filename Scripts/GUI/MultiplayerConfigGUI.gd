@@ -1,28 +1,47 @@
 extends Window
 
-var config_container : Tree
+var _config_container : Tree
 
-var player : Node2D
+var _world : Node2D
+
+var username : TreeItem
+var ip_item : TreeItem
+var port_item : TreeItem
 
 func _ready():
-	config_container = get_node(NodePath("./VContainer/Configs"))
-	player = get_node(NodePath("/root/World/Player"))
+	_config_container = get_node("./VContainer/Configs")
+	_world = get_node("/root/World")
 	build_confiuration()
 
 func _on_close_requested():
 	hide()
 
 func build_confiuration():
-	var root = config_container.create_item()
-	config_container.set_column_title(0, "Property")
-	config_container.set_column_title(1, "Value")
+	var root = _config_container.create_item()
+	_config_container.set_column_title(0, "Property")
+	_config_container.set_column_title(1, "Value")
 	
-	build_property(root, "Username", "lisko")
-	build_property(root, "IP", "127.0.0.1")
-	build_property(root, "Port", "2415")
+	username = build_property(root, "Username", "lisko")
+	ip_item = build_property(root, "IP", "127.0.0.1")
+	port_item = build_property(root, "Port", "2415")
 
 func build_property(root, property, init_value):
-	var item = config_container.create_item(root)
+	var item = _config_container.create_item(root)
 	item.set_text(0, property)
 	item.set_text(1, init_value)
 	item.set_editable(1, true)
+	
+	return item
+
+func _on_host_button_pressed():
+	var port = port_item.get_text(1).to_int()
+	Signals.host_game(port)
+	_world.start_test()
+	hide()
+
+func _on_connect_button_pressed():
+	var ip = ip_item.get_text(1)
+	var port = port_item.get_text(1).to_int()
+	Signals.join_game(ip, port)
+	_world.start_test()
+	hide()

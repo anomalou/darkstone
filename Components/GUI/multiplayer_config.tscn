@@ -40,3 +40,5 @@ size_flags_vertical = 0
 text = "Connect"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="VContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VContainer/ConnectButton" to="." method="_on_connect_button_pressed"]

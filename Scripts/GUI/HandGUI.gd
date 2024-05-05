@@ -11,6 +11,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	return
+	
 	var id : String
 	if not player.is_ghost:
 		if is_left_hand:

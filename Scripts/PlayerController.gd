@@ -1,7 +1,6 @@
 extends Node2D
 
 # multiplayer configuration
-var username : String
 
 @export var speed : float = 3000.0
 @export var push_force : float = 100.0
@@ -18,11 +17,20 @@ var is_ghost : bool = true
 @export var body : CharacterBody2D
 var brain : Node2D # for future
 
+var _world : Node2D
 
-# Called when the node enters the scene tree for the first time.
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
+
 func _ready():
+	_world = get_node("/root/World")
+	
 	Signals.interact.connect(interact_with)
 	Signals.intent_change.connect(change_intent)
+	
+	if not is_multiplayer_authority():
+		camera.queue_free()
+	
 
 func _physics_process(delta):
 	if not body:
@@ -37,30 +45,27 @@ func _physics_process(delta):
 		result_speed *= 2.0
 		result_force *= 1.5
 	
-	if Input.is_action_pressed("up"):
-		body.velocity.y = -(delta * result_speed)
-	if Input.is_action_pressed("down"):
-		body.velocity.y = delta * result_speed
-	if Input.is_action_pressed("left"):
-		body.velocity.x = -(delta * result_speed)
-	if Input.is_action_pressed("right"):
-		body.velocity.x = delta * result_speed
-		
+	body.velocity = Input.get_vector("left", "right", "up", "down") * delta * result_speed
+	
 	if body.move_and_slide():
 		for i in body.get_slide_collision_count():
 			var collision = body.get_slide_collision(i)
 			if collision.get_collider() is RigidBody2D:
 				collision.get_collider().apply_force(collision.get_normal() * -result_force)
 	
-	camera.transform = body.transform
+	if camera != null:
+		camera.transform = body.transform
 
-func interact_with(body):
+func interact_with(id, body):
+	if id != get_multiplayer_authority():
+		return
+	
 	if is_ghost:
 		if intent == 3:
 			in_body_fov.show()
 			ghost_fov.hide()
 			self.body.free()
-			self.body = body
+			_world.rpc("settle_player", id, body.get_path())
 			is_ghost = false
 		return
 

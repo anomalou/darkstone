@@ -20,10 +20,10 @@ var cached_parts : Dictionary
 
 func _ready():
 	if race != null:
-		build_body()
+		_build_body()
 	
 func _process(delta):
-	absorb_reagents(delta)
+	_absorb_reagents(delta)
 	process_injures(delta)
 	
 func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
@@ -32,7 +32,7 @@ func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
 	elif event.is_action_pressed("left_click"):
 		Signals.interact_with(self)
 
-func build_body():
+func _build_body():
 	var race_data : Dictionary = RaceData.get_race(race)
 	
 	min_temperature = race_data["min_temperature"]
@@ -41,13 +41,13 @@ func build_body():
 	blood_level = max_blood_level
 	blood_group = RaceData.blood_groups[randi_range(0, 3)]
 	
-	var upper_body = create_body_part(race_data, "upper_body")
-	var groin = create_body_part(race_data, "groin")
-	var head = create_body_part(race_data, "head")
-	var left_arm = create_body_part(race_data, "left_arm")
-	var right_arm = create_body_part(race_data, "right_arm")
-	var left_leg = create_body_part(race_data, "left_leg")
-	var right_leg = create_body_part(race_data, "right_leg")
+	var upper_body = _create_body_part(race_data, "upper_body")
+	var groin = _create_body_part(race_data, "groin")
+	var head = _create_body_part(race_data, "head")
+	var left_arm = _create_body_part(race_data, "left_arm")
+	var right_arm = _create_body_part(race_data, "right_arm")
+	var left_leg = _create_body_part(race_data, "left_leg")
+	var right_leg = _create_body_part(race_data, "right_leg")
 	
 	# replace to append part method
 	groin.add_child(left_leg)
@@ -70,7 +70,7 @@ func build_body():
 	cached_parts["right_leg"] = right_leg
 #endregion
 
-func create_body_part(parts : Dictionary, part_id : String):
+func _create_body_part(parts : Dictionary, part_id : String):
 	var obj = RaceData.create_body_part()
 	var data : Dictionary = parts[part_id]
 	obj.name = part_id
@@ -78,12 +78,12 @@ func create_body_part(parts : Dictionary, part_id : String):
 	obj.size = RaceData.get_race_body_part_size(race, part_id)
 	var organs = RaceData.get_race_body_part_organs(race, part_id)
 	if organs:
-		for organ in create_organs(organs):
+		for organ in _create_organs(organs):
 			obj.inject(organ)
 	
 	return obj
 
-func create_organs(organs : Array):
+func _create_organs(organs : Array):
 	var pack : Array = []
 	
 	for organ : Dictionary in organs:
@@ -95,7 +95,7 @@ func create_organs(organs : Array):
 		
 	return pack
 
-func absorb_reagents(tick_coef):
+func _absorb_reagents(tick_coef):
 	for reagent in reagents:
 		var absorbability = ReagentData.get_absorbability(reagent)
 		var absorbed = absorbability * tick_coef

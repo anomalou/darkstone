@@ -39,5 +39,5 @@ visible = false
 _spawnable_scenes = PackedStringArray("res://Components/Body/human_body.tscn", "res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn")
 spawn_path = NodePath("../Network")
 
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_72l0v")
