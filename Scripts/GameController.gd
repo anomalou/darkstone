@@ -3,7 +3,7 @@ extends Node2D
 @export var maps_path : String = "res://Maps/"
 
 @export var player : PackedScene
-@export var player_ghost : PackedScene
+@export var ghost : PackedScene
 
 var players : Dictionary = {}
 
@@ -34,23 +34,26 @@ func _ready():
 	toggle_menu(true)
 
 func _add_observer(id = 1): # 1 - server
-	var player = player.instantiate()
-	player.name = str(id)
-	network.add_child(player)
+	var player_obj = player.instantiate()
+	var ghost_obj = ghost.instantiate()
+	player_obj.name = str(id)
+	ghost_obj.name = str(id) + "_ghost"
+	network.add_child(player_obj)
+	network.add_child(ghost_obj)
 	
-	players[id] = player.get_path()
+	print(Signals.multiplayer_id)
+	
+	#player_obj.body = ghost_obj.get_path()
+	
+	players[id] = player_obj.get_path()
 
-	rpc_id(id, "prepare_player", id)
+	rpc("prepare_player", id, player_obj.get_path(), ghost_obj.get_path())
 
-@rpc("authority", "call_remote")
-func prepare_player(id):
+@rpc("authority", "call_local")
+func prepare_player(id, player_path, ghost_path):
 	Signals.multiplayer_id = id
-
-@rpc("any_peer", "call_local")
-func settle_player(id, body_path):
-	var player = get_node(players[id])
-	var body = get_node(body_path)
-	player.body = body
+	var player_obj = get_node(player_path)
+	player_obj.body = ghost_path
 
 func host(port):
 	peer.create_server(port)

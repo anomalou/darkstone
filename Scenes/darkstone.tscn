@@ -14,7 +14,7 @@ properties/0/replication_mode = 1
 [node name="World" type="Node2D"]
 script = ExtResource("1_2nwxt")
 player = ExtResource("1_8wflw")
-player_ghost = ExtResource("2_1408u")
+ghost = ExtResource("2_1408u")
 
 [node name="Network" type="Node2D" parent="."]
 

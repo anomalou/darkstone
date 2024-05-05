@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ubtdnf8hg5g3"]
+[gd_scene load_steps=10 format=3 uid="uid://ubtdnf8hg5g3"]
 
 [ext_resource type="Texture2D" uid="uid://cwofjipk8alh0" path="res://Sprites/human.png" id="1_fuyhx"]
+[ext_resource type="Script" path="res://Components/ObserverBody.gd" id="1_lrrhc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17o3r"]
 atlas = ExtResource("1_fuyhx")
@@ -49,6 +50,7 @@ properties/0/replication_mode = 1
 collision_layer = 2
 collision_mask = 0
 floor_block_on_wall = false
+script = ExtResource("1_lrrhc")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_agnq1")

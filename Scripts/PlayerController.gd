@@ -14,7 +14,7 @@ var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
 var is_ghost : bool = true
 @export var pickup_zone : Area2D
-@export var body : CharacterBody2D
+var body : String
 var brain : Node2D # for future
 
 var _world : Node2D
@@ -30,9 +30,19 @@ func _ready():
 	
 	if not is_multiplayer_authority():
 		camera.queue_free()
-	
+
+func _get_body():
+	return get_node(body)
+
+func _destroy_body():
+	var body = _get_body()
+	if body:
+		body.queue_free()
+		
 
 func _physics_process(delta):
+	var body = _get_body()
+	
 	if not body:
 		return
 	
@@ -64,8 +74,8 @@ func interact_with(id, body):
 		if intent == 3:
 			in_body_fov.show()
 			ghost_fov.hide()
-			self.body.free()
-			_world.rpc("settle_player", id, body.get_path())
+			_destroy_body()
+			self.body = body.get_path()
 			is_ghost = false
 		return
 
