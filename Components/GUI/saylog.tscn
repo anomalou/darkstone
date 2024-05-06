@@ -13,19 +13,29 @@ offset_bottom = 300.0
 grow_horizontal = 0
 horizontal_scroll_mode = 0
 
-[node name="VContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Messages" type="VBoxContainer" parent="VContainer"]
+[node name="VContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Messages" type="VBoxContainer" parent="Panel/VContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 script = ExtResource("1_x6bbs")
 
-[node name="Chat" type="LineEdit" parent="VContainer"]
+[node name="Chat" type="LineEdit" parent="Panel/VContainer"]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 placeholder_text = "Type to say..."

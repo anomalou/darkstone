@@ -2,36 +2,36 @@
 
 [ext_resource type="Texture2D" uid="uid://cwofjipk8alh0" path="res://Sprites/human.png" id="1_fuyhx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_17o3r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln2k1"]
 atlas = ExtResource("1_fuyhx")
-region = Rect2(0, 224, 32, 32)
+region = Rect2(0, 231, 33, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aap1v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ql7g"]
 atlas = ExtResource("1_fuyhx")
-region = Rect2(32, 224, 32, 32)
+region = Rect2(33, 231, 33, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtrbc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbduu"]
 atlas = ExtResource("1_fuyhx")
-region = Rect2(64, 224, 32, 32)
+region = Rect2(66, 231, 33, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gt50q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b53b"]
 atlas = ExtResource("1_fuyhx")
-region = Rect2(96, 224, 32, 32)
+region = Rect2(99, 231, 33, 33)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_agnq1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_17o3r")
+"texture": SubResource("AtlasTexture_ln2k1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aap1v")
+"texture": SubResource("AtlasTexture_1ql7g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xtrbc")
+"texture": SubResource("AtlasTexture_qbduu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gt50q")
+"texture": SubResource("AtlasTexture_4b53b")
 }],
 "loop": true,
 "name": &"ghost",
@@ -54,7 +54,7 @@ floor_block_on_wall = false
 sprite_frames = SubResource("SpriteFrames_agnq1")
 animation = &"ghost"
 autoplay = "ghost"
-frame_progress = 0.811658
+frame_progress = 0.548797
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cs84c")

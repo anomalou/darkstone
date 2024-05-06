@@ -31,8 +31,8 @@ func _init_player(id = 1):
 	var player = _player_scene.instantiate()
 	player.name = str(id) + "_player"
 	
-	_player_list[id] = player.get_path()
 	_root.add_child(player)
+	_player_list[id] = player.get_path()
 	
 	_register_player.rpc_id(id, id, player.get_path())
 
