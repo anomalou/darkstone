@@ -13,23 +13,21 @@ extends Node2D
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
 var is_ghost : bool = true
+
 @export var pickup_zone : Area2D
-var body : String
+@export var body : NodePath
 var brain : Node2D # for future
 
-var _world : Node2D
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _ready():
-	_world = get_node("/root/World")
-	
 	Signals.interact.connect(interact_with)
 	Signals.intent_change.connect(change_intent)
 	
 	if not is_multiplayer_authority():
-		camera.queue_free()
+		camera.queue_free() # free not your camera
 
 func _get_body():
 	return get_node(body)
@@ -66,9 +64,9 @@ func _physics_process(delta):
 	if camera != null:
 		camera.transform = body.transform
 
-func interact_with(id, body):
-	if id != get_multiplayer_authority():
-		return
+func interact_with(body):
+	
+	return # temporary
 	
 	if is_ghost:
 		if intent == 3:

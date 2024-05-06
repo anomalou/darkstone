@@ -1,20 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=4 format=3 uid="uid://df6nq0pn78vr6"]
 
-[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_2nwxt"]
-[ext_resource type="PackedScene" uid="uid://cdvgyvt112yq4" path="res://Components/player.tscn" id="1_8wflw"]
-[ext_resource type="PackedScene" uid="uid://ubtdnf8hg5g3" path="res://Components/ghost.tscn" id="2_1408u"]
+[ext_resource type="Script" path="res://Scripts/AutoLoad/GameState.gd" id="1_2nwxt"]
 [ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game_control.tscn" id="4_xvxp1"]
 [ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/configuration_menu.tscn" id="5_vs0bm"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72l0v"]
-properties/0/path = NodePath(".:players")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="World" type="Node2D"]
 script = ExtResource("1_2nwxt")
-player = ExtResource("1_8wflw")
-ghost = ExtResource("2_1408u")
 
 [node name="Network" type="Node2D" parent="."]
 
@@ -35,9 +26,10 @@ visible = false
 [node name="ConfigurationMenu" parent="GUI" instance=ExtResource("5_vs0bm")]
 visible = false
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/Body/human_body.tscn", "res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn")
 spawn_path = NodePath("../Network")
 
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_72l0v")
+[node name="MapSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Maps/test.tscn")
+spawn_path = NodePath("../Network")

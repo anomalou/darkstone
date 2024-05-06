@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=6 format=3 uid="uid://cdvgyvt112yq4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_5tpwv"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
+[ext_resource type="PackedScene" uid="uid://ubtdnf8hg5g3" path="res://Components/ghost.tscn" id="3_uesuc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxy03"]
 radius = 42.0119
@@ -13,6 +14,15 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:body")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:intent")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:power")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:speed")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("in_body_fov", "ghost_fov", "camera", "pickup_zone")]
 z_index = 1
@@ -22,6 +32,7 @@ in_body_fov = NodePath("Camera/BodyFOV")
 ghost_fov = NodePath("Camera/GhostFOV")
 camera = NodePath("Camera")
 pickup_zone = NodePath("DetectionArea")
+body = NodePath("Ghost")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 visible = false
@@ -46,6 +57,8 @@ texture_scale = 5.0
 
 [node name="GhostFOV" type="DirectionalLight2D" parent="Camera"]
 blend_mode = 2
+
+[node name="Ghost" parent="." instance=ExtResource("3_uesuc")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d4o7n")

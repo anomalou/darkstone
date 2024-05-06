@@ -35,13 +35,13 @@ func build_property(root, property, init_value):
 
 func _on_host_button_pressed():
 	var port = port_item.get_text(1).to_int()
-	Signals.host_game(port)
-	_world.start_test()
+	Multiplayer.host(port)
+	GameState.toggle_game_gui(true)
 	hide()
 
 func _on_connect_button_pressed():
 	var ip = ip_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
-	Signals.join_game(ip, port)
-	_world.start_test()
+	Multiplayer.join_server(ip, port)
+	GameState.toggle_game_gui(true)
 	hide()

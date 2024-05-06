@@ -22,6 +22,8 @@ Saylog="*res://Scripts/AutoLoad/Saylog.gd"
 RaceData="*res://Scripts/AutoLoad/RaceData.gd"
 ReagentData="*res://Scripts/AutoLoad/ReagentData.gd"
 Signals="*res://Scripts/AutoLoad/Signals.gd"
+Multiplayer="*res://Scripts/AutoLoad/Multiplayer.gd"
+GameState="*res://Scripts/AutoLoad/GameState.gd"
 
 [editor]
 
@@ -98,6 +100,16 @@ resist_intent={
 grab_intent={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":52,"key_label":0,"unicode":52,"echo":false,"script":null)
+]
+}
+say={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":84,"key_label":0,"unicode":116,"echo":false,"script":null)
+]
+}
+send={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
