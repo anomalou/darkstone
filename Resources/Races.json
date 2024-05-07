@@ -1,5 +1,7 @@
 {
 	"human": {
+		"name": "Human",
+		"description": "Space assholes",
 		"min_temperature" : 33.0,
 		"max_temperature" : 40.0,
 		"head": {

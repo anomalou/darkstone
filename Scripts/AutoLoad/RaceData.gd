@@ -1,5 +1,6 @@
 extends Node
 
+var races : Array
 var blood_groups : Array = ["0", "A", "B", "AB"]
 
 var race_data : Dictionary
@@ -10,6 +11,8 @@ var organ_scene : PackedScene
 func _ready():
 	var race_file = FileAccess.open("res://Resources/Races.json", FileAccess.READ)
 	race_data = JSON.parse_string(race_file.get_as_text())
+	
+	races = race_data.keys()
 	
 	body_scene = load("res://Components/Body/Parts/body_part.tscn")
 	organ_scene = load("res://Components/Body/Parts/organ.tscn")

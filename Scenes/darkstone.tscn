@@ -1,13 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=7 format=3 uid="uid://df6nq0pn78vr6"]
 
-[ext_resource type="Script" path="res://Scripts/AutoLoad/GameState.gd" id="1_2nwxt"]
+[ext_resource type="Script" path="res://Scripts/ServerInfo.gd" id="1_u7k0x"]
+[ext_resource type="PackedScene" uid="uid://bsm4ei3hf1xeb" path="res://Components/GUI/lobby.tscn" id="3_ohlbw"]
 [ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game_control.tscn" id="4_xvxp1"]
+[ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/GUI/saylog.tscn" id="4_yis7i"]
 [ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/configuration_menu.tscn" id="5_vs0bm"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x4gwi"]
+properties/0/path = NodePath(".:online_players")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:ready_players")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:host")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
 [node name="World" type="Node2D"]
-script = ExtResource("1_2nwxt")
+
+[node name="ServerInfo" type="Node" parent="."]
+script = ExtResource("1_u7k0x")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="ServerInfo"]
+replication_config = SubResource("SceneReplicationConfig_x4gwi")
 
 [node name="Network" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Ground" type="Node2D" parent="."]
 
@@ -25,6 +44,11 @@ visible = false
 
 [node name="ConfigurationMenu" parent="GUI" instance=ExtResource("5_vs0bm")]
 visible = false
+
+[node name="Lobby" parent="GUI" instance=ExtResource("3_ohlbw")]
+visible = false
+
+[node name="Saylog" parent="GUI" instance=ExtResource("4_yis7i")]
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/Body/human_body.tscn", "res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn")

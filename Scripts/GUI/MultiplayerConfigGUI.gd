@@ -4,7 +4,7 @@ var _config_container : Tree
 
 var _world : Node2D
 
-var username : TreeItem
+var username_item : TreeItem
 var ip_item : TreeItem
 var port_item : TreeItem
 
@@ -21,7 +21,7 @@ func build_confiuration():
 	_config_container.set_column_title(0, "Property")
 	_config_container.set_column_title(1, "Value")
 	
-	username = build_property(root, "Username", "lisko")
+	username_item = build_property(root, "Username", "lisko")
 	ip_item = build_property(root, "IP", "127.0.0.1")
 	port_item = build_property(root, "Port", "2415")
 
@@ -34,14 +34,16 @@ func build_property(root, property, init_value):
 	return item
 
 func _on_host_button_pressed():
+	var username = username_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
-	Multiplayer.host(port)
-	GameState.toggle_game_gui(true)
+	Multiplayer.host(username, port)
+	GameState.toggle_lobby_gui(true)
 	hide()
 
 func _on_connect_button_pressed():
+	var username = username_item.get_text(1)
 	var ip = ip_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
-	Multiplayer.join_server(ip, port)
-	GameState.toggle_game_gui(true)
+	Multiplayer.join_server(username, ip, port)
+	GameState.toggle_lobby_gui(true)
 	hide()

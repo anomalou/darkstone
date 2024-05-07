@@ -1,12 +1,10 @@
 extends VBoxContainer
 
-var log_line : PackedScene
+@export var log_line : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Saylog.connect("log_update", Callable(self, "update_log"))
-	
-	log_line = load("res://Components/GUI/log_line.tscn")
+	Saylog.log_update.connect(update_log)
 
 func update_log(erase_first):
 	if get_child_count() > 0:
@@ -18,5 +16,3 @@ func update_log(erase_first):
 	instance.text = Saylog.saylog.back()
 	
 	add_child(instance)
-		
-	

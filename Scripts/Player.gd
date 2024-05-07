@@ -16,11 +16,12 @@ var is_ghost : bool = true
 
 @export var pickup_zone : Area2D
 @export var body : NodePath
+@export var ghost : Node2D
 var brain : Node2D # for future
 
 
 func _enter_tree():
-	set_multiplayer_authority(name.to_int())
+	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
 	Signals.interact.connect(interact_with)
@@ -32,6 +33,22 @@ func _ready():
 func _get_body():
 	return get_node(body)
 
+@rpc("any_peer", "call_local")
+func set_body(path):
+	body = path
+
+@rpc("any_peer", "call_local")
+func set_alive(value):
+	if value:
+		ghost.hide()
+		in_body_fov.show()
+		ghost_fov.hide()
+	else:
+		ghost.show()
+		in_body_fov.hide()
+		ghost_fov.show()
+	is_ghost = not value
+
 func _destroy_body():
 	var body = _get_body()
 	if body:
@@ -39,7 +56,12 @@ func _destroy_body():
 		
 
 func _physics_process(delta):
-	var body = _get_body()
+	var body : CharacterBody2D
+	
+	if is_ghost:
+		body = ghost
+	else:
+		body = get_node(self.body)
 	
 	if not body:
 		return

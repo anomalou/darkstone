@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 ItemData="*res://Scripts/AutoLoad/ItemData.gd"
-Saylog="*res://Scripts/AutoLoad/Saylog.gd"
 RaceData="*res://Scripts/AutoLoad/RaceData.gd"
+Saylog="*res://Scripts/AutoLoad/Saylog.gd"
 ReagentData="*res://Scripts/AutoLoad/ReagentData.gd"
 Signals="*res://Scripts/AutoLoad/Signals.gd"
 Multiplayer="*res://Scripts/AutoLoad/Multiplayer.gd"

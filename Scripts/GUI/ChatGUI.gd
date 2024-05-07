@@ -5,5 +5,7 @@ func _input(event):
 		grab_focus()
 	if event.is_action_pressed("send"):
 		release_focus()
+		if Multiplayer.is_connected:
+			text = Multiplayer._username + ": " + text
 		Saylog.add.rpc(text)
 		clear()

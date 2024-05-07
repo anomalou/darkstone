@@ -1,5 +1,6 @@
 extends Node
 
+var body_name : String
 @export var race : String
 
 var blood_level : float
@@ -17,6 +18,8 @@ var reagents : Dictionary # reagents in blood
 
 var cached_parts : Dictionary
 
+func _enter_tree():
+	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
 	if race != null:
