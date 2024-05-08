@@ -1,4 +1,5 @@
 extends Node
+class_name Body
 
 var body_name : String
 @export var race : String
@@ -61,7 +62,7 @@ func _build_body():
 	upper_body.add_child(left_arm)
 	upper_body.add_child(right_arm)
 	
-	add_child(upper_body)
+	$Parts.add_child(upper_body)
 	
 #region Body part caching
 	cached_parts["upper_body"] = upper_body

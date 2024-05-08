@@ -44,7 +44,7 @@ shape = SubResource("CircleShape2D_dxy03")
 
 [node name="Camera2D" type="Camera2D" parent="Camera"]
 zoom = Vector2(2.015, 2.015)
-position_smoothing_speed = 8.0
+position_smoothing_speed = 100.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 

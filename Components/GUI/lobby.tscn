@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsm4ei3hf1xeb"]
+[gd_scene load_steps=6 format=3 uid="uid://bsm4ei3hf1xeb"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/LobbyGUI.gd" id="1_vt5ix"]
 [ext_resource type="Theme" uid="uid://hu4m6kc88avb" path="res://Resources/countdown.tres" id="2_ls8p5"]
+[ext_resource type="LabelSettings" uid="uid://vvamxfkq342" path="res://Resources/ready.tres" id="3_lmpg2"]
+[ext_resource type="LabelSettings" uid="uid://ca2baga1pgfue" path="res://Resources/not_ready.tres" id="3_ms0mk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xxq0t"]
 font_size = 50
 
-[node name="Lobby" type="Control" node_paths=PackedStringArray("time", "host", "players_online", "players_ready")]
+[node name="Lobby" type="Control" node_paths=PackedStringArray("time", "host", "players_online", "players_ready", "ready_status")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +21,9 @@ time = NodePath("CountDown/HBoxContainer/VBoxContainer/Time")
 host = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/HostContainer/Host")
 players_online = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/PlayersOnlineContainer/PlayersOnline")
 players_ready = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/PlayersReadyContainer/PlayersReady")
+ready_status = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/ReadyStatus/ReadyStatus")
+ready_outline = ExtResource("3_lmpg2")
+not_ready_outline = ExtResource("3_ms0mk")
 
 [node name="CharacterCreation" type="Window" parent="."]
 visible = false
@@ -61,8 +66,7 @@ vertical_alignment = 1
 
 [node name="Start" type="Button" parent="CountDown/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Start timer"
+text = "Start"
 
 [node name="Ready" type="Button" parent="CountDown/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -127,6 +131,14 @@ layout_mode = 2
 
 [node name="HSeparator4" type="HSeparator" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
 layout_mode = 2
+
+[node name="ReadyStatus" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="ReadyStatus" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/ReadyStatus"]
+layout_mode = 2
+text = "NOT READY"
+label_settings = ExtResource("3_ms0mk")
 
 [connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Ready" to="." method="_on_ready_pressed"]

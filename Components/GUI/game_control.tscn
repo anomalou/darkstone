@@ -14,6 +14,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Hands" parent="." instance=ExtResource("1_ipmtr")]
+visible = false
 layout_mode = 1
 offset_left = -102.0
 offset_top = -100.0

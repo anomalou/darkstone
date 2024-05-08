@@ -16,11 +16,22 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(".:host")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath(".:game_countdown")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:is_game_started")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:time_left")
+properties/5/spawn = true
+properties/5/replication_mode = 2
 
 [node name="World" type="Node2D"]
 
 [node name="ServerInfo" type="Node" parent="."]
 script = ExtResource("1_u7k0x")
+
+[node name="Timer" type="Timer" parent="ServerInfo"]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="ServerInfo"]
 replication_config = SubResource("SceneReplicationConfig_x4gwi")

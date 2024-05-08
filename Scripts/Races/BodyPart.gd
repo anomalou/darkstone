@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name BodyPart
 
 var race : String = "human" # later update to make another race
 
