@@ -3,12 +3,14 @@ extends Node
 var _game_control : Control
 var _menu_control : Control
 var _lobby_control : Control
+var _saylog : Control
 
 
 func _ready():
 	_game_control = $/root/World/GUI/GameControl
 	_menu_control = $/root/World/GUI/ConfigurationMenu
 	_lobby_control = $/root/World/GUI/Lobby
+	_saylog = $/root/World/GUI/Saylog
 	
 	toggle_menu_gui(true)
 
@@ -16,6 +18,7 @@ func _ready():
 func toggle_game_gui(value):
 	if value:
 		_game_control.show()
+		_saylog.show()
 		_menu_control.hide()
 		_lobby_control.hide()
 	else:
@@ -27,6 +30,7 @@ func toggle_menu_gui(value):
 		_menu_control.show()
 		_game_control.hide()
 		_lobby_control.hide()
+		_saylog.hide()
 	else:
 		_menu_control.hide()
 
@@ -34,7 +38,14 @@ func toggle_menu_gui(value):
 func toggle_lobby_gui(value):
 	if value:
 		_lobby_control.show()
+		_saylog.show()
 		_menu_control.hide()
 		_game_control.hide()
 	else:
 		_lobby_control.hide()
+
+func toggle_saylog_gui(value):
+	if value:
+		_saylog.show()
+	else:
+		_saylog.hide()

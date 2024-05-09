@@ -79,8 +79,8 @@ func start_game():
 	
 	_timer.stop()
 	
-	var _ready = ready_players.keys()
-	for player_id in _ready:
+	var _ready_players = ready_players.keys()
+	for player_id in _ready_players:
 		start_game_for(player_id)
 	is_game_started = true
 

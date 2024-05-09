@@ -20,12 +20,26 @@ func _ready():
 func get_race(race):
 	if race_data.has(race):
 		return race_data[race]
-		
+
+func get_part(race, part_id):
+	if race.has(part_id):
+		return race[part_id]
+
 func create_body_part():
 	return body_scene.instantiate()
 	
 func create_organ():
 	return organ_scene.instantiate()
+
+func get_race_body_min_temperature(race_id):
+	var race = get_race(race_id)
+	if race:
+		return race["min_temperature"]
+
+func get_race_body_max_temperature(race_id):
+	var race = get_race(race_id)
+	if race:
+		return race["max_temperature"]
 
 func get_race_body_part_texture(race_id, part_id):
 	var race = get_race(race_id)
@@ -53,3 +67,10 @@ func get_race_body_part_name(race_id, part_id):
 	var race = get_race(race_id)
 	if race:
 		return race[part_id]["name"]
+
+func get_race_body_part_has_bone(race_id, part_id):
+	var race = get_race(race_id)
+	if race:
+		var part = get_part(race, part_id)
+		if part.has("has_bone"):
+			return part["has_bone"]

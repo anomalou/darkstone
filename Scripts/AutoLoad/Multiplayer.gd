@@ -64,3 +64,7 @@ func when_connect():
 	
 func when_disconnected():
 	_is_connected = false
+
+func get_player() -> Player:
+	var player = get_node("/root/World/Network/" + str(get_multiplayer_authority()) + "_player")
+	return player

@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=21 format=3 uid="uid://cdvgyvt112yq4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5tpwv"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
-[ext_resource type="PackedScene" uid="uid://ubtdnf8hg5g3" path="res://Components/ghost.tscn" id="3_uesuc"]
+[ext_resource type="PackedScene" path="res://Components/ghost.tscn" id="3_uesuc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxy03"]
 radius = 42.0119
@@ -24,15 +24,161 @@ properties/4/path = NodePath(".:speed")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("in_body_fov", "ghost_fov", "camera", "pickup_zone", "ghost")]
+[sub_resource type="Animation" id="Animation_vf3ox"]
+resource_name = "screen_shake"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-16, -16), Vector2(16, 16), Vector2(-8, -8), Vector2(8, 8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/Camera2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_stp1q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/Camera2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tcsfh"]
+resource_name = "to_critical_state"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/BodyFOV:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_od4d6"]
+resource_name = "from_critical_state"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/BodyFOV:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 5.0]
+}
+
+[sub_resource type="Animation" id="Animation_3l446"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/BodyFOV:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nl6l3"]
+_data = {
+"RESET": SubResource("Animation_stp1q"),
+"from_critical_state": SubResource("Animation_od4d6"),
+"idle": SubResource("Animation_3l446"),
+"screen_shake": SubResource("Animation_vf3ox"),
+"to_critical_state": SubResource("Animation_tcsfh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r1d3w"]
+animation = &"from_critical_state"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqnxa"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0uji7"]
+animation = &"to_critical_state"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvun7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6uwan"]
+advance_mode = 2
+advance_condition = &"reduce"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_py4yv"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"restore"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spmak"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5vb8u"]
+priority = 2
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"reduce"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xvlxy"]
+states/from_critical_state/node = SubResource("AnimationNodeAnimation_r1d3w")
+states/from_critical_state/position = Vector2(508, 160)
+states/idle/node = SubResource("AnimationNodeAnimation_gqnxa")
+states/idle/position = Vector2(318, 88)
+states/to_critical_state/node = SubResource("AnimationNodeAnimation_0uji7")
+states/to_critical_state/position = Vector2(509, 53)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lvun7"), "idle", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_6uwan"), "to_critical_state", "from_critical_state", SubResource("AnimationNodeStateMachineTransition_py4yv"), "from_critical_state", "idle", SubResource("AnimationNodeStateMachineTransition_spmak"), "from_critical_state", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_5vb8u")]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("pickup_zone")]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_5tpwv")
-in_body_fov = NodePath("Camera/BodyFOV")
-ghost_fov = NodePath("Camera/GhostFOV")
-camera = NodePath("Camera")
 pickup_zone = NodePath("DetectionArea")
-ghost = NodePath("Ghost")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 visible = false
@@ -49,7 +195,6 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="BodyFOV" type="PointLight2D" parent="Camera"]
-visible = false
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("3_dr0av")
@@ -59,6 +204,19 @@ texture_scale = 5.0
 blend_mode = 2
 
 [node name="Ghost" parent="." instance=ExtResource("3_uesuc")]
+motion_mode = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d4o7n")
+
+[node name="FOVAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nl6l3")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+tree_root = SubResource("AnimationNodeStateMachine_xvlxy")
+anim_player = NodePath("../FOVAnimator")
+parameters/conditions/reduce = false
+parameters/conditions/restore = false

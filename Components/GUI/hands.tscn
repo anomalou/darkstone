@@ -24,37 +24,33 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+script = ExtResource("2_j7tcc")
 
 [node name="Left" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = SubResource("AtlasTexture_j3pfx")
 
-[node name="TextureRect" type="TextureRect" parent="Left"]
+[node name="Texture" type="TextureRect" parent="Left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_j7tcc")
 
 [node name="Right" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = SubResource("AtlasTexture_bvjbb")
 
-[node name="TextureRect" type="TextureRect" parent="Right"]
+[node name="Texture" type="TextureRect" parent="Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_j7tcc")
-is_left_hand = false
 
-[connection signal="draw" from="Left/TextureRect" to="Left/TextureRect" method="_on_draw"]
-[connection signal="gui_input" from="Left/TextureRect" to="Left/TextureRect" method="_on_gui_input"]
-[connection signal="draw" from="Right/TextureRect" to="Right/TextureRect" method="_on_draw"]
-[connection signal="gui_input" from="Right/TextureRect" to="Right/TextureRect" method="_on_gui_input"]
+[connection signal="draw" from="Left/Texture" to="Left/Texture" method="_on_draw"]
+[connection signal="draw" from="Right/Texture" to="Right/Texture" method="_on_draw"]

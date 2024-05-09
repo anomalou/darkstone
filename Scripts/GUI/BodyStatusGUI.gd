@@ -1,10 +1,10 @@
 extends Window
+class_name BodyStatus
 
 var body_tree : Tree
 
 func _ready():
-	body_tree = get_node(NodePath("./Tree"))
-	Signals.show_body_info.connect(show_info)
+	body_tree = $Tree
 	hide()
 
 func _on_close_requested():

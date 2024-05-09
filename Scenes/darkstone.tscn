@@ -60,6 +60,7 @@ visible = false
 visible = false
 
 [node name="Saylog" parent="GUI" instance=ExtResource("4_yis7i")]
+visible = false
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/Body/human_body.tscn", "res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn")

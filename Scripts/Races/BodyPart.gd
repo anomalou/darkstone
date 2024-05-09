@@ -83,3 +83,6 @@ func get_slot():
 		return "" # temporary when i make new items
 	else:
 		return slot
+
+func set_slot(value):
+	slot = value

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjvhmhas5a327"]
 
-[ext_resource type="Theme" uid="uid://cbe4f4qlajxr8" path="res://Resources/ui_theme.tres" id="1_uq8rh"]
+[ext_resource type="Theme" path="res://Resources/ui_theme.tres" id="1_uq8rh"]
 [ext_resource type="Script" path="res://Scripts/GUI/BodyStatusGUI.gd" id="2_1h7e0"]
 
 [node name="BodyStatus" type="Window"]

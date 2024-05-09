@@ -38,7 +38,7 @@ func _on_ready_pressed():
 	
 	Saylog.add.rpc(Multiplayer._username + result)
 
-func _process(delta):
+func _process(_delta):
 	time.text = str(_server_info.time_left)
 	host.text = _server_info.host
 	players_online.text = str(_server_info.online_players.size())
