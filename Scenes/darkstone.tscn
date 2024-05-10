@@ -63,7 +63,7 @@ visible = false
 visible = false
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Components/Body/human_body.tscn", "res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn")
+_spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
 spawn_path = NodePath("../Network")
 
 [node name="MapSpawner" type="MultiplayerSpawner" parent="."]

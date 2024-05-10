@@ -21,3 +21,6 @@ func drain(value : float):
 
 func restore(value : float):
 	blood_level = min(max_blood_level, blood_level + value)
+
+func get_group_name():
+	return Group.keys()[group]

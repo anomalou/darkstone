@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://mtfh7xajql02"]
+
+[ext_resource type="Script" path="res://Scripts/Components/StateComponent.gd" id="1_obund"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xv1y3"]
+properties/0/path = NodePath(".:damage_limit")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:is_dead")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:in_critical")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="StateComponent" type="Node"]
+script = ExtResource("1_obund")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xv1y3")

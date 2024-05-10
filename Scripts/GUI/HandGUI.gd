@@ -4,8 +4,8 @@ class_name Hands
 var left : TextureRect
 var right : TextureRect
 
-var left_slot : String
-var right_slot : String
+var left_slot : SlotComponent
+var right_slot : SlotComponent
 
 var server_info : ServerInfo
 
@@ -25,13 +25,15 @@ func _process(_delta):
 	if not body:
 		return
 	
-	left_slot = body.get_slot("left_arm")
-	right_slot = body.get_slot("right_arm")
+	left_slot = body.get_slot(Body.BodyPartTag.LEFT_ARM)
+	right_slot = body.get_slot(Body.BodyPartTag.RIGHT_ARM)
 	
 	if left_slot:
-		left.texture = load("res://Sprites/Slot/" + left_slot + ".tres")
+		if left_slot.get_slot():
+			left.texture = load("res://Sprites/Slot/" + left_slot.get_slot() + ".tres")
 	if right_slot:
-		right.texture = load("res://Sprites/Slot/" + right_slot + ".tres")
+		if right_slot.get_slot():
+			right.texture = load("res://Sprites/Slot/" + right_slot.get_slot() + ".tres")
 
 func _on_gui_input(event : InputEvent):
 	pass # Replace with function body.

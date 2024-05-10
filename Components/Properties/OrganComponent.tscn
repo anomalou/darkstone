@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://crnqctcrcxgus" path="res://Components/Properties/HealthComponent.tscn" id="2_l6y21"]
 [ext_resource type="PackedScene" uid="uid://b5aeg6dptty7b" path="res://Components/Properties/NameComponent.tscn" id="2_w8jum"]
 
-[node name="OrganComponent" type="Node" node_paths=PackedStringArray("health_component")]
+[node name="OrganComponent" type="Node" node_paths=PackedStringArray("name_component", "health_component")]
 script = ExtResource("1_eyt8e")
+name_component = NodePath("NameComponent")
 health_component = NodePath("HealthComponent")
 
 [node name="NameComponent" parent="." instance=ExtResource("2_w8jum")]

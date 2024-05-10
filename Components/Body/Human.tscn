@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://dso5jxilojvhv"]
+
+[ext_resource type="PackedScene" uid="uid://cjje8xhmliet6" path="res://Components/Body/Body.tscn" id="1_ai40p"]
+[ext_resource type="PackedScene" uid="uid://mtfh7xajql02" path="res://Components/Properties/Specials/StateComponent.tscn" id="2_c3jrx"]
+[ext_resource type="PackedScene" uid="uid://b26bfu8vssl2o" path="res://Components/Body/Parts/Head.tscn" id="2_l7n8h"]
+[ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="3_hkpaf"]
+[ext_resource type="PackedScene" uid="uid://dlcttmoxiwufr" path="res://Components/Body/Parts/UpperBody.tscn" id="3_tcjmf"]
+[ext_resource type="PackedScene" uid="uid://b0khfuv2skth4" path="res://Components/Properties/OrganComponent.tscn" id="4_dpubf"]
+[ext_resource type="PackedScene" uid="uid://tyg87prayr1u" path="res://Components/Body/Parts/LeftArm.tscn" id="4_f7frg"]
+[ext_resource type="PackedScene" uid="uid://caaycshdtl57n" path="res://Components/Properties/EntrailsComponent.tscn" id="4_p4jxx"]
+[ext_resource type="PackedScene" uid="uid://bed1xqwwuhj1k" path="res://Components/Body/Parts/RightArm.tscn" id="5_jercd"]
+[ext_resource type="PackedScene" uid="uid://6cwsj50utmhb" path="res://Components/Body/Parts/Groin.tscn" id="6_ba3ie"]
+[ext_resource type="PackedScene" uid="uid://ckirg5heqnofw" path="res://Components/Body/Parts/LeftLeg.tscn" id="7_4xhga"]
+[ext_resource type="PackedScene" uid="uid://deb8ffhqg6sfq" path="res://Components/Body/Parts/RightLeg.tscn" id="8_sn4tv"]
+
+[node name="Human" node_paths=PackedStringArray("state_component") instance=ExtResource("1_ai40p")]
+state_component = NodePath("StateComponent")
+
+[node name="BloodComponent" parent="." index="0"]
+max_blood_level = 100.0
+
+[node name="StateComponent" parent="." index="3" node_paths=PackedStringArray("body") instance=ExtResource("2_c3jrx")]
+body = NodePath("..")
+damage_limit = 100.0
+
+[node name="Head" parent="Parts" index="0" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("2_l7n8h")]
+slot_component = NodePath("SlotComponent")
+entrails_component = NodePath("EntrailsComponent")
+
+[node name="SlotComponent" parent="Parts/Head" index="3" instance=ExtResource("3_hkpaf")]
+
+[node name="EntrailsComponent" parent="Parts/Head" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
+toxin_component = NodePath("../../../ToxinDamage")
+suff_component = NodePath("../../../SuffDamage")
+
+[node name="Brain" parent="Parts/Head/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+
+[node name="Eyes" parent="Parts/Head/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+type = 1
+
+[node name="Ears" parent="Parts/Head/EntrailsComponent" index="3" instance=ExtResource("4_dpubf")]
+type = 2
+
+[node name="UpperBody" parent="Parts" index="1" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("3_tcjmf")]
+slot_component = NodePath("SlotComponent")
+entrails_component = NodePath("EntrailsComponent")
+
+[node name="SlotComponent" parent="Parts/UpperBody" index="3" instance=ExtResource("3_hkpaf")]
+
+[node name="EntrailsComponent" parent="Parts/UpperBody" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
+toxin_component = NodePath("../../../ToxinDamage")
+suff_component = NodePath("../../../SuffDamage")
+
+[node name="Heart" parent="Parts/UpperBody/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+type = 3
+
+[node name="Lungs" parent="Parts/UpperBody/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+type = 4
+
+[node name="LeftArm" parent="Parts" index="2" node_paths=PackedStringArray("slot_component") instance=ExtResource("4_f7frg")]
+slot_component = NodePath("SlotComponent")
+
+[node name="SlotComponent" parent="Parts/LeftArm" index="3" instance=ExtResource("3_hkpaf")]
+
+[node name="RightArm" parent="Parts" index="3" node_paths=PackedStringArray("slot_component") instance=ExtResource("5_jercd")]
+slot_component = NodePath("SlotComponent")
+
+[node name="SlotComponent" parent="Parts/RightArm" index="3" instance=ExtResource("3_hkpaf")]
+
+[node name="Groin" parent="Parts" index="4" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("6_ba3ie")]
+slot_component = NodePath("SlotComponent")
+entrails_component = NodePath("EntrailsComponent")
+
+[node name="SlotComponent" parent="Parts/Groin" index="3" instance=ExtResource("3_hkpaf")]
+
+[node name="EntrailsComponent" parent="Parts/Groin" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
+toxin_component = NodePath("../../../ToxinDamage")
+suff_component = NodePath("../../../SuffDamage")
+
+[node name="Liver" parent="Parts/Groin/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+type = 5
+
+[node name="Appendix" parent="Parts/Groin/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+type = 6
+
+[node name="LeftLeg" parent="Parts" index="5" instance=ExtResource("7_4xhga")]
+
+[node name="RightLeg" parent="Parts" index="6" instance=ExtResource("8_sn4tv")]

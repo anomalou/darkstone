@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://deb8ffhqg6sfq"]
+
+[ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_jf24b"]
+[ext_resource type="Texture2D" uid="uid://dkjljqa1sn620" path="res://Sprites/Body/human/right_leg.tres" id="2_wxpgj"]
+
+[node name="RightLeg" instance=ExtResource("1_jf24b")]
+texture = ExtResource("2_wxpgj")
+tag = 7
+connections = Array[int]([5])

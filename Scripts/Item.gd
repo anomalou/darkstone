@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Item
 
 @export var id : String
 
@@ -27,10 +28,14 @@ func raise_up():
 	if not player_body:
 		return
 	if player_body:
-		if player_body.set_slot("left_arm", id):
+		if player_body.set_slot(Body.BodyPartTag.LEFT_ARM, id):
 			Saylog.add.rpc(ItemData.get_pickup_message(id))
 			queue_free()
-			
+
+@rpc("any_peer", "call_local")
+func apply_force_rpc(force):
+	apply_force(force)
+
 func examine():
 	Saylog.add(ItemData.get_description(id))
 

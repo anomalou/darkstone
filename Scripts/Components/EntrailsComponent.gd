@@ -33,6 +33,13 @@ func get_organs():
 			organs.append(organ)
 	return organs
 
+func has_organ(tag : OrganTags):
+	for organ in get_children():
+		if organ is OrganComponent:
+			if organ.type == tag:
+				return true
+	return false
+
 func damage_organ(type : OrganTags, value : float):
 	for organ in get_children():
 		if organ is OrganComponent:
@@ -46,6 +53,3 @@ func heal_organ(type : OrganTags, value : float):
 			if organ.type == type:
 				organ.heal(value)
 				return
-
-func _process(delta):
-	pass

@@ -23,7 +23,7 @@ func _ready():
 	_root = $/root/World/Network
 	_timer = $Timer
 	_player_scene = load("res://Components/player.tscn")
-	_human_scene = load("res://Components/Body/human_body.tscn")
+	_human_scene = load("res://Components/Body/Human.tscn")
 	
 	_timer.timeout.connect(_countdown)
 

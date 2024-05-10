@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://buidvyg6ojpyh"]
+
+[ext_resource type="Script" path="res://Scripts/Races/BodyPart.gd" id="1_wiibh"]
+[ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="2_gs185"]
+[ext_resource type="PackedScene" uid="uid://crnqctcrcxgus" path="res://Components/Properties/HealthComponent.tscn" id="3_flang"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dtir4"]
+light_mode = 2
+
+[node name="Part" type="Sprite2D" node_paths=PackedStringArray("brute_damage", "burn_damage", "health")]
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_dtir4")
+script = ExtResource("1_wiibh")
+brute_damage = NodePath("BruteDamage")
+burn_damage = NodePath("BurnDamage")
+health = NodePath("HealthComponent")
+
+[node name="BruteDamage" parent="." instance=ExtResource("2_gs185")]
+
+[node name="BurnDamage" parent="." instance=ExtResource("2_gs185")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_flang")]

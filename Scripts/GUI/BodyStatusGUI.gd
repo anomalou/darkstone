@@ -17,7 +17,7 @@ func show_info(body):
 	build_body_info(body)
 	show()
 
-func build_body_info(body):
+func build_body_info(body : Body):
 	var root = body_tree.create_item()
 	body_tree.hide_root = true
 	
@@ -33,7 +33,7 @@ func build_body_info(body):
 	build_blood_info(blood_info, body)
 	build_damage_info(damage_info, body)
 	
-	var parts = body.cached_parts.values().duplicate()
+	var parts = body.get_parts().duplicate()
 	for part in parts:
 		build_part_info(parts_info, body, part)
 	
@@ -41,15 +41,15 @@ func build_body_info(body):
 	for reagent in reagents:
 		build_reagent_info(reagents_info, reagents, reagent)
 
-func build_blood_info(root, body):
-	build_damage_item(root, "Blood level", body.blood_level, Color.DARK_RED)
-	build_damage_item(root, "Blood group", body.blood_group, Color.DARK_RED)
+func build_blood_info(root, body : Body):
+	build_damage_item(root, "Blood level", body.blood_component.blood_level, Color.DARK_RED)
+	build_damage_item(root, "Blood group", body.blood_component.get_group_name(), Color.DARK_RED)
 
-func build_damage_info(root, body):
+func build_damage_info(root, body : Body):
 	build_damage_item(root, "Brute", body.get_brute_damage(), Color.RED)
 	build_damage_item(root, "Burn", body.get_burn_damage(), Color.ORANGE)
-	build_damage_item(root, "Toxin", body.toxin_damage, Color.WEB_GREEN)
-	build_damage_item(root, "Suffocation", body.suff_damage, Color.DEEP_SKY_BLUE)
+	build_damage_item(root, "Toxin", body.toxin_damage.damage_value, Color.WEB_GREEN)
+	build_damage_item(root, "Suffocation", body.suff_damage.damage_value, Color.DEEP_SKY_BLUE)
 
 func build_damage_item(root, lable : String, value, color : Color):
 	if value is float:
@@ -61,16 +61,16 @@ func build_damage_item(root, lable : String, value, color : Color):
 	item.set_custom_color(0, color)
 	item.set_custom_color(1, color)
 
-func build_part_info(root, body, part):
+func build_part_info(root, body, part : BodyPart):
 	var part_item : TreeItem = body_tree.create_item(root)
-	part_item.set_text(0, RaceData.get_race_body_part_name(body.race, part.name))
-	part_item.set_text(1, str(part.health * 100).pad_decimals(2) + "%")
+	part_item.set_text(0, part.name)
+	part_item.set_text(1, str(part.health.health * 100).pad_decimals(2) + "%")
 	
-	if part.brute_damage != 0.0:
-		build_damage_item(part_item, "Brute", part.brute_damage, Color.RED)
+	if part.get_brute_damage() != 0.0:
+		build_damage_item(part_item, "Brute", part.get_brute_damage(), Color.RED)
 	
-	if part.burn_damage != 0.0:
-		build_damage_item(part_item, "Burn", part.burn_damage, Color.ORANGE)
+	if part.get_burn_damage() != 0.0:
+		build_damage_item(part_item, "Burn", part.get_burn_damage(), Color.ORANGE)
 	
 
 func build_reagent_info(root, reagents, reagent):

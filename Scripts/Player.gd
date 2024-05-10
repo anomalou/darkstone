@@ -47,8 +47,8 @@ func _process_animation():
 	if not _body:
 		return
 	
-	animation["parameters/conditions/reduce"] = _body.in_critical or _body.in_coma or _body.in_sleep
-	animation["parameters/conditions/restore"] = not _body.in_critical and not _body.in_coma and not _body.in_sleep
+	animation["parameters/conditions/reduce"] = _body.in_critical() or _body.is_dead()
+	animation["parameters/conditions/restore"] = not _body.in_critical() and not _body.is_dead()
 
 func get_body() -> Body:
 	return get_node(body)
@@ -103,8 +103,8 @@ func _physics_process(delta):
 	if _body.move_and_slide():
 		for i in _body.get_slide_collision_count():
 			var collision = _body.get_slide_collision(i)
-			if collision.get_collider() is RigidBody2D:
-				collision.get_collider().apply_force(collision.get_normal() * -result_force)
+			if collision.get_collider() is Item:
+				collision.get_collider().apply_force_rpc.rpc(collision.get_normal() * -result_force)
 	
 	if camera != null:
 		camera.transform = _body.transform
@@ -128,10 +128,8 @@ func interact_with(_body : Body):
 		1:
 			_body.do_brute_damage.rpc(randf() * power)
 		2:
-			_body.set_critical.rpc(true)
 			print("shove")
 		3:
-			_body.set_critical.rpc(false)
 			print("grab")
 
 func change_intent(intent_id):

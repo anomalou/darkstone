@@ -1,22 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://djq4es6nanhu5"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_0ixhv"]
-[ext_resource type="PackedScene" uid="uid://b6uwqxr2tb36o" path="res://Components/Body/human_body.tscn" id="2_ixqu0"]
 [ext_resource type="PackedScene" uid="uid://dxtkkc5w4naq2" path="res://Components/item.tscn" id="3_lfeb0"]
+[ext_resource type="PackedScene" uid="uid://dso5jxilojvhv" path="res://Components/Body/Human.tscn" id="3_pphan"]
 
 [node name="test_scene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="test_zone" parent="." instance=ExtResource("1_0ixhv")]
 
-[node name="Body" parent="." instance=ExtResource("2_ixqu0")]
-z_index = 0
-position = Vector2(-145, -143)
-
-[node name="Body2" parent="." instance=ExtResource("2_ixqu0")]
-z_index = 0
-position = Vector2(81, -400)
-
 [node name="item" parent="." instance=ExtResource("3_lfeb0")]
 position = Vector2(76, 77)
 id = "toolbox"
+
+[node name="item2" parent="." instance=ExtResource("3_lfeb0")]
+position = Vector2(-95, 80)
+id = "toolbox"
+
+[node name="Human" parent="." instance=ExtResource("3_pphan")]
+position = Vector2(-146, -143)
+
+[node name="Human2" parent="." instance=ExtResource("3_pphan")]
+position = Vector2(80, -399)

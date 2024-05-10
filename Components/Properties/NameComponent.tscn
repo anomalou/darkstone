@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5aeg6dptty7b"]
+[gd_scene load_steps=3 format=3 uid="uid://b5aeg6dptty7b"]
 
 [ext_resource type="Script" path="res://Scripts/Components/NameComponent.gd" id="1_tkqd5"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oa4vl"]
+properties/0/path = NodePath(".:name_value")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="NameComponent" type="Node"]
 script = ExtResource("1_tkqd5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_oa4vl")
