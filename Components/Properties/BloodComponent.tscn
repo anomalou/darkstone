@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ge2ca3bxa5qn"]
+
+[ext_resource type="Script" path="res://Scripts/Components/BloodComponent.gd" id="1_fard1"]
+
+[node name="BloodComponent" type="Node"]
+script = ExtResource("1_fard1")

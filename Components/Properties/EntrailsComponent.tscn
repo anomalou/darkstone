@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://caaycshdtl57n"]
+
+[ext_resource type="Script" path="res://Scripts/Components/EntrailsComponent.gd" id="1_470dj"]
+
+[node name="EntrailsComponent" type="Node"]
+script = ExtResource("1_470dj")
