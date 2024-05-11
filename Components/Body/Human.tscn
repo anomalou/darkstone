@@ -16,12 +16,11 @@
 [node name="Human" node_paths=PackedStringArray("state_component") instance=ExtResource("1_ai40p")]
 state_component = NodePath("StateComponent")
 
-[node name="BloodComponent" parent="." index="0"]
+[node name="BloodComponent" parent="." index="1"]
 max_blood_level = 100.0
 
-[node name="StateComponent" parent="." index="3" node_paths=PackedStringArray("body") instance=ExtResource("2_c3jrx")]
-body = NodePath("..")
-damage_limit = 100.0
+[node name="StateComponent" parent="." index="3" node_paths=PackedStringArray("blood_component") instance=ExtResource("2_c3jrx")]
+blood_component = NodePath("../BloodComponent")
 
 [node name="Head" parent="Parts" index="0" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("2_l7n8h")]
 slot_component = NodePath("SlotComponent")

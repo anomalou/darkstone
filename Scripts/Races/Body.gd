@@ -13,7 +13,6 @@ enum BodyPartTag {
 }
 
 @export var name_component : NameComponent
-@export var race : String
 
 @export var blood_component : BloodComponent
 
@@ -21,6 +20,7 @@ enum BodyPartTag {
 @export var suff_damage : DamageComponent # Suffocation damage
 
 @export var state_component : StateComponent
+@export var velocity_component : VelocityComponent
 
 var temperature : float
 var min_temperature : float
@@ -39,10 +39,12 @@ func _ready():
 	animation.active = true
 
 func _process(delta):
+	state_component.calculate(self)
 	_process_animation()
 
 func _physics_process(_delta):
-	pass
+	if not state_component.is_dead:
+		velocity_component.move(self)
 
 func _process_animation():
 	if velocity != Vector2.ZERO:

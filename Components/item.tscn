@@ -5,7 +5,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pnwwc"]
 friction = 0.2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xs4vr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s40uv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c643q"]
 light_mode = 2
@@ -28,7 +28,7 @@ linear_damp = 10.0
 script = ExtResource("1_f5g2a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xs4vr")
+shape = SubResource("RectangleShape2D_s40uv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_c643q")

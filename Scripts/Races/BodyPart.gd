@@ -1,8 +1,6 @@
 extends Sprite2D
 class_name BodyPart
 
-var race : String = "human" # later update to make another race
-
 @export var brute_damage : DamageComponent
 @export var burn_damage : DamageComponent
 
@@ -19,6 +17,9 @@ var is_covered : bool = false
 @export var tag : Body.BodyPartTag
 @export var connections : Array[Body.BodyPartTag]
 var texture_name : String
+
+func get_health():
+	return health.get_value()
 
 func get_brute_damage():
 	return brute_damage.damage_value

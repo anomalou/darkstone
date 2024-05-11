@@ -3,10 +3,6 @@ class_name Player
 
 # multiplayer configuration
 
-@export var speed : float = 3000.0
-@export var push_force : float = 100.0
-@export var power : float = 30.0
-
 @onready var in_body_fov : PointLight2D = $Camera/BodyFOV
 @onready var ghost_fov : DirectionalLight2D = $Camera/GhostFOV
 @onready var camera : Node2D = $Camera
@@ -79,7 +75,7 @@ func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
 	
-	var _body : CharacterBody2D
+	var _body : Body
 	
 	if is_ghost:
 		_body = ghost
@@ -88,23 +84,6 @@ func _physics_process(delta):
 	
 	if not _body:
 		return
-	
-	_body.velocity = Vector2.ZERO
-	
-	var result_speed : float = speed
-	var result_force : float = push_force
-	
-	if Input.is_action_pressed("run"):
-		result_speed *= 2.0
-		result_force *= 1.5
-	
-	_body.velocity = Input.get_vector("left", "right", "up", "down") * delta * result_speed
-	
-	if _body.move_and_slide():
-		for i in _body.get_slide_collision_count():
-			var collision = _body.get_slide_collision(i)
-			if collision.get_collider() is Item:
-				collision.get_collider().apply_force_rpc.rpc(collision.get_normal() * -result_force)
 	
 	if camera != null:
 		camera.transform = _body.transform
@@ -126,7 +105,8 @@ func interact_with(_body : Body):
 		0:
 			game_control.body_status.show_info(_body)
 		1:
-			_body.do_brute_damage.rpc(randf() * power)
+			#_body.do_brute_damage.rpc(randf() * power)
+			pass
 		2:
 			print("shove")
 		3:
