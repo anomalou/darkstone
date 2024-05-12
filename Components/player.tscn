@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5tpwv"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="3_dr0av"]
-[ext_resource type="PackedScene" path="res://Components/ghost.tscn" id="3_uesuc"]
+[ext_resource type="PackedScene" uid="uid://cqrkoi43tiym1" path="res://Components/ghost.tscn" id="3_uesuc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dxy03"]
-radius = 42.0119
+[sub_resource type="CircleShape2D" id="CircleShape2D_mtul3"]
+radius = 48.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d4o7n"]
 properties/0/path = NodePath(".:is_ghost")
@@ -168,19 +168,24 @@ states/to_critical_state/node = SubResource("AnimationNodeAnimation_0uji7")
 states/to_critical_state/position = Vector2(509, 53)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lvun7"), "idle", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_6uwan"), "to_critical_state", "from_critical_state", SubResource("AnimationNodeStateMachineTransition_py4yv"), "from_critical_state", "idle", SubResource("AnimationNodeStateMachineTransition_spmak"), "from_critical_state", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_5vb8u")]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("pickup_zone")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("direction_ray", "pick_up_zone")]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_5tpwv")
-pickup_zone = NodePath("DetectionArea")
-
-[node name="DetectionArea" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("CircleShape2D_dxy03")
+direction_ray = NodePath("Camera/DirectionRay")
+pick_up_zone = NodePath("Camera/PickUpZone")
 
 [node name="Camera" type="Node2D" parent="."]
+
+[node name="PickUpZone" type="Area2D" parent="Camera"]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/PickUpZone"]
+shape = SubResource("CircleShape2D_mtul3")
+
+[node name="DirectionRay" type="RayCast2D" parent="Camera"]
+target_position = Vector2(50, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Camera"]
 zoom = Vector2(2.015, 2.015)
@@ -214,3 +219,9 @@ tree_root = SubResource("AnimationNodeStateMachine_xvlxy")
 anim_player = NodePath("../FOVAnimator")
 parameters/conditions/reduce = false
 parameters/conditions/restore = false
+
+[connection signal="body_entered" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_body_entered"]
+[connection signal="body_exited" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_body_exited"]
+[connection signal="input_event" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_input_event"]
+[connection signal="mouse_entered" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_mouse_entered"]
+[connection signal="mouse_exited" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_mouse_exited"]

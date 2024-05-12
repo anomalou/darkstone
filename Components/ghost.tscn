@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ubtdnf8hg5g3"]
+[gd_scene load_steps=9 format=3 uid="uid://cqrkoi43tiym1"]
 
 [ext_resource type="Texture2D" uid="uid://cwofjipk8alh0" path="res://Sprites/human.png" id="1_fuyhx"]
 
@@ -49,7 +49,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 2
 
 [node name="Ghost" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 8
 collision_mask = 0
 floor_block_on_wall = false
 

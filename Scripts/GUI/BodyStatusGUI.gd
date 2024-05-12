@@ -35,7 +35,7 @@ func build_body_info(body : Body):
 	
 	var parts = body.get_parts().duplicate()
 	for part in parts:
-		build_part_info(parts_info, body, part)
+		build_part_info(parts_info, part)
 	
 	var reagents = body.reagents.duplicate()
 	for reagent in reagents:
@@ -61,7 +61,7 @@ func build_damage_item(root, lable : String, value, color : Color):
 	item.set_custom_color(0, color)
 	item.set_custom_color(1, color)
 
-func build_part_info(root, body, part : BodyPart):
+func build_part_info(root, part : BodyPart):
 	var part_item : TreeItem = body_tree.create_item(root)
 	part_item.set_text(0, part.name)
 	part_item.set_text(1, str(part.health.health * 100).pad_decimals(2) + "%")

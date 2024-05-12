@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://257g88cyc5cn"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/InteractGUI.gd" id="1_c1d6u"]
+[ext_resource type="PackedScene" uid="uid://d1ckmvekngg2b" path="res://Components/GUI/interact_item.tscn" id="1_ouj2a"]
+
+[node name="Interact" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_c1d6u")
+item_scene = ExtResource("1_ouj2a")
+
+[node name="Menu" type="Window" parent="."]
+initial_position = 4
+size = Vector2i(200, 300)
+visible = false
+min_size = Vector2i(200, 300)
+
+[node name="Scroll" type="ScrollContainer" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="Menu/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="close_requested" from="Menu" to="." method="_on_menu_close_requested"]

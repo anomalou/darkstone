@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1ckmvekngg2b"]
+
+[ext_resource type="Theme" uid="uid://b4o3dwypibubk" path="res://Resources/interact.tres" id="1_1w13a"]
+[ext_resource type="Script" path="res://Scripts/GUI/InteractItem.gd" id="1_mcswo"]
+
+[node name="Item" type="HBoxContainer"]
+size_flags_vertical = 2
+script = ExtResource("1_mcswo")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+theme = ExtResource("1_1w13a")
+text = "item"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="Label" to="." method="_on_label_gui_input"]

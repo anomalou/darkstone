@@ -4,6 +4,7 @@ var _game_control : Control
 var _menu_control : Control
 var _lobby_control : Control
 var _saylog : Control
+var interact : Interact
 
 
 func _ready():
@@ -11,6 +12,7 @@ func _ready():
 	_menu_control = $/root/World/GUI/ConfigurationMenu
 	_lobby_control = $/root/World/GUI/Lobby
 	_saylog = $/root/World/GUI/Saylog
+	interact = $/root/World/GUI/Interact
 	
 	toggle_menu_gui(true)
 

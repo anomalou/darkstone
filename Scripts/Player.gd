@@ -11,7 +11,6 @@ var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
 var is_ghost : bool = true
 
-@export var pickup_zone : Area2D
 @export var body : NodePath
 @onready var ghost : Node2D = $Ghost
 var brain : Node2D # for future
@@ -19,11 +18,15 @@ var brain : Node2D # for future
 var game_control : GameControl
 @onready var animation : AnimationTree = $AnimationTree
 
+@export var direction_ray : RayCast2D
+@export var pick_up_zone : Area2D
+
+var pick_up_list : Array
+
 func _enter_tree():
 	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
-	Signals.interact.connect(interact_with)
 	Signals.intent_change.connect(change_intent)
 	
 	game_control = $/root/World/GUI/GameControl
@@ -69,7 +72,6 @@ func _destroy_body():
 	var _body = get_body()
 	if _body:
 		_body.queue_free()
-		
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():
@@ -88,30 +90,43 @@ func _physics_process(delta):
 	if camera != null:
 		camera.transform = _body.transform
 
-func interact_with(_body : Body):
-	if not is_multiplayer_authority():
-		return
+func interact():
+	var mouse_pos = get_global_mouse_position()
+	var len = mouse_pos - get_body().global_position
+	len = len.length()
+	direction_ray.target_position.x = len
+	direction_ray.look_at(mouse_pos)
 	
-	if is_ghost:
-		if intent == 3:
-			in_body_fov.show()
-			ghost_fov.hide()
-			_destroy_body()
-			self.body = _body.get_path()
-			is_ghost = false
-		return
-
-	match intent:
-		0:
-			game_control.body_status.show_info(_body)
-		1:
-			#_body.do_brute_damage.rpc(randf() * power)
+	if pick_up_zone.has_overlapping_bodies():
+		for _body in pick_up_zone.get_overlapping_bodies():
 			pass
-		2:
-			print("shove")
-		3:
-			print("grab")
+	
+	direction_ray.force_raycast_update()
+	
+	if direction_ray.is_colliding():
+		var col = direction_ray.get_collider()
+		print(col)
+		if intent == 0:
+			if col is Body:
+				game_control.body_status.show_info(col)
+
+func pick_up_menu():
+	if pick_up_zone.has_overlapping_bodies():
+		GameState.interact.build_menu(pick_up_zone.get_overlapping_bodies())
+		GameState.interact.open_interact_menu()
 
 func change_intent(intent_id):
 	intent = intent_id
-	print(intent)
+	#print(intent)
+
+func _on_pick_up_zone_body_entered(_body):
+	pick_up_list.append(_body)
+
+func _on_pick_up_zone_body_exited(_body):
+	pick_up_list.erase(_body)
+
+func _on_pick_up_zone_input_event(viewport, event : InputEvent, shape_idx):
+	if event.is_action_pressed("left_click"):
+		interact()
+	if event.is_action_pressed("right_click"):
+		pick_up_menu()

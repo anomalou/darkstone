@@ -39,8 +39,11 @@ func _ready():
 	animation.active = true
 
 func _process(delta):
-	state_component.calculate(self)
 	_process_animation()
+	
+	if not is_multiplayer_authority():
+		return
+	state_component.calculate(self)
 
 func _physics_process(_delta):
 	if not state_component.is_dead:
@@ -178,10 +181,4 @@ func set_slot(part_tag : BodyPartTag, value):
 	for part in partsRoot.get_children():
 		if part is BodyPart and part.tag == part_tag:
 			return part.set_slot(value)
-	return false
-
-func is_alive():
-	for part in partsRoot.get_children():
-		if part is BodyPart and part.tag == BodyPartTag.HEAD:
-			return true
 	return false

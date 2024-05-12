@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=9 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="Script" path="res://Scripts/ServerInfo.gd" id="1_u7k0x"]
 [ext_resource type="PackedScene" uid="uid://bsm4ei3hf1xeb" path="res://Components/GUI/lobby.tscn" id="3_ohlbw"]
 [ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game_control.tscn" id="4_xvxp1"]
 [ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/GUI/saylog.tscn" id="4_yis7i"]
 [ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/configuration_menu.tscn" id="5_vs0bm"]
+[ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="6_7ga24"]
+[ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/interact.tscn" id="6_gx8n0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x4gwi"]
 properties/0/path = NodePath(".:online_players")
@@ -62,6 +64,8 @@ visible = false
 [node name="Saylog" parent="GUI" instance=ExtResource("4_yis7i")]
 visible = false
 
+[node name="Interact" parent="GUI" instance=ExtResource("6_gx8n0")]
+
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
 spawn_path = NodePath("../Network")
@@ -69,3 +73,28 @@ spawn_path = NodePath("../Network")
 [node name="MapSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Maps/test.tscn")
 spawn_path = NodePath("../Network")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Space" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-512, -512)
+texture = ExtResource("6_7ga24")
+region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
+
+[node name="Space2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(512, -512)
+texture = ExtResource("6_7ga24")
+region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
+
+[node name="Space3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-512, 512)
+texture = ExtResource("6_7ga24")
+region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
+
+[node name="Space4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(512, 512)
+texture = ExtResource("6_7ga24")
+region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
