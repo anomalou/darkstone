@@ -33,7 +33,8 @@ var reagents : Dictionary # reagents in blood
 @onready var animation : AnimationTree = $AnimationTree
 
 func _enter_tree():
-	set_multiplayer_authority(name.split("_")[0].to_int())
+	if not GameState.debug:
+		set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
 	animation.active = true

@@ -16,7 +16,7 @@ var _username : String
 #var _local_player_path : NodePath
 
 func _ready():
-	_root = $/root/World/Network
+	_root = $/root/World/LitView/Network
 	_peer = ENetMultiplayerPeer.new()
 	
 	_server_info = $/root/World/ServerInfo
@@ -37,8 +37,8 @@ func host(username, port):
 	multiplayer.multiplayer_peer = _peer
 	multiplayer.peer_connected.connect(_player_connect)
 	
-	var map = _map.instantiate()
-	_root.add_child(map)
+	#var map = _map.instantiate()
+	#_root.add_child(map)
 	
 	_player_connect()
 	_server_info.host = _username
@@ -66,5 +66,5 @@ func when_disconnected():
 	_is_connected = false
 
 func get_player() -> Player:
-	var player = get_node("/root/World/Network/" + str(get_multiplayer_authority()) + "_player")
+	var player = get_node("/root/World/GUI/Viewport/LitView/Network/" + str(get_multiplayer_authority()) + "_player")
 	return player

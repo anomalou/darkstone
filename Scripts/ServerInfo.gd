@@ -1,7 +1,7 @@
 extends Node
 class_name ServerInfo
 
-var _root : Node2D
+@export var _root : Node2D
 var _timer : Timer
 
 # Player resources
@@ -20,7 +20,6 @@ var is_game_started : bool = false
 
 
 func _ready():
-	_root = $/root/World/Network
 	_timer = $Timer
 	_player_scene = load("res://Components/player.tscn")
 	_human_scene = load("res://Components/Body/Human.tscn")

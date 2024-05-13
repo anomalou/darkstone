@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxtkkc5w4naq2"]
+[gd_scene load_steps=5 format=3 uid="uid://dxtkkc5w4naq2"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_f5g2a"]
 
@@ -6,9 +6,6 @@
 friction = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s40uv"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c643q"]
-light_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lq6mg"]
 properties/0/path = NodePath(".:position")
@@ -19,6 +16,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="item" type="RigidBody2D"]
+light_mask = 2
 collision_layer = 4
 input_pickable = true
 mass = 0.1
@@ -31,7 +29,6 @@ script = ExtResource("1_f5g2a")
 shape = SubResource("RectangleShape2D_s40uv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_c643q")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lq6mg")

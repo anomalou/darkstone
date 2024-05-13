@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/GUI/LobbyGUI.gd" id="1_vt5ix"]
 [ext_resource type="Theme" uid="uid://18edxng4tfw2" path="res://Resources/countdown.tres" id="2_ls8p5"]
-[ext_resource type="LabelSettings" path="res://Resources/ready.tres" id="3_lmpg2"]
-[ext_resource type="LabelSettings" path="res://Resources/not_ready.tres" id="3_ms0mk"]
+[ext_resource type="LabelSettings" uid="uid://vvamxfkq342" path="res://Resources/ready.tres" id="3_lmpg2"]
+[ext_resource type="LabelSettings" uid="uid://ca2baga1pgfue" path="res://Resources/not_ready.tres" id="3_ms0mk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xxq0t"]
 font_size = 50

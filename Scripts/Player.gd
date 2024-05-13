@@ -3,13 +3,14 @@ class_name Player
 
 # multiplayer configuration
 
-@onready var in_body_fov : PointLight2D = $Camera/BodyFOV
+var in_body_fov : PointLight2D
+var camera : Node2D
 @onready var ghost_fov : DirectionalLight2D = $Camera/GhostFOV
-@onready var camera : Node2D = $Camera
+
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
-var is_ghost : bool = true
+@export var is_ghost : bool = true
 
 @export var body : NodePath
 @onready var ghost : Node2D = $Ghost
@@ -24,9 +25,14 @@ var game_control : GameControl
 var pick_up_list : Array
 
 func _enter_tree():
-	set_multiplayer_authority(name.split("_")[0].to_int())
+	if not GameState.debug:
+		set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
+	if is_multiplayer_authority():
+		in_body_fov = $/root/World/Mask/FOV
+		camera = $/root/World/LitView/Camera
+	
 	Signals.intent_change.connect(change_intent)
 	
 	game_control = $/root/World/GUI/GameControl
@@ -34,7 +40,6 @@ func _ready():
 	animation.active = true
 	
 	if not is_multiplayer_authority():
-		camera.queue_free() # free not your camera
 		animation.active = false
 
 func _process(delta):
@@ -89,6 +94,9 @@ func _physics_process(delta):
 	
 	if camera != null:
 		camera.transform = _body.transform
+	
+	if in_body_fov:
+		in_body_fov.transform = _body.transform
 
 func interact():
 	var mouse_pos = get_global_mouse_position()

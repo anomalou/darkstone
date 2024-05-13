@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhd51gs7p6j5a"]
+
+[ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Maps/test.tscn" id="1_4ang5"]
+
+[node name="FOV" type="Node2D"]
+
+[node name="test_scene" parent="." instance=ExtResource("1_4ang5")]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="test_scene" parent="SubViewport" instance=ExtResource("1_4ang5")]

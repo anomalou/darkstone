@@ -1,5 +1,7 @@
 extends Node
 
+var debug : bool = false
+
 var _game_control : Control
 var _menu_control : Control
 var _lobby_control : Control
@@ -14,7 +16,10 @@ func _ready():
 	_saylog = $/root/World/GUI/Saylog
 	interact = $/root/World/GUI/Interact
 	
-	toggle_menu_gui(true)
+	if not debug:
+		toggle_menu_gui(true)
+	else:
+		toggle_game_gui(true)
 
 @rpc("authority", "call_local")
 func toggle_game_gui(value):
