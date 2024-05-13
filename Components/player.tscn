@@ -87,22 +87,22 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_5tpwv")
-direction_ray = NodePath("Camera/DirectionRay")
-pick_up_zone = NodePath("Camera/PickUpZone")
+direction_ray = NodePath("Interaction/DirectionRay")
+pick_up_zone = NodePath("Interaction/PickUpZone")
 
-[node name="Camera" type="Node2D" parent="."]
+[node name="Interaction" type="Node2D" parent="."]
 
-[node name="PickUpZone" type="Area2D" parent="Camera"]
+[node name="PickUpZone" type="Area2D" parent="Interaction"]
 collision_layer = 2
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/PickUpZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/PickUpZone"]
 shape = SubResource("CircleShape2D_mtul3")
 
-[node name="DirectionRay" type="RayCast2D" parent="Camera"]
+[node name="DirectionRay" type="RayCast2D" parent="Interaction"]
 target_position = Vector2(50, 0)
 
-[node name="GhostFOV" type="DirectionalLight2D" parent="Camera"]
+[node name="GhostFOV" type="DirectionalLight2D" parent="Interaction"]
 visible = false
 blend_mode = 2
 
@@ -127,8 +127,8 @@ anim_player = NodePath("../FOVAnimator")
 parameters/conditions/reduce = false
 parameters/conditions/restore = false
 
-[connection signal="body_entered" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_body_entered"]
-[connection signal="body_exited" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_body_exited"]
-[connection signal="input_event" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_input_event"]
-[connection signal="mouse_entered" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_mouse_entered"]
-[connection signal="mouse_exited" from="Camera/PickUpZone" to="." method="_on_pick_up_zone_mouse_exited"]
+[connection signal="body_entered" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_body_entered"]
+[connection signal="body_exited" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_body_exited"]
+[connection signal="input_event" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_input_event"]
+[connection signal="mouse_entered" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_mouse_entered"]
+[connection signal="mouse_exited" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_mouse_exited"]

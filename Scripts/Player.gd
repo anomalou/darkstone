@@ -5,7 +5,8 @@ class_name Player
 
 var in_body_fov : PointLight2D
 var camera : Node2D
-@onready var ghost_fov : DirectionalLight2D = $Camera/GhostFOV
+@onready var interaction : Node2D = $Interaction
+@onready var ghost_fov : DirectionalLight2D = $Interaction/GhostFOV
 
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
@@ -30,8 +31,8 @@ func _enter_tree():
 
 func _ready():
 	if is_multiplayer_authority():
-		in_body_fov = $/root/World/Mask/FOV
-		camera = $/root/World/LitView/Camera
+		in_body_fov = get_node(Constants.fov)
+		camera = get_node(Constants.camera)
 	
 	Signals.intent_change.connect(change_intent)
 	
@@ -97,6 +98,9 @@ func _physics_process(delta):
 	
 	if in_body_fov:
 		in_body_fov.transform = _body.transform
+	
+	if interaction:
+		interaction.transform = _body.transform
 
 func interact():
 	var mouse_pos = get_global_mouse_position()

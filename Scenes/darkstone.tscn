@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=21 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_686lb"]
 [ext_resource type="Script" path="res://Scripts/ServerInfo.gd" id="1_u7k0x"]
@@ -46,6 +46,14 @@ properties/5/path = NodePath(".:time_left")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_bj4uc"]
+viewport_path = NodePath("Mask")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnvum"]
+resource_local_to_scene = true
+shader = ExtResource("12_hjpew")
+shader_parameter/mask_texture = SubResource("ViewportTexture_bj4uc")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_wkrmo"]
 viewport_path = NodePath("Mask")
 
@@ -55,13 +63,14 @@ shader = ExtResource("12_hjpew")
 shader_parameter/mask_texture = SubResource("ViewportTexture_wkrmo")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_m50jh"]
-viewport_path = NodePath("GUI/Viewport/LitView")
+viewport_path = NodePath("GUI/AspectRatio/Viewport/LitView")
 
 [node name="World" type="Node2D"]
 
 [node name="Mask" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(648, 648)
 render_target_update_mode = 4
 
 [node name="test_zone" parent="Mask" instance=ExtResource("1_686lb")]
@@ -77,7 +86,7 @@ texture_scale = 3.0
 
 [node name="ServerInfo" type="Node" parent="." node_paths=PackedStringArray("_root")]
 script = ExtResource("1_u7k0x")
-_root = NodePath("../GUI/Viewport/LitView/Network")
+_root = NodePath("../GUI/AspectRatio/Viewport/LitView/Network")
 
 [node name="Timer" type="Timer" parent="ServerInfo"]
 
@@ -95,53 +104,66 @@ color = Color(0.341176, 0.341176, 0.341176, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Viewport" type="SubViewportContainer" parent="GUI"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="AspectRatio" type="AspectRatioContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="LitView" type="SubViewport" parent="GUI/Viewport"]
+[node name="Viewport" type="SubViewportContainer" parent="GUI/AspectRatio"]
+material = SubResource("ShaderMaterial_vnvum")
+layout_mode = 2
+mouse_filter = 0
+stretch = true
+
+[node name="LitView" type="SubViewport" parent="GUI/AspectRatio/Viewport"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 physics_object_picking = true
+size = Vector2i(648, 648)
 render_target_update_mode = 4
 
-[node name="CanvasModulate" type="CanvasModulate" parent="GUI/Viewport/LitView"]
+[node name="CanvasModulate" type="CanvasModulate" parent="GUI/AspectRatio/Viewport/LitView"]
 color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="GUI/Viewport/LitView"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="GUI/AspectRatio/Viewport/LitView"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="GUI/Viewport/LitView/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground"]
 
-[node name="Space" type="Sprite2D" parent="GUI/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(-512, -512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space2" type="Sprite2D" parent="GUI/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space2" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(512, -512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space3" type="Sprite2D" parent="GUI/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space3" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(-512, 512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space4" type="Sprite2D" parent="GUI/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space4" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(512, 512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Camera" type="Node2D" parent="GUI/Viewport/LitView"]
+[node name="Camera" type="Node2D" parent="GUI/AspectRatio/Viewport/LitView"]
 
-[node name="Camera2D" type="Camera2D" parent="GUI/Viewport/LitView/Camera"]
+[node name="Camera2D" type="Camera2D" parent="GUI/AspectRatio/Viewport/LitView/Camera"]
 
-[node name="Network" type="Node2D" parent="GUI/Viewport/LitView"]
+[node name="Network" type="Node2D" parent="GUI/AspectRatio/Viewport/LitView"]
 y_sort_enabled = true
 
-[node name="test_scene" parent="GUI/Viewport/LitView/Network" instance=ExtResource("2_tgsbp")]
+[node name="test_scene" parent="GUI/AspectRatio/Viewport/LitView/Network" instance=ExtResource("2_tgsbp")]
 
 [node name="RenderTexture" type="TextureRect" parent="GUI"]
+visible = false
 material = SubResource("ShaderMaterial_8melt")
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,4 +191,4 @@ visible = false
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
-spawn_path = NodePath("../GUI/Viewport/LitView/Network")
+spawn_path = NodePath("../GUI/AspectRatio/Viewport/LitView/Network")

@@ -16,7 +16,7 @@ var _username : String
 #var _local_player_path : NodePath
 
 func _ready():
-	_root = $/root/World/LitView/Network
+	_root = get_node(Constants.network)
 	_peer = ENetMultiplayerPeer.new()
 	
 	_server_info = $/root/World/ServerInfo
@@ -66,5 +66,5 @@ func when_disconnected():
 	_is_connected = false
 
 func get_player() -> Player:
-	var player = get_node("/root/World/GUI/Viewport/LitView/Network/" + str(get_multiplayer_authority()) + "_player")
+	var player = get_node(str(Constants.network) + "/" + str(get_multiplayer_authority()) + "_player")
 	return player
