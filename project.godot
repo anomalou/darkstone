@@ -26,8 +26,16 @@ Signals="*res://Scripts/AutoLoad/Signals.gd"
 Multiplayer="*res://Scripts/AutoLoad/Multiplayer.gd"
 GameState="*res://Scripts/AutoLoad/GameState.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=640
+window/size/resizable=false
+
 [editor]
 
+movie_writer/movie_file="E:/Godot/Projects/darkstone/Exports/darkstone_play.avi"
+movie_writer/fps=75
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 

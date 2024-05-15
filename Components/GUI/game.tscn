@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/GUI/body_status.tscn" id="3_bphdo"]
 [ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/GUI/intents.tscn" id="4_q5xx8"]
 
-[node name="GameControl" type="Control"]
+[node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

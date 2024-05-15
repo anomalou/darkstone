@@ -1,7 +1,7 @@
 extends Node
 class_name ServerInfo
 
-@export var _root : Node2D
+@onready var _root : Node2D = get_node(Constants.network)
 var _timer : Timer
 
 # Player resources

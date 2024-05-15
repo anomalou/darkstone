@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cie7vvid70fq4"]
+
+[ext_resource type="Script" path="res://Scripts/MusicPlayer.gd" id="1_f5x65"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_irkpq"]
+properties/0/path = NodePath(".:current_song_name")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="MusicPlayer" type="Node"]
+script = ExtResource("1_f5x65")
+
+[node name="Streamer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_irkpq")

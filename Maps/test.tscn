@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://djq4es6nanhu5"]
+[gd_scene load_steps=8 format=3 uid="uid://djq4es6nanhu5"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_0ixhv"]
 [ext_resource type="PackedScene" uid="uid://dxtkkc5w4naq2" path="res://Components/item.tscn" id="3_lfeb0"]
 [ext_resource type="PackedScene" uid="uid://dso5jxilojvhv" path="res://Components/Body/Human.tscn" id="3_pphan"]
 [ext_resource type="Texture2D" uid="uid://biagcoytlxpm5" path="res://Sprites/light.png" id="4_nuwa5"]
+[ext_resource type="PackedScene" uid="uid://b8cjkbbtxyhc0" path="res://Components/MapLayouts/wall.tscn" id="5_0jdyr"]
+[ext_resource type="AudioStream" uid="uid://doijfwsgxmrh2" path="res://Music/ss14.mp3" id="6_kkt8r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cdksv"]
 light_mode = 2
@@ -45,3 +47,48 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("4_nuwa5")
 texture_scale = 3.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+material = SubResource("CanvasItemMaterial_cdksv")
+position = Vector2(304, 144)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_nuwa5")
+texture_scale = 3.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+material = SubResource("CanvasItemMaterial_cdksv")
+position = Vector2(-208, -32)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_nuwa5")
+texture_scale = 3.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+material = SubResource("CanvasItemMaterial_cdksv")
+position = Vector2(144, -144)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_nuwa5")
+texture_scale = 3.0
+
+[node name="Wall" parent="." instance=ExtResource("5_0jdyr")]
+position = Vector2(48, -112)
+
+[node name="Wall2" parent="." instance=ExtResource("5_0jdyr")]
+position = Vector2(80, -112)
+
+[node name="Wall3" parent="." instance=ExtResource("5_0jdyr")]
+position = Vector2(112, -112)
+
+[node name="Wall4" parent="." instance=ExtResource("5_0jdyr")]
+position = Vector2(112, -80)
+
+[node name="Wall5" parent="." instance=ExtResource("5_0jdyr")]
+position = Vector2(112, -48)
+
+[node name="Player" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-48, 336)
+stream = ExtResource("6_kkt8r")
+volume_db = -10.0
+attenuation = 6.49801

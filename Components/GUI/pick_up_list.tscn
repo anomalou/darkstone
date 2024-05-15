@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/GUI/InteractGUI.gd" id="1_c1d6u"]
 [ext_resource type="PackedScene" uid="uid://d1ckmvekngg2b" path="res://Components/GUI/interact_item.tscn" id="1_ouj2a"]
 
-[node name="Interact" type="Control"]
+[node name="PickUpList" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

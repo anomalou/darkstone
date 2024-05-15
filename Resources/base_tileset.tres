@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ch7npbsqokmep" path="res://Sprites/tiles.png" id="1_4rbkw"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1rbcu"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u8wkf"]
 polygon = PackedVector2Array(-13, -13, 16, -13, 16, 1, 13, 1, 13, 16, -13, 16)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_btk2l"]
@@ -267,7 +267,7 @@ texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 0:2/0/terrain_set = 0
 0:2/0/terrain = 0
-0:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_1rbcu")
+0:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_u8wkf")
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -13, 16, -13, 16, 13, 13, 13, 13, 16, -13, 16)

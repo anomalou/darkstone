@@ -36,7 +36,7 @@ func _ready():
 	
 	Signals.intent_change.connect(change_intent)
 	
-	game_control = $/root/World/GUI/GameControl
+	game_control = GameState.game_control
 	
 	animation.active = true
 	
@@ -106,8 +106,7 @@ func interact():
 	var mouse_pos = get_global_mouse_position()
 	var len = mouse_pos - get_body().global_position
 	len = len.length()
-	direction_ray.target_position.x = len
-	direction_ray.look_at(mouse_pos)
+	direction_ray.target_position = get_global_mouse_position() - get_body().position
 	
 	if pick_up_zone.has_overlapping_bodies():
 		for _body in pick_up_zone.get_overlapping_bodies():
@@ -117,15 +116,14 @@ func interact():
 	
 	if direction_ray.is_colliding():
 		var col = direction_ray.get_collider()
-		print(col)
 		if intent == 0:
 			if col is Body:
 				game_control.body_status.show_info(col)
 
 func pick_up_menu():
 	if pick_up_zone.has_overlapping_bodies():
-		GameState.interact.build_menu(pick_up_zone.get_overlapping_bodies())
-		GameState.interact.open_interact_menu()
+		GameState.pick_up_list.build_menu(pick_up_zone.get_overlapping_bodies())
+		GameState.pick_up_list.open_interact_menu()
 
 func change_intent(intent_id):
 	intent = intent_id
@@ -138,7 +136,12 @@ func _on_pick_up_zone_body_exited(_body):
 	pick_up_list.erase(_body)
 
 func _on_pick_up_zone_input_event(viewport, event : InputEvent, shape_idx):
-	if event.is_action_pressed("left_click"):
-		interact()
 	if event.is_action_pressed("right_click"):
 		pick_up_menu()
+
+func _input(event):
+	if not is_multiplayer_authority():
+		return
+	
+	if event.is_action_pressed("left_click"):
+		interact()

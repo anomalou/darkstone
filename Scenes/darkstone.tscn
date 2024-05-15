@@ -1,183 +1,153 @@
-[gd_scene load_steps=21 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=27 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_686lb"]
-[ext_resource type="Script" path="res://Scripts/ServerInfo.gd" id="1_u7k0x"]
 [ext_resource type="Shader" path="res://Shaders/white.gdshader" id="2_kbqhn"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Maps/test.tscn" id="2_tgsbp"]
+[ext_resource type="PackedScene" uid="uid://b8cjkbbtxyhc0" path="res://Components/MapLayouts/wall.tscn" id="3_3a4oe"]
 [ext_resource type="PackedScene" uid="uid://bsm4ei3hf1xeb" path="res://Components/GUI/lobby.tscn" id="3_ohlbw"]
-[ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game_control.tscn" id="4_xvxp1"]
+[ext_resource type="PackedScene" uid="uid://by65qv6i613hu" path="res://Scenes/server_info.tscn" id="4_kueen"]
+[ext_resource type="PackedScene" uid="uid://dyxeohp5k5vjd" path="res://Scenes/fov.tscn" id="4_kwyvx"]
+[ext_resource type="Shader" uid="uid://ddl8sstnbvb3j" path="res://Shaders/fov_visual.tres" id="4_ofe1k"]
+[ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game.tscn" id="4_xvxp1"]
 [ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/GUI/saylog.tscn" id="4_yis7i"]
-[ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/configuration_menu.tscn" id="5_vs0bm"]
+[ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/main_menu.tscn" id="5_vs0bm"]
 [ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="6_7ga24"]
-[ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/interact.tscn" id="6_gx8n0"]
-[ext_resource type="Shader" path="res://Shaders/fov.gdshader" id="12_hjpew"]
+[ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/pick_up_list.tscn" id="6_gx8n0"]
+[ext_resource type="PackedScene" uid="uid://h7eyygyu8d6g" path="res://Scenes/camera.tscn" id="8_nkj6p"]
+[ext_resource type="PackedScene" uid="uid://cie7vvid70fq4" path="res://Scenes/music_player.tscn" id="13_m5li0"]
+[ext_resource type="AudioStream" uid="uid://bk0v6k4vf2tfp" path="res://Music/space_asshole.ogg" id="14_q6urh"]
+[ext_resource type="AudioStream" uid="uid://crbredagcmom7" path="res://Music/endless_space.ogg" id="16_07b1n"]
+[ext_resource type="AudioStream" uid="uid://blokxytm638dg" path="res://Music/marhaba.ogg" id="17_gipua"]
+[ext_resource type="AudioStream" uid="uid://doijfwsgxmrh2" path="res://Music/ss14.mp3" id="18_iit50"]
+[ext_resource type="AudioStream" uid="uid://b6vf6pm6sm6ex" path="res://Music/title1.ogg" id="19_27agx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wbwhp"]
+viewport_path = NodePath("MaskView")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6urq0"]
 shader = ExtResource("2_kbqhn")
 
-[sub_resource type="Gradient" id="Gradient_k378r"]
-offsets = PackedFloat32Array(0.420118, 0.704142)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0440u"]
+shader = ExtResource("2_kbqhn")
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
-gradient = SubResource("Gradient_k378r")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fc6cm"]
+shader = ExtResource("2_kbqhn")
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x4gwi"]
-properties/0/path = NodePath(".:online_players")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath(".:ready_players")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath(".:host")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:game_countdown")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:is_game_started")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath(".:time_left")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_bj4uc"]
-viewport_path = NodePath("Mask")
+[sub_resource type="ViewportTexture" id="ViewportTexture_noswh"]
+viewport_path = NodePath("MaskView")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vnvum"]
 resource_local_to_scene = true
-shader = ExtResource("12_hjpew")
-shader_parameter/mask_texture = SubResource("ViewportTexture_bj4uc")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_wkrmo"]
-viewport_path = NodePath("Mask")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8melt"]
-resource_local_to_scene = true
-shader = ExtResource("12_hjpew")
-shader_parameter/mask_texture = SubResource("ViewportTexture_wkrmo")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_m50jh"]
-viewport_path = NodePath("GUI/AspectRatio/Viewport/LitView")
+shader = ExtResource("4_ofe1k")
+shader_parameter/Mask = SubResource("ViewportTexture_noswh")
 
 [node name="World" type="Node2D"]
 
-[node name="Mask" type="SubViewport" parent="."]
+[node name="DebugFOV" type="Sprite2D" parent="."]
+position = Vector2(160, 160)
+scale = Vector2(0.493827, 0.493827)
+texture = SubResource("ViewportTexture_wbwhp")
+
+[node name="MaskView" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
 size = Vector2i(648, 648)
 render_target_update_mode = 4
 
-[node name="test_zone" parent="Mask" instance=ExtResource("1_686lb")]
+[node name="test_zone" parent="MaskView" instance=ExtResource("1_686lb")]
 material = SubResource("ShaderMaterial_6urq0")
 
-[node name="FOV" type="PointLight2D" parent="Mask"]
-blend_mode = 1
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_hq1qo")
-texture_scale = 3.0
+[node name="Wall" parent="MaskView" instance=ExtResource("3_3a4oe")]
+material = SubResource("ShaderMaterial_0440u")
+position = Vector2(48, -112)
 
-[node name="Camera2D" type="Camera2D" parent="Mask/FOV"]
+[node name="Wall3" parent="MaskView" instance=ExtResource("3_3a4oe")]
+material = SubResource("ShaderMaterial_fc6cm")
+position = Vector2(112, -112)
 
-[node name="ServerInfo" type="Node" parent="." node_paths=PackedStringArray("_root")]
-script = ExtResource("1_u7k0x")
-_root = NodePath("../GUI/AspectRatio/Viewport/LitView/Network")
+[node name="Wall2" parent="MaskView" instance=ExtResource("3_3a4oe")]
+material = SubResource("ShaderMaterial_0440u")
+position = Vector2(80, -112)
 
-[node name="Timer" type="Timer" parent="ServerInfo"]
+[node name="Wall4" parent="MaskView" instance=ExtResource("3_3a4oe")]
+material = SubResource("ShaderMaterial_0440u")
+position = Vector2(112, -80)
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="ServerInfo"]
-replication_config = SubResource("SceneReplicationConfig_x4gwi")
+[node name="Wall5" parent="MaskView" instance=ExtResource("3_3a4oe")]
+material = SubResource("ShaderMaterial_0440u")
+position = Vector2(112, -48)
 
-[node name="Ground" type="Node2D" parent="."]
+[node name="FOV" parent="MaskView" instance=ExtResource("4_kwyvx")]
 
-[node name="Light" type="Node2D" parent="."]
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Light"]
-color = Color(0.341176, 0.341176, 0.341176, 1)
-
-[node name="Map" type="Node2D" parent="."]
+[node name="ServerInfo" parent="." instance=ExtResource("4_kueen")]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="AspectRatio" type="AspectRatioContainer" parent="GUI"]
+[node name="Render" type="AspectRatioContainer" parent="GUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Viewport" type="SubViewportContainer" parent="GUI/AspectRatio"]
+[node name="Viewport" type="SubViewportContainer" parent="GUI/Render"]
 material = SubResource("ShaderMaterial_vnvum")
 layout_mode = 2
 mouse_filter = 0
 stretch = true
 
-[node name="LitView" type="SubViewport" parent="GUI/AspectRatio/Viewport"]
+[node name="LitView" type="SubViewport" parent="GUI/Render/Viewport"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 physics_object_picking = true
-size = Vector2i(648, 648)
+size = Vector2i(640, 640)
 render_target_update_mode = 4
 
-[node name="CanvasModulate" type="CanvasModulate" parent="GUI/AspectRatio/Viewport/LitView"]
+[node name="CanvasModulate" type="CanvasModulate" parent="GUI/Render/Viewport/LitView"]
 color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="GUI/AspectRatio/Viewport/LitView"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="GUI/Render/Viewport/LitView"]
+scroll_ignore_camera_zoom = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="GUI/Render/Viewport/LitView/ParallaxBackground"]
 
-[node name="Space" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(-512, -512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space2" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space2" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(512, -512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space3" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space3" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(-512, 512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Space4" type="Sprite2D" parent="GUI/AspectRatio/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
+[node name="Space4" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 position = Vector2(512, 512)
 texture = ExtResource("6_7ga24")
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
-[node name="Camera" type="Node2D" parent="GUI/AspectRatio/Viewport/LitView"]
+[node name="Camera" parent="GUI/Render/Viewport/LitView" instance=ExtResource("8_nkj6p")]
 
-[node name="Camera2D" type="Camera2D" parent="GUI/AspectRatio/Viewport/LitView/Camera"]
-
-[node name="Network" type="Node2D" parent="GUI/AspectRatio/Viewport/LitView"]
+[node name="Network" type="Node2D" parent="GUI/Render/Viewport/LitView"]
 y_sort_enabled = true
 
-[node name="test_scene" parent="GUI/AspectRatio/Viewport/LitView/Network" instance=ExtResource("2_tgsbp")]
+[node name="test_scene" parent="GUI/Render/Viewport/LitView/Network" instance=ExtResource("2_tgsbp")]
 
-[node name="RenderTexture" type="TextureRect" parent="GUI"]
-visible = false
-material = SubResource("ShaderMaterial_8melt")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("ViewportTexture_m50jh")
-stretch_mode = 5
-
-[node name="GameControl" parent="GUI" instance=ExtResource("4_xvxp1")]
+[node name="Game" parent="GUI" instance=ExtResource("4_xvxp1")]
 visible = false
 
-[node name="ConfigurationMenu" parent="GUI" instance=ExtResource("5_vs0bm")]
+[node name="MainMenu" parent="GUI" instance=ExtResource("5_vs0bm")]
 visible = false
 
 [node name="Lobby" parent="GUI" instance=ExtResource("3_ohlbw")]
@@ -186,9 +156,28 @@ visible = false
 [node name="Saylog" parent="GUI" instance=ExtResource("4_yis7i")]
 visible = false
 
-[node name="Interact" parent="GUI" instance=ExtResource("6_gx8n0")]
+[node name="PickUpList" parent="GUI" instance=ExtResource("6_gx8n0")]
 visible = false
+
+[node name="MusicPlayer" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MusicPlayer" parent="." instance=ExtResource("13_m5li0")]
+music = {
+"endless_space": ExtResource("16_07b1n"),
+"marhaba": ExtResource("17_gipua"),
+"ss14": ExtResource("18_iit50"),
+"title1": ExtResource("19_27agx")
+}
+main_menu_music = ExtResource("14_q6urh")
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
-spawn_path = NodePath("../GUI/AspectRatio/Viewport/LitView/Network")
+spawn_path = NodePath("../GUI/Render/Viewport/LitView/Network")

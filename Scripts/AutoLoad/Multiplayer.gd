@@ -8,6 +8,7 @@ var _root : Node2D
 var _peer : ENetMultiplayerPeer
 
 var _server_info : ServerInfo
+@onready var music_player : MusicPlayer = get_node(Constants.music_player)
 
 # Connected player data
 var _is_connected : bool = false
@@ -46,6 +47,8 @@ func host(username, port):
 	_is_connected = true
 	
 	_server_info.set_countdown(30.0)
+	music_player.play_random()
+	
 
 func join_server(username, ip, port):
 	_username = username
@@ -58,6 +61,7 @@ func join_server(username, ip, port):
 	await  multiplayer.connected_to_server
 	
 	_server_info.discover_player.rpc_id(1, _username)
+	music_player.play_current()
 
 func when_connect():
 	_is_connected = true

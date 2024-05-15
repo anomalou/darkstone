@@ -1,11 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhd51gs7p6j5a"]
+[gd_scene load_steps=3 format=3 uid="uid://dyxeohp5k5vjd"]
 
-[ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Maps/test.tscn" id="1_4ang5"]
+[sub_resource type="Gradient" id="Gradient_k378r"]
+offsets = PackedFloat32Array(0.420118, 0.704142)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[node name="FOV" type="Node2D"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
+gradient = SubResource("Gradient_k378r")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
-[node name="test_scene" parent="." instance=ExtResource("1_4ang5")]
+[node name="FOV" type="PointLight2D"]
+blend_mode = 1
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_hq1qo")
+texture_scale = 3.0
 
-[node name="SubViewport" type="SubViewport" parent="."]
-
-[node name="test_scene" parent="SubViewport" instance=ExtResource("1_4ang5")]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

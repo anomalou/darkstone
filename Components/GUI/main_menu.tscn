@@ -13,7 +13,7 @@ region = Rect2(0, 0, 128, 128)
 atlas = ExtResource("3_tqspx")
 region = Rect2(0, 128, 128, 128)
 
-[node name="ConfigurationMenu" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
