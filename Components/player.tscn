@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5tpwv"]
 [ext_resource type="PackedScene" uid="uid://cqrkoi43tiym1" path="res://Components/ghost.tscn" id="3_uesuc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mtul3"]
-radius = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sska6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d4o7n"]
 properties/0/path = NodePath(".:is_ghost")
@@ -83,21 +82,12 @@ states/to_critical_state/node = SubResource("AnimationNodeAnimation_0uji7")
 states/to_critical_state/position = Vector2(509, 53)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lvun7"), "idle", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_6uwan"), "to_critical_state", "from_critical_state", SubResource("AnimationNodeStateMachineTransition_py4yv"), "from_critical_state", "idle", SubResource("AnimationNodeStateMachineTransition_spmak"), "from_critical_state", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_5vb8u")]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("direction_ray", "pick_up_zone")]
+[node name="Player" type="Node2D"]
 z_index = 1
 z_as_relative = false
 script = ExtResource("1_5tpwv")
-direction_ray = NodePath("Interaction/DirectionRay")
-pick_up_zone = NodePath("Interaction/PickUpZone")
 
 [node name="Interaction" type="Node2D" parent="."]
-
-[node name="PickUpZone" type="Area2D" parent="Interaction"]
-collision_layer = 2
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/PickUpZone"]
-shape = SubResource("CircleShape2D_mtul3")
 
 [node name="DirectionRay" type="RayCast2D" parent="Interaction"]
 collision_mask = 7
@@ -105,6 +95,13 @@ collision_mask = 7
 [node name="GhostFOV" type="DirectionalLight2D" parent="Interaction"]
 visible = false
 blend_mode = 2
+
+[node name="Area2D" type="Area2D" parent="Interaction"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/Area2D"]
+shape = SubResource("CapsuleShape2D_sska6")
 
 [node name="Ghost" parent="." instance=ExtResource("3_uesuc")]
 motion_mode = 1
@@ -119,13 +116,10 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
+libraries = {
+"": SubResource("AnimationLibrary_nl6l3")
+}
 tree_root = SubResource("AnimationNodeStateMachine_xvlxy")
 anim_player = NodePath("../FOVAnimator")
 parameters/conditions/reduce = false
 parameters/conditions/restore = false
-
-[connection signal="body_entered" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_body_entered"]
-[connection signal="body_exited" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_body_exited"]
-[connection signal="input_event" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_input_event"]
-[connection signal="mouse_entered" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_mouse_entered"]
-[connection signal="mouse_exited" from="Interaction/PickUpZone" to="." method="_on_pick_up_zone_mouse_exited"]

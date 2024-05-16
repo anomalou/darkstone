@@ -33,8 +33,7 @@ var reagents : Dictionary # reagents in blood
 @onready var animation : AnimationTree = $AnimationTree
 
 func _enter_tree():
-	if not GameState.debug:
-		set_multiplayer_authority(name.split("_")[0].to_int())
+	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
 	animation.active = true
@@ -60,12 +59,6 @@ func _process_animation():
 	
 	animation["parameters/conditions/fell"] = in_critical() or is_dead()
 	animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead()
-
-func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
-	if event.is_action_pressed("examine"):
-		pass
-	elif event.is_action_pressed("left_click"):
-		Signals.interact.emit(self)
 
 #func _absorb_reagents(tick_coef):
 	#for reagent in reagents:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjje8xhmliet6"]
+[gd_scene load_steps=28 format=3 uid="uid://cjje8xhmliet6"]
 
 [ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_co8ix"]
 [ext_resource type="PackedScene" uid="uid://ge2ca3bxa5qn" path="res://Components/Properties/BloodComponent.tscn" id="2_f42at"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="3_7yh33"]
 [ext_resource type="PackedScene" uid="uid://cdy5wsixfec7j" path="res://Components/Properties/VelocityComponent.tscn" id="5_pk5fx"]
 [ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_j1pta"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ounu7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
 
@@ -69,7 +67,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../HitArea/CollisionShape2D:position")
+tracks/2/path = NodePath("../PhysicalCollider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = false
 tracks/2/keys = {
@@ -81,34 +79,10 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../HitArea/CollisionShape2D:rotation")
+tracks/3/path = NodePath("../PhysicalCollider:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = false
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.57079]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../PhysicalCollider:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = false
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 5)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../PhysicalCollider:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = false
-tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -161,7 +135,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../HitArea/CollisionShape2D:position")
+tracks/2/path = NodePath("../PhysicalCollider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = false
 tracks/2/keys = {
@@ -173,34 +147,10 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../HitArea/CollisionShape2D:rotation")
+tracks/3/path = NodePath("../PhysicalCollider:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = false
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.57079, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../PhysicalCollider:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = false
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 5), Vector2(0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../PhysicalCollider:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = false
-tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -355,13 +305,6 @@ run_mod = 2.0
 [node name="ControlComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_j1pta")]
 velocity_component = NodePath("../VelocityComponent")
 
-[node name="HitArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-shape = SubResource("CapsuleShape2D_ounu7")
-
 [node name="PhysicalCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lamsy")
 
@@ -385,5 +328,3 @@ parameters/conditions/walk = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_523fx")
-
-[connection signal="input_event" from="HitArea" to="." method="_on_hit_area_input_event"]

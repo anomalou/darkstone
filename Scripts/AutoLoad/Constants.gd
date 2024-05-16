@@ -7,6 +7,7 @@ extends Node
 @onready var music_player : NodePath = "/root/World/MusicPlayer"
 
 
+@onready var debug : NodePath = "/root/World/GUI/Debug"
 @onready var game : NodePath = "/root/World/GUI/Game"
 @onready var main_menu : NodePath = "/root/World/GUI/MainMenu"
 @onready var lobby : NodePath = "/root/World/GUI/Lobby"

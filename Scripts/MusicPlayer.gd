@@ -9,6 +9,7 @@ var current_song_name : String
 @onready var streamer : AudioStreamPlayer2D = $Streamer
 
 func _ready():
+	streamer.finished.connect(play_random)
 	streamer.stream = main_menu_music
 	streamer.play()
 

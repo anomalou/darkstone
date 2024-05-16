@@ -8,21 +8,21 @@ var camera : Node2D
 @onready var interaction : Node2D = $Interaction
 @onready var ghost_fov : DirectionalLight2D = $Interaction/GhostFOV
 
-
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
-@onready var interact_anchor : PackedScene = preload("res://Scenes/interact.tscn")
+@onready var interact_marker : PackedScene = preload("res://Scenes/interact.tscn")
 @export var is_ghost : bool = true
 
 @export var body : NodePath
 @onready var ghost : Node2D = $Ghost
 var brain : Node2D # for future
 
-@onready var game_control : GameControl = GameState.game_control
+@onready var game_control : GameControl = GameState.game_overlay
 @onready var animation : AnimationTree = $AnimationTree
 
-@export var direction_ray : RayCast2D
-@export var pick_up_zone : Area2D
+@onready var direction_ray : RayCast2D = $Interaction/DirectionRay
+
+@onready var network : Node2D = get_node(Constants.network)
 
 var pick_up_list : Array
 
@@ -101,46 +101,36 @@ func _physics_process(delta):
 	if interaction:
 		interaction.transform = _body.transform
 
-func interact():
+func init_interact():
 	var mouse_pos = get_global_mouse_position()
-	var len = mouse_pos - get_body().global_position
-	len = len.length()
-	direction_ray.target_position = get_global_mouse_position() - get_body().position
+	var target_position = mouse_pos - get_body().position
 	
-	if pick_up_zone.has_overlapping_bodies():
-		for _body in pick_up_zone.get_overlapping_bodies():
-			pass
+	direction_ray.target_position = target_position
 	
-	direction_ray.force_raycast_update()
+	var marker : InteractMarker = interact_marker.instantiate()
+	marker.position = mouse_pos
+	network.add_child(marker)
+	marker.discover()
 	
-	if direction_ray.is_colliding():
-		var col = direction_ray.get_collider()
-		if intent == 0:
-			if col is Body:
-				game_control.body_status.show_info(col)
+	#direction_ray.force_raycast_update()
+	#
+	#if direction_ray.is_colliding():
+		#var col = direction_ray.get_collider()
+		#if intent == 0:
+			#if col is Body:
+				#game_control.body_status.show_info(col)
 
-func pick_up_menu():
-	if pick_up_zone.has_overlapping_bodies():
-		GameState.pick_up_list.build_menu(pick_up_zone.get_overlapping_bodies())
-		GameState.pick_up_list.open_interact_menu()
+func interact_with(node):
+	if node is Body:
+		game_control.body_status.show_info(node)
 
 func change_intent(intent_id):
 	intent = intent_id
 	#print(intent)
-
-func _on_pick_up_zone_body_entered(_body):
-	pick_up_list.append(_body)
-
-func _on_pick_up_zone_body_exited(_body):
-	pick_up_list.erase(_body)
-
-func _on_pick_up_zone_input_event(viewport, event : InputEvent, shape_idx):
-	if event.is_action_pressed("right_click"):
-		pick_up_menu()
 
 func _input(event):
 	if not is_multiplayer_authority():
 		return
 	
 	if event.is_action_pressed("left_click"):
-		interact()
+		init_interact()

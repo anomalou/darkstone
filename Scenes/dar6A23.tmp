@@ -39,7 +39,7 @@ resource_local_to_scene = true
 shader = ExtResource("4_ofe1k")
 shader_parameter/Mask = SubResource("ViewportTexture_noswh")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jwol4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8wcor"]
 viewport_path = NodePath("MaskView")
 
 [node name="World" type="Node2D"]
@@ -141,20 +141,20 @@ y_sort_enabled = true
 [node name="test_scene" parent="GUI/Render/Viewport/LitView/Network" instance=ExtResource("2_tgsbp")]
 
 [node name="Debug" type="Control" parent="GUI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Mask" type="TextureRect" parent="GUI/Debug"]
+[node name="Light" type="TextureRect" parent="GUI/Debug"]
 layout_mode = 1
 offset_right = 648.0
 offset_bottom = 648.0
 scale = Vector2(0.5, 0.5)
-texture = SubResource("ViewportTexture_jwol4")
+texture = SubResource("ViewportTexture_8wcor")
 
 [node name="Game" parent="GUI" instance=ExtResource("4_xvxp1")]
 visible = false
