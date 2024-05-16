@@ -11,13 +11,14 @@ var camera : Node2D
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 
+@onready var interact_anchor : PackedScene = preload("res://Scenes/interact.tscn")
 @export var is_ghost : bool = true
 
 @export var body : NodePath
 @onready var ghost : Node2D = $Ghost
 var brain : Node2D # for future
 
-var game_control : GameControl
+@onready var game_control : GameControl = GameState.game_control
 @onready var animation : AnimationTree = $AnimationTree
 
 @export var direction_ray : RayCast2D
@@ -35,8 +36,6 @@ func _ready():
 		camera = get_node(Constants.camera)
 	
 	Signals.intent_change.connect(change_intent)
-	
-	game_control = GameState.game_control
 	
 	animation.active = true
 	

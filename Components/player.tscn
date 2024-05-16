@@ -119,9 +119,6 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
-libraries = {
-"": SubResource("AnimationLibrary_nl6l3")
-}
 tree_root = SubResource("AnimationNodeStateMachine_xvlxy")
 anim_player = NodePath("../FOVAnimator")
 parameters/conditions/reduce = false
