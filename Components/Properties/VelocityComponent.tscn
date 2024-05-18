@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdy5wsixfec7j"]
+
+[ext_resource type="Script" path="res://Scripts/Components/VelocityComponent.gd" id="1_ykycl"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k7wxt"]
+properties/0/path = NodePath(".:walk_speed")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:run_mod")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:crawl_mod")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:force")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:_velocity")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="VelocityComponent" type="Node"]
+script = ExtResource("1_ykycl")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_k7wxt")

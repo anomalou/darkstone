@@ -1,13 +1,16 @@
-extends Node
+extends CharacterBody2D
+class_name Body
 
-@export var race : String
+@export var name_component : NameComponent
 
-var blood_level : float
-@export var max_blood_level : float = 100.0
-var blood_group : String
+@export var blood_component : BloodComponent
 
-var toxin_damage : float
-var suff_damage : float # Suffocation damage
+@export var toxin_damage : DamageComponent
+@export var suff_damage : DamageComponent # Suffocation damage
+
+@export var parts_component : PartsComponent
+@export var state_component : StateComponent
+@export var velocity_component : VelocityComponent
 
 var temperature : float
 var min_temperature : float
@@ -15,107 +18,57 @@ var max_temperature : float
 
 var reagents : Dictionary # reagents in blood
 
-var cached_parts : Dictionary
+@onready var animation : AnimationTree = $AnimationTree
 
+func _enter_tree():
+	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
-	if race != null:
-		build_body()
-	
+	animation.active = true
+
 func _process(delta):
-	absorb_reagents(delta)
-	process_injures(delta)
+	_process_animation()
 	
-func _on_hit_area_input_event(_viewport, event : InputEvent, _shape_idx):
-	if event.is_action_pressed("examine"):
-		pass
-	elif event.is_action_pressed("left_click"):
-		Signals.interact_with(self)
+	if not is_multiplayer_authority():
+		return
+	state_component.calculate(self)
 
-func build_body():
-	var race_data : Dictionary = RaceData.get_race(race)
-	
-	min_temperature = race_data["min_temperature"]
-	max_temperature = race_data["max_temperature"]
-	
-	blood_level = max_blood_level
-	blood_group = RaceData.blood_groups[randi_range(0, 3)]
-	
-	var upper_body = create_body_part(race_data, "upper_body")
-	var groin = create_body_part(race_data, "groin")
-	var head = create_body_part(race_data, "head")
-	var left_arm = create_body_part(race_data, "left_arm")
-	var right_arm = create_body_part(race_data, "right_arm")
-	var left_leg = create_body_part(race_data, "left_leg")
-	var right_leg = create_body_part(race_data, "right_leg")
-	
-	# replace to append part method
-	groin.add_child(left_leg)
-	groin.add_child(right_leg)
-	
-	upper_body.add_child(head)
-	upper_body.add_child(groin)
-	upper_body.add_child(left_arm)
-	upper_body.add_child(right_arm)
-	
-	add_child(upper_body)
-	
-#region Body part caching
-	cached_parts["upper_body"] = upper_body
-	cached_parts["groin"] = groin
-	cached_parts["head"] = head
-	cached_parts["left_arm"] = left_arm
-	cached_parts["right_arm"] = right_arm
-	cached_parts["left_leg"] = left_leg
-	cached_parts["right_leg"] = right_leg
-#endregion
+func _physics_process(_delta):
+	if not state_component.is_dead:
+		velocity_component.move(self)
 
-func create_body_part(parts : Dictionary, part_id : String):
-	var obj = RaceData.create_body_part()
-	var data : Dictionary = parts[part_id]
-	obj.name = part_id
-	obj.texture_name = RaceData.get_race_body_part_texture(race, part_id)
-	obj.size = RaceData.get_race_body_part_size(race, part_id)
-	var organs = RaceData.get_race_body_part_organs(race, part_id)
-	if organs:
-		for organ in create_organs(organs):
-			obj.inject(organ)
+func _process_animation():
+	if velocity != Vector2.ZERO:
+		animation["parameters/conditions/walk"] = true
+		animation["parameters/conditions/idle"] = false
+	else:
+		animation["parameters/conditions/walk"] = false
+		animation["parameters/conditions/idle"] = true
 	
-	return obj
+	#animation["parameters/conditions/fell"] = in_critical() or is_dead() or velocity_component.is_crawl
+	#animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead() and not velocity_component.is_crawl
 
-func create_organs(organs : Array):
-	var pack : Array = []
-	
-	for organ : Dictionary in organs:
-		var organ_obj = RaceData.create_organ()
-		organ_obj.name = organ["id"]
-		if organ.has("tags"):
-			organ_obj.tags.append_array(organ["tags"])
-		pack.append(organ_obj)
-		
-	return pack
+#func _absorb_reagents(tick_coef):
+	#for reagent in reagents:
+		#var absorbability = ReagentData.get_absorbability(reagent)
+		#var absorbed = absorbability * tick_coef
+		#reagents[reagent] = maxf(0, reagents[reagent] - absorbed)
+		#if reagents[reagent] == 0.0:
+			#reagents.erase(reagent)
+		#process_reagent(reagent, absorbed)
 
-func absorb_reagents(tick_coef):
-	for reagent in reagents:
-		var absorbability = ReagentData.get_absorbability(reagent)
-		var absorbed = absorbability * tick_coef
-		reagents[reagent] = maxf(0, reagents[reagent] - absorbed)
-		if reagents[reagent] == 0.0:
-			reagents.erase(reagent)
-		process_reagent(reagent, absorbed)
-
-func process_reagent(reagent, absorbed):
-	var tags = ReagentData.get_tags(reagent)
-	if "blood" in tags:
-		process_blood(reagent, absorbed)
+#func process_reagent(reagent, absorbed):
+	#var tags = ReagentData.get_tags(reagent)
+	#if "blood" in tags:
+		#process_blood(reagent, absorbed)
 
 # need move reagent behaviour to separated class
-func process_blood(blood, absorbed):
-	var tags = ReagentData.get_tags(blood)
-	if blood_group in tags:
-		blood_level = minf(max_blood_level, blood_level + absorbed)
-	else:
-		toxin_damage += absorbed * 1.5
+#func process_blood(blood, absorbed):
+	#var tags = ReagentData.get_tags(blood)
+	#if blood_group in tags:
+		#blood_level = minf(max_blood_level, blood_level + absorbed)
+	#else:
+		#toxin_damage += absorbed * 1.5
 
 # need move reagent behaviour to separated class
 func process_sorbent(sorbent, absorbed):
@@ -126,34 +79,62 @@ func process_sorbent(sorbent, absorbed):
 func process_injures(tick_coef):
 	pass
 
+func is_dead():
+	return state_component.is_dead
+
+func in_critical():
+	return state_component.in_critical
+
+@warning_ignore("unused_parameter")
 func attach_part(part):
 	# attach missing part here
 	pass
 
+@warning_ignore("unused_parameter")
 func detache_part(part):
 	# detache body part here
 	pass
 
-func get_part(part : String):
-	if part in cached_parts.keys():
-		return cached_parts[part]
+func get_part(part_tag : PartsComponent.Part) -> BodyPart:
+	return parts_component.get_part(part_tag)
 
-func do_brute_damage(value : float, target : String = ""):
-	var part = get_part(target)
-	part.do_brute_damage(value)
+func get_parts():
+	return parts_component.get_parts()
 
-func do_burn_damage(value : float, target : String = ""):
-	var part = get_part(target)
-	part.do_burn_damage(value)
+@rpc("any_peer", "call_local")
+func do_brute_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+	parts_component.do_brute_damage(value, target)
+
+@rpc("any_peer", "call_local")
+func do_burn_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+	parts_component.do_burn_damage(value, target)
+
+@rpc("any_peer", "call_local")
+func do_toxin_damage(value : float):
+	toxin_damage.damage(value)
+
+@rpc("any_peer", "call_local")
+func do_suff_damage(value : float):
+	suff_damage.damage(value)
 
 func get_brute_damage():
-	var total = 0.0
-	for part in cached_parts.values():
-		total += part.brute_damage
-	return total
+	return parts_component.get_brute_damage()
 
 func get_burn_damage():
-	var total = 0.0
-	for part in cached_parts.values():
-		total += part.burn_damage
-	return total
+	return parts_component.get_burn_damage()
+
+func get_toxin_damage():
+	return toxin_damage.damage_value
+
+func get_suff_damage():
+	return suff_damage.damage_value
+
+func get_total_damage():
+	return get_brute_damage() + get_burn_damage() + get_toxin_damage() + get_suff_damage()
+
+func get_slot(part_tag : PartsComponent.Part) -> SlotComponent:
+	return parts_component.get_slot(part_tag)
+
+@rpc("any_peer", "call_local")
+func set_slot(part_tag : PartsComponent.Part, value):
+	parts_component.set_slot(part_tag, value)

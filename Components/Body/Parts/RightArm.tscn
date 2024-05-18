@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bed1xqwwuhj1k"]
+
+[ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_yan18"]
+[ext_resource type="Texture2D" uid="uid://byvvoj553bf1s" path="res://Sprites/Body/human/right_arm.tres" id="2_qwny5"]
+
+[node name="RightArm" instance=ExtResource("1_yan18")]
+texture = ExtResource("2_qwny5")
+tag = 4
+connections = Array[int]([2])

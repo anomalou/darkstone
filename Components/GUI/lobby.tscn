@@ -1,0 +1,153 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsm4ei3hf1xeb"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/LobbyGUI.gd" id="1_vt5ix"]
+[ext_resource type="Theme" uid="uid://18edxng4tfw2" path="res://Resources/countdown.tres" id="2_ls8p5"]
+[ext_resource type="LabelSettings" uid="uid://vvamxfkq342" path="res://Resources/ready.tres" id="3_lmpg2"]
+[ext_resource type="LabelSettings" uid="uid://ca2baga1pgfue" path="res://Resources/not_ready.tres" id="3_ms0mk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xxq0t"]
+font_size = 50
+
+[node name="Lobby" type="Control" node_paths=PackedStringArray("time", "host", "players_online", "players_ready", "ready_status")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vt5ix")
+time = NodePath("CountDown/HBoxContainer/VBoxContainer/Time")
+host = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/HostContainer/Host")
+players_online = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/PlayersOnlineContainer/PlayersOnline")
+players_ready = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/PlayersReadyContainer/PlayersReady")
+ready_status = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/ReadyStatus/ReadyStatus")
+ready_outline = ExtResource("3_lmpg2")
+not_ready_outline = ExtResource("3_ms0mk")
+
+[node name="CharacterCreation" type="Window" parent="."]
+visible = false
+
+[node name="CountDown" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_ls8p5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CountDown"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -30.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CountDown/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Title" type="Label" parent="CountDown/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Time left:"
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="CountDown/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "180"
+label_settings = SubResource("LabelSettings_xxq0t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="CountDown/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Ready" type="Button" parent="CountDown/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ready"
+
+[node name="VSeparator" type="VSeparator" parent="CountDown/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LobbyInfoLabels" type="VBoxContainer" parent="CountDown/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HostContainer" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="HostLabel" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/HostContainer"]
+layout_mode = 2
+text = "Host:"
+
+[node name="Host" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/HostContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="PlayersOnlineContainer" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="PlayersOnlineLabel" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/PlayersOnlineContainer"]
+layout_mode = 2
+text = "Players online:"
+
+[node name="PlayersOnline" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/PlayersOnlineContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="PlayersReadyContainer" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="PlayersReadyLabel" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/PlayersReadyContainer"]
+layout_mode = 2
+text = "Players ready:"
+
+[node name="PlayersReady" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/PlayersReadyContainer"]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="NextMapContainer" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="NextMapLabel" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/NextMapContainer"]
+layout_mode = 2
+text = "Next map:"
+
+[node name="NextMap" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/NextMapContainer"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="ReadyStatus" type="HBoxContainer" parent="CountDown/HBoxContainer/LobbyInfoLabels"]
+layout_mode = 2
+
+[node name="ReadyStatus" type="Label" parent="CountDown/HBoxContainer/LobbyInfoLabels/ReadyStatus"]
+layout_mode = 2
+text = "NOT READY"
+label_settings = ExtResource("3_ms0mk")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Ready" to="." method="_on_ready_pressed"]

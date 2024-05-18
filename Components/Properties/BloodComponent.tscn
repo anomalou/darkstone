@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ge2ca3bxa5qn"]
+
+[ext_resource type="Script" path="res://Scripts/Components/BloodComponent.gd" id="1_fard1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q70vm"]
+properties/0/path = NodePath(".:max_blood_level")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:group")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:blood_level")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="BloodComponent" type="Node"]
+script = ExtResource("1_fard1")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q70vm")

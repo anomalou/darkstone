@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8cjkbbtxyhc0"]
+
+[ext_resource type="Texture2D" uid="uid://ch7npbsqokmep" path="res://Sprites/tiles.png" id="1_h8pr3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60poe"]
+atlas = ExtResource("1_h8pr3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k722"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4reav"]
+cull_mode = 2
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = SubResource("AtlasTexture_60poe")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+collision_mask = 6
+
+[node name="Collision" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_1k722")
+
+[node name="Occluder" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_4reav")

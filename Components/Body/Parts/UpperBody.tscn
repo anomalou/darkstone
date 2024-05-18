@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlcttmoxiwufr"]
+
+[ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_gy0x2"]
+[ext_resource type="Texture2D" uid="uid://dgr0fqrd5uwke" path="res://Sprites/Body/human/upper_body.tres" id="2_ywmpa"]
+
+[node name="UpperBody" instance=ExtResource("1_gy0x2")]
+texture = ExtResource("2_ywmpa")
+tag = 2
+connections = Array[int]([1, 3, 4, 5])

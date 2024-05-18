@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbl3d20oq0ouk"]
+
+[ext_resource type="PackedScene" uid="uid://de3j58yjyblmf" path="res://Components/Properties/Specials/PartsComponent.tscn" id="1_uakkb"]
+[ext_resource type="Script" path="res://Scripts/Components/HumanPartsComponent.gd" id="2_323h1"]
+
+[node name="HumanPartsComponent" instance=ExtResource("1_uakkb")]
+script = ExtResource("2_323h1")

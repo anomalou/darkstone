@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://tyg87prayr1u"]
+
+[ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_0mka6"]
+[ext_resource type="Texture2D" uid="uid://cetgh51iv3hv" path="res://Sprites/Body/human/left_arm.tres" id="2_axkf2"]
+
+[node name="LeftArm" instance=ExtResource("1_0mka6")]
+texture = ExtResource("2_axkf2")
+tag = 3
+connections = Array[int]([2])

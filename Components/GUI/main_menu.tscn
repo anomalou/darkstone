@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://0uy8dkfg2ftu"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/ConfigurationMenuGUI.gd" id="1_fki57"]
+[ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="2_aofle"]
+[ext_resource type="Shader" path="res://Shaders/stars.gdshader" id="2_vtr30"]
+[ext_resource type="Texture2D" uid="uid://clo0x0kmvogff" path="res://Sprites/gamemode_icons.png" id="3_tqspx"]
+[ext_resource type="PackedScene" uid="uid://eg1buxmnfxw6" path="res://Components/GUI/multiplayer_config.tscn" id="4_sskeu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5cxq"]
+shader = ExtResource("2_vtr30")
+shader_parameter/dimensions = Vector2(1, 1)
+shader_parameter/small_stars = 150.0
+shader_parameter/small_stars_far_size = 0.3
+shader_parameter/small_stars_near_size = 0.6
+shader_parameter/large_stars = 40.0
+shader_parameter/large_stars_far_size = 0.1
+shader_parameter/large_stars_near_size = 1.0
+shader_parameter/far_stars_color = Color(1, 0.858824, 0.709804, 1)
+shader_parameter/near_stars_color = Color(1, 1, 1, 1)
+shader_parameter/base_scroll_speed = 0.0
+shader_parameter/additional_scroll_speed = 0.02
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khued"]
+atlas = ExtResource("3_tqspx")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb380"]
+atlas = ExtResource("3_tqspx")
+region = Rect2(0, 128, 128, 128)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fki57")
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_r5cxq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aofle")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="MenuContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameModeButtons" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 2
+
+[node name="Singleplayer" type="Button" parent="MenuContainer/GameModeButtons"]
+layout_mode = 2
+shortcut_in_tooltip = false
+icon = SubResource("AtlasTexture_khued")
+flat = true
+
+[node name="Multiplayer" type="Button" parent="MenuContainer/GameModeButtons"]
+layout_mode = 2
+shortcut_in_tooltip = false
+icon = SubResource("AtlasTexture_sb380")
+flat = true
+
+[node name="MultiplayerConfig" parent="." instance=ExtResource("4_sskeu")]
+visible = false
+
+[connection signal="pressed" from="MenuContainer/GameModeButtons/Multiplayer" to="." method="_on_multiplayer_pressed"]

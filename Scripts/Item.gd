@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Item
 
 @export var id : String
 
@@ -16,17 +17,25 @@ func _process(_delta):
 
 # rewrite to signal
 func raise_up():
-	var player = get_node(NodePath("/root/World/Player"))
+	var player = Multiplayer.get_player()
+	if not player:
+		return
+	
 	if player.is_ghost:
 		return
-	var player_body : Node2D = player.body
-	if player_body != null:
-		var left_arm = player_body.get_part("left_arm")
-		if left_arm != null:
-			left_arm.slot = id
-			Saylog.add(ItemData.get_pickup_message(id))
+	
+	var player_body : Body = player.get_body()
+	if not player_body:
+		return
+	if player_body:
+		if player_body.set_slot(PartsComponent.Part.LEFT_ARM, id):
+			Saylog.add.rpc(ItemData.get_pickup_message(id))
 			queue_free()
-			
+
+@rpc("any_peer", "call_local")
+func apply_force_rpc(force):
+	apply_force(force)
+
 func examine():
 	Saylog.add(ItemData.get_description(id))
 

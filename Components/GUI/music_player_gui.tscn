@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqpcvnhnesf34"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/MusicPlayerGUI.gd" id="1_p1855"]
+[ext_resource type="PackedScene" uid="uid://byt16dkf6ri5d" path="res://Components/GUI/music_item.tscn" id="2_hkbtr"]
+
+[node name="MusicPlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MusicSelector" type="Window" parent="."]
+initial_position = 1
+size = Vector2i(200, 300)
+visible = false
+min_size = Vector2i(200, 300)
+script = ExtResource("1_p1855")
+music_item_scene = ExtResource("2_hkbtr")
+
+[node name="Player" type="VBoxContainer" parent="MusicSelector"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MusicSelector/Player"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="MusicSelector/Player/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="List" type="VBoxContainer" parent="MusicSelector/Player/Panel/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MusicSelector/Player"]
+layout_mode = 2
+text = "title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="MusicSelector/Player"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="MusicSelector/Player/Control"]
+layout_mode = 2
+text = "Play
+"
+
+[node name="Stop" type="Button" parent="MusicSelector/Player/Control"]
+layout_mode = 2
+text = "Stop"
+
+[node name="Music" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 54.0
+grow_vertical = 0
+text = "Music"
+
+[connection signal="close_requested" from="MusicSelector" to="MusicSelector" method="_on_close_requested"]
+[connection signal="pressed" from="MusicSelector/Player/Control/Play" to="MusicSelector" method="_on_play_pressed"]
+[connection signal="pressed" from="MusicSelector/Player/Control/Stop" to="MusicSelector" method="_on_stop_pressed"]
+[connection signal="pressed" from="Music" to="MusicSelector" method="_on_music_pressed"]

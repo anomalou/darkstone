@@ -1,33 +1,33 @@
-extends TextureRect
+extends Node
+class_name Hands
 
-@export var is_left_hand : bool = true
+@onready var left : TextureRect = $Left/Texture
+@onready var right : TextureRect = $Right/Texture
 
-var player : Node2D
+@onready var server_info : ServerInfo = get_node(Constants.server_info)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	player = get_node(NodePath("/root/World/Player"))
+var left_slot : SlotComponent
+var right_slot : SlotComponent
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var id : String
-	if not player.is_ghost:
-		if is_left_hand:
-			var left_arm = player.body.get_part("left_arm")
-			if left_arm != null:
-				id = left_arm.get_slot()
-		else:
-			var right_arm = player.body.get_part("right_arm")
-			if right_arm != null:
-				id = right_arm.get_slot()
+	if not server_info.is_game_started:
+		return
 		
-		if id != "":
-			var texture_name = ItemData.get_slot_texture_name(id)
-			texture = load("res://Sprites/Slot/" + texture_name + ".tres")
+	var player : Player = Multiplayer.get_player()
+	var body : Body = player.get_body()
 	
+	if not body:
+		return
 	
+	left_slot = body.get_slot(PartsComponent.Part.LEFT_ARM)
+	right_slot = body.get_slot(PartsComponent.Part.RIGHT_ARM)
+	
+	if left_slot:
+		if left_slot.get_slot():
+			left.texture = load(Constants.slot_sprites + left_slot.get_slot() + ".tres")
+	if right_slot:
+		if right_slot.get_slot():
+			right.texture = load(Constants.slot_sprites + right_slot.get_slot() + ".tres")
+
 func _on_gui_input(event : InputEvent):
-	if event.is_action_pressed("left_click"):
-		print(is_left_hand)
 	pass # Replace with function body.

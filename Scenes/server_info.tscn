@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://by65qv6i613hu"]
+
+[ext_resource type="Script" path="res://Scripts/ServerInfo.gd" id="1_5pqcc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x4gwi"]
+properties/0/path = NodePath(".:online_players")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:ready_players")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:host")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:game_countdown")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:is_game_started")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:time_left")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[node name="ServerInfo" type="Node"]
+script = ExtResource("1_5pqcc")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_x4gwi")

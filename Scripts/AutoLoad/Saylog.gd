@@ -5,6 +5,7 @@ signal log_update
 var saylog : Array = []
 var log_limit = 50
 
+@rpc("any_peer", "call_local")
 func add(text):
 	saylog.append(text)
 	

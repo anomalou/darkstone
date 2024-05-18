@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://q6jjehm6a6fm"]
+
+[ext_resource type="Script" path="res://Scripts/Components/SlotComponent.gd" id="1_0102g"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4ufex"]
+properties/0/path = NodePath(".:slot")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="SlotComponent" type="Node"]
+script = ExtResource("1_0102g")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4ufex")

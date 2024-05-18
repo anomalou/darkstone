@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyxeohp5k5vjd"]
+
+[ext_resource type="Script" path="res://Scripts/FOV.gd" id="1_5ue1i"]
+
+[sub_resource type="Gradient" id="Gradient_k378r"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.704142)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
+gradient = SubResource("Gradient_k378r")
+width = 512
+height = 512
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_7rwsv"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.846154)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jkbxy"]
+gradient = SubResource("Gradient_7rwsv")
+width = 512
+height = 512
+
+[node name="FOV" type="PointLight2D"]
+blend_mode = 1
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_hq1qo")
+script = ExtResource("1_5ue1i")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="BlockAlpha (beta)" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_jkbxy")

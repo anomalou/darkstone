@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://byt16dkf6ri5d"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/MusicItem.gd" id="1_fyj38"]
+
+[node name="MusicItem" type="Button"]
+size_flags_vertical = 0
+text = "text"
+script = ExtResource("1_fyj38")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

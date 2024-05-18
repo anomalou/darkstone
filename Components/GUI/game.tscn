@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://civxfssd814bg"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/GameControlGUI.gd" id="1_h2lu4"]
+[ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/GUI/hands.tscn" id="1_ipmtr"]
+[ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/GUI/med_info.tscn" id="3_3djba"]
+[ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/GUI/intents.tscn" id="4_q5xx8"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_h2lu4")
+
+[node name="Hands" parent="." instance=ExtResource("1_ipmtr")]
+layout_mode = 1
+offset_left = -102.0
+offset_top = -100.0
+offset_right = 102.0
+
+[node name="MedInfo" parent="." instance=ExtResource("3_3djba")]
+visible = false
+
+[node name="Intents" parent="." instance=ExtResource("4_q5xx8")]
+layout_mode = 1

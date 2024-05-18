@@ -1,84 +1,64 @@
 extends Sprite2D
+class_name BodyPart
 
-var race : String = "human" # later update to make another race
+@export var brute_damage : DamageComponent
+@export var burn_damage : DamageComponent
 
-var brute_damage : float
-var burn_damage : float
-
-var health : float = 1.0
+@export var health : HealthComponent
 var has_bone : bool = false
 var is_bone_broken : bool = false
 
 var size : int
 var is_covered : bool = false
-var slot
+@export var slot_component : SlotComponent
 
-var tags : Array = ["body_part"]
+@export var entrails_component : EntrailsComponent
 
+@export var tag : PartsComponent.Part
+@export var connections : Array[PartsComponent.Part]
 var texture_name : String
-var cached_organs : Dictionary
 
-func _ready():
-	texture = load_texture()
-	
-func load_texture():
-	return load("res://Sprites/Body/" + race + "/" + name + ".tres")
+func get_health():
+	return health.get_value()
 
-# check this out later. Added only couse bug with Dictionary convert to EncodedObjectAsID dictionary
-func decode(encoded_organ):
-	if encoded_organ is EncodedObjectAsID:
-		return instance_from_id(encoded_organ.object_id)
-	else:
-		return encoded_organ
-
-func inject(organ : Node2D):
-	if "organ" in organ.tags:
-		add_child(organ)
-		cached_organs[organ.name] = organ
-
-func eject(organ : String):
-	var obj = cached_organs[organ]
-	cached_organs.erase(organ)
-	remove_child(obj)
-		
-func is_organ_alive(organ : String):
-	if not cached_organs.has(organ):
-		return false
-	var obj = decode(cached_organs[organ])
-	if obj.health <= 0.0:
-		return false
-	return true
-
-func get_organ_status(organ : String):
-	if cached_organs.has(organ):
-		var obj = decode(cached_organs[organ])
-		return obj.health
-
-func is_organ_alive_by_tag(tag : String):
-	var temp = cached_organs.values().duplicate()
-	for organ in temp:
-		var obj = decode(organ)
-		if tag in obj.tags:
-			if obj.health <= 0.0:
-				return false
-			return true
-	return false
-
-func get_organ_status_by_tag(tag : String):
-	var temp = cached_organs.values().duplicate()
-	for organ in temp:
-		var obj = decode(organ)
-		if tag in obj.tags:
-			return obj.health
+func get_brute_damage():
+	return brute_damage.damage_value
 
 func do_brute_damage(value : float):
-	brute_damage += value
+	brute_damage.damage(value)
+
+func heal_brute_damage(value : float):
+	brute_damage.heal(value)
+
+func get_burn_damage():
+	return burn_damage.damage_value
 
 func do_burn_damage(value : float):
-	burn_damage += value
+	burn_damage.damage(value)
+
+func heal_burn_damage(value : float):
+	burn_damage.heal(value)
+
+func has_entrails():
+	return entrails_component != null
+
+func has_slot():
+	return slot_component != null
 
 func get_slot():
-	if slot == null:
-		return "" # temporary when i make new items
-	else:
-		return slot
+	return slot_component
+
+func set_slot(value):
+	slot_component.set_slot(value)
+
+func inject(organ):
+	entrails_component.inject(organ)
+
+func eject(organ : EntrailsComponent.OrganTags):
+	return entrails_component.eject(organ)
+
+func get_organs():
+	return entrails_component.get_organs()
+
+func has_organ(tag : EntrailsComponent.OrganTags):
+	return entrails_component.has_organ(tag)
