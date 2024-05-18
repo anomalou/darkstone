@@ -12,7 +12,7 @@ func _physics_process(delta):
 	else:
 		velocity_component.is_run = false
 	
-	if Input.is_action_pressed("crawl"):
+	if Input.is_action_just_pressed("crawl"):
 		velocity_component.is_crawl = not velocity_component.is_crawl
 	
 	var direction = Input.get_vector("left", "right", "up", "down") * delta

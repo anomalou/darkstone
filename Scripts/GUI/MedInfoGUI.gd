@@ -1,5 +1,5 @@
 extends Window
-class_name BodyStatus
+class_name MedInfoGUI
 
 var body_tree : Tree
 

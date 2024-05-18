@@ -95,4 +95,4 @@ func start_game_for(id):
 	player.set_alive.rpc_id(id, true)
 	
 	update_path.rpc_id(id, player.get_path())
-	$/root/GameState.toggle_game_gui.rpc_id(id, true)
+	GUIManager.toggle_game_gui.rpc_id(id, true)

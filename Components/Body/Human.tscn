@@ -1,87 +1,217 @@
-[gd_scene load_steps=13 format=3 uid="uid://dso5jxilojvhv"]
+[gd_scene load_steps=28 format=3 uid="uid://dso5jxilojvhv"]
 
 [ext_resource type="PackedScene" uid="uid://cjje8xhmliet6" path="res://Components/Body/Body.tscn" id="1_ai40p"]
+[ext_resource type="PackedScene" uid="uid://dfq72ojkr6bwa" path="res://Components/Properties/InteractionComponent.tscn" id="2_4v8l4"]
 [ext_resource type="PackedScene" uid="uid://mtfh7xajql02" path="res://Components/Properties/Specials/StateComponent.tscn" id="2_c3jrx"]
 [ext_resource type="PackedScene" uid="uid://b26bfu8vssl2o" path="res://Components/Body/Parts/Head.tscn" id="2_l7n8h"]
+[ext_resource type="PackedScene" uid="uid://ib3qeji8r6r0" path="res://Components/Properties/Specials/ExamineAction.tscn" id="3_3ofxq"]
 [ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="3_hkpaf"]
+[ext_resource type="Script" path="res://Scripts/Components/Actions/Action.gd" id="3_lsifc"]
+[ext_resource type="PackedScene" uid="uid://b8shon656v7c0" path="res://Components/Properties/Specials/MedInfoAction.tscn" id="3_r83ym"]
 [ext_resource type="PackedScene" uid="uid://dlcttmoxiwufr" path="res://Components/Body/Parts/UpperBody.tscn" id="3_tcjmf"]
 [ext_resource type="PackedScene" uid="uid://b0khfuv2skth4" path="res://Components/Properties/OrganComponent.tscn" id="4_dpubf"]
 [ext_resource type="PackedScene" uid="uid://tyg87prayr1u" path="res://Components/Body/Parts/LeftArm.tscn" id="4_f7frg"]
 [ext_resource type="PackedScene" uid="uid://caaycshdtl57n" path="res://Components/Properties/EntrailsComponent.tscn" id="4_p4jxx"]
 [ext_resource type="PackedScene" uid="uid://bed1xqwwuhj1k" path="res://Components/Body/Parts/RightArm.tscn" id="5_jercd"]
 [ext_resource type="PackedScene" uid="uid://6cwsj50utmhb" path="res://Components/Body/Parts/Groin.tscn" id="6_ba3ie"]
+[ext_resource type="PackedScene" uid="uid://bbl3d20oq0ouk" path="res://Components/Properties/Specials/HumanPartsComponent.tscn" id="6_bh7po"]
 [ext_resource type="PackedScene" uid="uid://ckirg5heqnofw" path="res://Components/Body/Parts/LeftLeg.tscn" id="7_4xhga"]
 [ext_resource type="PackedScene" uid="uid://deb8ffhqg6sfq" path="res://Components/Body/Parts/RightLeg.tscn" id="8_sn4tv"]
 
-[node name="Human" node_paths=PackedStringArray("state_component") instance=ExtResource("1_ai40p")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebbby"]
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_hdrvh"]
+resource_name = "walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanPartsComponent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0), Vector2(0, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HumanPartsComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mmovy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanPartsComponent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HumanPartsComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhp3q"]
+_data = {
+"RESET": SubResource("Animation_mmovy"),
+"walking": SubResource("Animation_hdrvh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ddnm"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aaoj3"]
+animation = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rhtpv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u1ty"]
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tocfk"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rwuon"]
+states/RESET/node = SubResource("AnimationNodeAnimation_5ddnm")
+states/RESET/position = Vector2(370, 96)
+states/walking/node = SubResource("AnimationNodeAnimation_aaoj3")
+states/walking/position = Vector2(494, 88)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_rhtpv"), "RESET", "walking", SubResource("AnimationNodeStateMachineTransition_3u1ty"), "walking", "RESET", SubResource("AnimationNodeStateMachineTransition_tocfk")]
+graph_offset = Vector2(-6, 14)
+
+[node name="Human" node_paths=PackedStringArray("parts_component", "state_component") instance=ExtResource("1_ai40p")]
+parts_component = NodePath("HumanPartsComponent")
 state_component = NodePath("StateComponent")
 
-[node name="BloodComponent" parent="." index="1"]
+[node name="InteractionComponent" parent="." index="0" node_paths=PackedStringArray("help_action", "grab_action", "examine_action") instance=ExtResource("2_4v8l4")]
+help_action = NodePath("Dummy (replace)")
+grab_action = NodePath("MedInfoAction")
+examine_action = NodePath("ExamineAction (Dummy)")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
+shape = SubResource("CapsuleShape2D_ebbby")
+
+[node name="MedInfoAction" parent="InteractionComponent" index="1" node_paths=PackedStringArray("body") instance=ExtResource("3_r83ym")]
+body = NodePath("../..")
+
+[node name="ExamineAction (Dummy)" parent="InteractionComponent" index="2" instance=ExtResource("3_3ofxq")]
+examine = "Just a robust human"
+
+[node name="Dummy (replace)" type="Node" parent="InteractionComponent" index="3"]
+script = ExtResource("3_lsifc")
+
+[node name="BloodComponent" parent="." index="2"]
 max_blood_level = 100.0
 
-[node name="StateComponent" parent="." index="3" node_paths=PackedStringArray("blood_component") instance=ExtResource("2_c3jrx")]
+[node name="StateComponent" parent="." index="4" node_paths=PackedStringArray("blood_component") instance=ExtResource("2_c3jrx")]
 blood_component = NodePath("../BloodComponent")
 
-[node name="Head" parent="Parts" index="0" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("2_l7n8h")]
+[node name="HumanPartsComponent" parent="." index="6" node_paths=PackedStringArray("head", "upper_body", "left_arm", "right_arm", "groin", "left_leg", "right_leg") instance=ExtResource("6_bh7po")]
+head = NodePath("Head")
+upper_body = NodePath("UpperBody")
+left_arm = NodePath("LeftArm")
+right_arm = NodePath("RightArm")
+groin = NodePath("Groin")
+left_leg = NodePath("LeftLeg")
+right_leg = NodePath("RightLeg")
+
+[node name="Head" parent="HumanPartsComponent" index="0" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("2_l7n8h")]
 slot_component = NodePath("SlotComponent")
 entrails_component = NodePath("EntrailsComponent")
 
-[node name="SlotComponent" parent="Parts/Head" index="3" instance=ExtResource("3_hkpaf")]
+[node name="SlotComponent" parent="HumanPartsComponent/Head" index="3" instance=ExtResource("3_hkpaf")]
 
-[node name="EntrailsComponent" parent="Parts/Head" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
-toxin_component = NodePath("../../../ToxinDamage")
-suff_component = NodePath("../../../SuffDamage")
+[node name="EntrailsComponent" parent="HumanPartsComponent/Head" index="4" instance=ExtResource("4_p4jxx")]
 
-[node name="Brain" parent="Parts/Head/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+[node name="Brain" parent="HumanPartsComponent/Head/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
 
-[node name="Eyes" parent="Parts/Head/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+[node name="Eyes" parent="HumanPartsComponent/Head/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
 type = 1
 
-[node name="Ears" parent="Parts/Head/EntrailsComponent" index="3" instance=ExtResource("4_dpubf")]
+[node name="Ears" parent="HumanPartsComponent/Head/EntrailsComponent" index="3" instance=ExtResource("4_dpubf")]
 type = 2
 
-[node name="UpperBody" parent="Parts" index="1" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("3_tcjmf")]
+[node name="UpperBody" parent="HumanPartsComponent" index="1" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("3_tcjmf")]
 slot_component = NodePath("SlotComponent")
 entrails_component = NodePath("EntrailsComponent")
 
-[node name="SlotComponent" parent="Parts/UpperBody" index="3" instance=ExtResource("3_hkpaf")]
+[node name="SlotComponent" parent="HumanPartsComponent/UpperBody" index="3" instance=ExtResource("3_hkpaf")]
 
-[node name="EntrailsComponent" parent="Parts/UpperBody" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
-toxin_component = NodePath("../../../ToxinDamage")
-suff_component = NodePath("../../../SuffDamage")
+[node name="EntrailsComponent" parent="HumanPartsComponent/UpperBody" index="4" instance=ExtResource("4_p4jxx")]
 
-[node name="Heart" parent="Parts/UpperBody/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+[node name="Heart" parent="HumanPartsComponent/UpperBody/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
 type = 3
 
-[node name="Lungs" parent="Parts/UpperBody/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+[node name="Lungs" parent="HumanPartsComponent/UpperBody/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
 type = 4
 
-[node name="LeftArm" parent="Parts" index="2" node_paths=PackedStringArray("slot_component") instance=ExtResource("4_f7frg")]
+[node name="LeftArm" parent="HumanPartsComponent" index="2" node_paths=PackedStringArray("slot_component") instance=ExtResource("4_f7frg")]
 slot_component = NodePath("SlotComponent")
 
-[node name="SlotComponent" parent="Parts/LeftArm" index="3" instance=ExtResource("3_hkpaf")]
+[node name="SlotComponent" parent="HumanPartsComponent/LeftArm" index="3" instance=ExtResource("3_hkpaf")]
 
-[node name="RightArm" parent="Parts" index="3" node_paths=PackedStringArray("slot_component") instance=ExtResource("5_jercd")]
+[node name="RightArm" parent="HumanPartsComponent" index="3" node_paths=PackedStringArray("slot_component") instance=ExtResource("5_jercd")]
 slot_component = NodePath("SlotComponent")
 
-[node name="SlotComponent" parent="Parts/RightArm" index="3" instance=ExtResource("3_hkpaf")]
+[node name="SlotComponent" parent="HumanPartsComponent/RightArm" index="3" instance=ExtResource("3_hkpaf")]
 
-[node name="Groin" parent="Parts" index="4" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("6_ba3ie")]
+[node name="Groin" parent="HumanPartsComponent" index="4" node_paths=PackedStringArray("slot_component", "entrails_component") instance=ExtResource("6_ba3ie")]
 slot_component = NodePath("SlotComponent")
 entrails_component = NodePath("EntrailsComponent")
 
-[node name="SlotComponent" parent="Parts/Groin" index="3" instance=ExtResource("3_hkpaf")]
+[node name="SlotComponent" parent="HumanPartsComponent/Groin" index="3" instance=ExtResource("3_hkpaf")]
 
-[node name="EntrailsComponent" parent="Parts/Groin" index="4" node_paths=PackedStringArray("toxin_component", "suff_component") instance=ExtResource("4_p4jxx")]
-toxin_component = NodePath("../../../ToxinDamage")
-suff_component = NodePath("../../../SuffDamage")
+[node name="EntrailsComponent" parent="HumanPartsComponent/Groin" index="4" instance=ExtResource("4_p4jxx")]
 
-[node name="Liver" parent="Parts/Groin/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
+[node name="Liver" parent="HumanPartsComponent/Groin/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
 type = 5
 
-[node name="Appendix" parent="Parts/Groin/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
+[node name="Appendix" parent="HumanPartsComponent/Groin/EntrailsComponent" index="2" instance=ExtResource("4_dpubf")]
 type = 6
 
-[node name="LeftLeg" parent="Parts" index="5" instance=ExtResource("7_4xhga")]
+[node name="LeftLeg" parent="HumanPartsComponent" index="5" instance=ExtResource("7_4xhga")]
 
-[node name="RightLeg" parent="Parts" index="6" instance=ExtResource("8_sn4tv")]
+[node name="RightLeg" parent="HumanPartsComponent" index="6" instance=ExtResource("8_sn4tv")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+libraries = {
+"": SubResource("AnimationLibrary_vhp3q")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+libraries = {
+"": SubResource("AnimationLibrary_vhp3q")
+}
+tree_root = SubResource("AnimationNodeStateMachine_rwuon")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/walk = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjje8xhmliet6"]
+[gd_scene load_steps=9 format=3 uid="uid://cjje8xhmliet6"]
 
 [ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_co8ix"]
 [ext_resource type="PackedScene" uid="uid://ge2ca3bxa5qn" path="res://Components/Properties/BloodComponent.tscn" id="2_f42at"]
@@ -8,253 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_j1pta"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
-
-[sub_resource type="Animation" id="Animation_y4g1y"]
-length = 0.001
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_6vuud"]
-resource_name = "fell"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.57079]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../PhysicalCollider:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 5)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../PhysicalCollider:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = false
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.57079]
-}
-
-[sub_resource type="Animation" id="Animation_qqfj5"]
-resource_name = "idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_mi02f"]
-resource_name = "stand_up"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 5), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.57079, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../PhysicalCollider:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 5), Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../PhysicalCollider:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = false
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.57079, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_5ton2"]
-resource_name = "walk"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o33dp"]
-_data = {
-"RESET": SubResource("Animation_y4g1y"),
-"fell": SubResource("Animation_6vuud"),
-"idle": SubResource("Animation_qqfj5"),
-"stand_up": SubResource("Animation_mi02f"),
-"walk": SubResource("Animation_5ton2")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pr536"]
-animation = &"fell"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itjmn"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dcyh"]
-animation = &"stand_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbwrd"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_42o5d"]
-priority = 2
-advance_mode = 2
-advance_condition = &"fell"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_je5j2"]
-reset = false
-switch_mode = 1
-advance_mode = 2
-advance_condition = &"stand_up"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52dkb"]
-priority = 2
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f0n4y"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mn7du"]
-advance_mode = 2
-advance_condition = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_78ip1"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsnqx"]
-advance_mode = 2
-advance_condition = &"fell"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5wik6"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tj4ob"]
-states/fell/node = SubResource("AnimationNodeAnimation_pr536")
-states/fell/position = Vector2(594, 10)
-states/idle/node = SubResource("AnimationNodeAnimation_itjmn")
-states/idle/position = Vector2(335, 105)
-states/stand_up/node = SubResource("AnimationNodeAnimation_3dcyh")
-states/stand_up/position = Vector2(615, 205)
-states/walk/node = SubResource("AnimationNodeAnimation_xbwrd")
-states/walk/position = Vector2(539, 100)
-transitions = ["walk", "fell", SubResource("AnimationNodeStateMachineTransition_42o5d"), "fell", "stand_up", SubResource("AnimationNodeStateMachineTransition_je5j2"), "stand_up", "walk", SubResource("AnimationNodeStateMachineTransition_52dkb"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_f0n4y"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_mn7du"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_78ip1"), "idle", "fell", SubResource("AnimationNodeStateMachineTransition_nsnqx"), "stand_up", "idle", SubResource("AnimationNodeStateMachineTransition_5wik6")]
-graph_offset = Vector2(-101, -88)
+radius = 9.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_523fx"]
 properties/0/path = NodePath(".:position")
@@ -273,7 +27,7 @@ properties/4/path = NodePath(".:reagents")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Body" type="CharacterBody2D" node_paths=PackedStringArray("name_component", "blood_component", "toxin_damage", "suff_damage", "velocity_component", "partsRoot")]
+[node name="Body" type="CharacterBody2D" node_paths=PackedStringArray("name_component", "blood_component", "toxin_damage", "suff_damage", "velocity_component")]
 z_index = 1
 y_sort_enabled = true
 collision_layer = 2
@@ -286,7 +40,6 @@ blood_component = NodePath("BloodComponent")
 toxin_damage = NodePath("ToxinDamage")
 suff_damage = NodePath("SuffDamage")
 velocity_component = NodePath("VelocityComponent")
-partsRoot = NodePath("Parts")
 
 [node name="NameComponent" parent="." instance=ExtResource("2_p7xgc")]
 
@@ -295,8 +48,6 @@ partsRoot = NodePath("Parts")
 [node name="ToxinDamage" parent="." instance=ExtResource("3_7yh33")]
 
 [node name="SuffDamage" parent="." instance=ExtResource("3_7yh33")]
-
-[node name="Parts" type="Node2D" parent="."]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_pk5fx")]
 walk_speed = 6000.0
@@ -307,24 +58,6 @@ velocity_component = NodePath("../VelocityComponent")
 
 [node name="PhysicalCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lamsy")
-
-[node name="Animation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Parts")
-libraries = {
-"": SubResource("AnimationLibrary_o33dp")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Parts")
-libraries = {
-"": SubResource("AnimationLibrary_o33dp")
-}
-tree_root = SubResource("AnimationNodeStateMachine_tj4ob")
-anim_player = NodePath("../Animation")
-parameters/conditions/fell = false
-parameters/conditions/idle = false
-parameters/conditions/stand_up = false
-parameters/conditions/walk = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_523fx")

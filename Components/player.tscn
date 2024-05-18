@@ -1,9 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=19 format=3 uid="uid://cdvgyvt112yq4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5tpwv"]
 [ext_resource type="PackedScene" uid="uid://cqrkoi43tiym1" path="res://Components/ghost.tscn" id="3_uesuc"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sska6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d4o7n"]
 properties/0/path = NodePath(".:is_ghost")
@@ -89,19 +87,9 @@ script = ExtResource("1_5tpwv")
 
 [node name="Interaction" type="Node2D" parent="."]
 
-[node name="DirectionRay" type="RayCast2D" parent="Interaction"]
-collision_mask = 7
-
 [node name="GhostFOV" type="DirectionalLight2D" parent="Interaction"]
 visible = false
 blend_mode = 2
-
-[node name="Area2D" type="Area2D" parent="Interaction"]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/Area2D"]
-shape = SubResource("CapsuleShape2D_sska6")
 
 [node name="Ghost" parent="." instance=ExtResource("3_uesuc")]
 motion_mode = 1

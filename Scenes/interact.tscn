@@ -1,17 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhc8tgq5gvomc"]
 
-[ext_resource type="Script" path="res://Scripts/Interact.gd" id="1_pof40"]
+[ext_resource type="Script" path="res://Scripts/InteractMarker.gd" id="1_0eidi"]
 
 [node name="Interact" type="Node2D"]
-script = ExtResource("1_pof40")
+script = ExtResource("1_0eidi")
 
 [node name="DiscoveryRay" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
-collision_mask = 7
+collision_mask = 32
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="RangeRay" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
-collision_mask = 17
 hit_from_inside = true

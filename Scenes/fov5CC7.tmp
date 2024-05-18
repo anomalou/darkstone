@@ -9,8 +9,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
 gradient = SubResource("Gradient_k378r")
-width = 512
-height = 512
+width = 128
+height = 128
 fill_to = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_7rwsv"]
@@ -27,6 +27,7 @@ height = 512
 blend_mode = 1
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_hq1qo")
+texture_scale = 3.0
 script = ExtResource("1_5ue1i")
 
 [node name="Camera" type="Camera2D" parent="."]

@@ -28,7 +28,7 @@ func raise_up():
 	if not player_body:
 		return
 	if player_body:
-		if player_body.set_slot(Body.BodyPartTag.LEFT_ARM, id):
+		if player_body.set_slot(PartsComponent.Part.LEFT_ARM, id):
 			Saylog.add.rpc(ItemData.get_pickup_message(id))
 			queue_free()
 

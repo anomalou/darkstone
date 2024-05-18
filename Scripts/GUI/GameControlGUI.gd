@@ -2,12 +2,12 @@ extends Control
 class_name GameControl
 
 var hands : Hands
-var body_status : BodyStatus
+var med_info : MedInfoGUI
 var intents : Control
 
-func _ready():
+func _enter_tree():
 	hands = $Hands
-	body_status = $BodyStatus
+	med_info = $MedInfo
 	intents = $Intents
 
 

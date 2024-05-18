@@ -9,26 +9,24 @@ var camera : Node2D
 @onready var ghost_fov : DirectionalLight2D = $Interaction/GhostFOV
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
+@export var interact_range : float = 54.0 # 1.5 tile
 
 @onready var interact_marker : PackedScene = preload("res://Scenes/interact.tscn")
-@export var is_ghost : bool = true
+@export var is_ghost : bool = false
 
 @export var body : NodePath
 @onready var ghost : Node2D = $Ghost
 var brain : Node2D # for future
 
-@onready var game_control : GameControl = GameState.game_overlay
+@onready var game_control : GameControl = GUIManager.game_overlay
 @onready var animation : AnimationTree = $AnimationTree
-
-@onready var direction_ray : RayCast2D = $Interaction/DirectionRay
 
 @onready var network : Node2D = get_node(Constants.network)
 
 var pick_up_list : Array
 
 func _enter_tree():
-	if not GameState.debug:
-		set_multiplayer_authority(name.split("_")[0].to_int())
+	set_multiplayer_authority(name.split("_")[0].to_int())
 
 func _ready():
 	if is_multiplayer_authority():
@@ -65,12 +63,8 @@ func set_body(path):
 func set_alive(value):
 	if value:
 		ghost.hide()
-		in_body_fov.show()
-		ghost_fov.hide()
 	else:
 		ghost.show()
-		in_body_fov.hide()
-		ghost_fov.show()
 	is_ghost = not value
 
 func _destroy_body():
@@ -103,22 +97,11 @@ func _physics_process(delta):
 
 func init_interact():
 	var mouse_pos = get_global_mouse_position()
-	var target_position = mouse_pos - get_body().position
-	
-	direction_ray.target_position = target_position
 	
 	var marker : InteractMarker = interact_marker.instantiate()
 	marker.position = mouse_pos
 	network.add_child(marker)
-	marker.discover()
-	
-	#direction_ray.force_raycast_update()
-	#
-	#if direction_ray.is_colliding():
-		#var col = direction_ray.get_collider()
-		#if intent == 0:
-			#if col is Body:
-				#game_control.body_status.show_info(col)
+	return marker
 
 func interact_with(node):
 	if node is Body:
@@ -126,11 +109,12 @@ func interact_with(node):
 
 func change_intent(intent_id):
 	intent = intent_id
-	#print(intent)
 
 func _input(event):
 	if not is_multiplayer_authority():
 		return
 	
-	if event.is_action_pressed("left_click"):
-		init_interact()
+	if event.is_action_pressed("examine"):
+		init_interact().examine()
+	elif event.is_action_pressed("left_click"):
+		init_interact().interact(intent)

@@ -1,17 +1,6 @@
 extends CharacterBody2D
 class_name Body
 
-enum BodyPartTag {
-	MISSING,
-	HEAD,
-	UPPER_BODY,
-	LEFT_ARM,
-	RIGHT_ARM,
-	GROIN,
-	LEFT_LEG,
-	RIGHT_LEG
-}
-
 @export var name_component : NameComponent
 
 @export var blood_component : BloodComponent
@@ -19,6 +8,7 @@ enum BodyPartTag {
 @export var toxin_damage : DamageComponent
 @export var suff_damage : DamageComponent # Suffocation damage
 
+@export var parts_component : PartsComponent
 @export var state_component : StateComponent
 @export var velocity_component : VelocityComponent
 
@@ -27,8 +17,6 @@ var min_temperature : float
 var max_temperature : float
 
 var reagents : Dictionary # reagents in blood
-
-@export var partsRoot : Node
 
 @onready var animation : AnimationTree = $AnimationTree
 
@@ -57,8 +45,8 @@ func _process_animation():
 		animation["parameters/conditions/walk"] = false
 		animation["parameters/conditions/idle"] = true
 	
-	animation["parameters/conditions/fell"] = in_critical() or is_dead()
-	animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead()
+	#animation["parameters/conditions/fell"] = in_critical() or is_dead() or velocity_component.is_crawl
+	#animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead() and not velocity_component.is_crawl
 
 #func _absorb_reagents(tick_coef):
 	#for reagent in reagents:
@@ -97,41 +85,29 @@ func is_dead():
 func in_critical():
 	return state_component.in_critical
 
+@warning_ignore("unused_parameter")
 func attach_part(part):
 	# attach missing part here
 	pass
 
+@warning_ignore("unused_parameter")
 func detache_part(part):
 	# detache body part here
 	pass
 
-func get_part(part_tag : BodyPartTag) -> BodyPart:
-	for part in partsRoot.get_children():
-		if part.tag == part_tag:
-			return part
-	return null
+func get_part(part_tag : PartsComponent.Part) -> BodyPart:
+	return parts_component.get_part(part_tag)
 
 func get_parts():
-	var parts : Array
-	for part in partsRoot.get_children():
-		parts.append(part)
-	return parts
+	return parts_component.get_parts()
 
 @rpc("any_peer", "call_local")
-func do_brute_damage(value : float, target : BodyPartTag = BodyPartTag.MISSING):
-	for part in partsRoot.get_children():
-		if target == BodyPartTag.MISSING:
-			part.do_brute_damage(value / float(partsRoot.get_child_count()))
-		elif part.tag == target:
-			part.do_brute_damage(value)
+func do_brute_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+	parts_component.do_brute_damage(value, target)
 
 @rpc("any_peer", "call_local")
-func do_burn_damage(value : float, target : BodyPartTag = BodyPartTag.MISSING):
-	for part in partsRoot.get_children():
-		if target == BodyPartTag.MISSING:
-			part.do_burn_damage(value / float(partsRoot.get_child_count()))
-		elif part.tag == target:
-			part.do_burn_damage(value)
+func do_burn_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+	parts_component.do_burn_damage(value, target)
 
 @rpc("any_peer", "call_local")
 func do_toxin_damage(value : float):
@@ -142,18 +118,10 @@ func do_suff_damage(value : float):
 	suff_damage.damage(value)
 
 func get_brute_damage():
-	var total = 0.0
-	for part in partsRoot.get_children():
-		if part is BodyPart:
-			total += part.get_brute_damage()
-	return total
+	return parts_component.get_brute_damage()
 
 func get_burn_damage():
-	var total = 0.0
-	for part in partsRoot.get_children():
-		if part is BodyPart:
-			total += part.get_burn_damage()
-	return total
+	return parts_component.get_burn_damage()
 
 func get_toxin_damage():
 	return toxin_damage.damage_value
@@ -164,15 +132,9 @@ func get_suff_damage():
 func get_total_damage():
 	return get_brute_damage() + get_burn_damage() + get_toxin_damage() + get_suff_damage()
 
-func get_slot(part_tag : BodyPartTag) -> SlotComponent:
-	for part in partsRoot.get_children():
-		if part is BodyPart and part.tag == part_tag:
-			return part.get_slot()
-	return null
+func get_slot(part_tag : PartsComponent.Part) -> SlotComponent:
+	return parts_component.get_slot(part_tag)
 
 @rpc("any_peer", "call_local")
-func set_slot(part_tag : BodyPartTag, value):
-	for part in partsRoot.get_children():
-		if part is BodyPart and part.tag == part_tag:
-			return part.set_slot(value)
-	return false
+func set_slot(part_tag : PartsComponent.Part, value):
+	parts_component.set_slot(part_tag, value)

@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjvhmhas5a327"]
 
-[ext_resource type="Theme" path="res://Resources/ui_theme.tres" id="1_uq8rh"]
-[ext_resource type="Script" path="res://Scripts/GUI/BodyStatusGUI.gd" id="2_1h7e0"]
+[ext_resource type="Theme" uid="uid://cbe4f4qlajxr8" path="res://Resources/ui_theme.tres" id="1_xf48s"]
+[ext_resource type="Script" path="res://Scripts/GUI/MedInfoGUI.gd" id="2_1qp5d"]
 
-[node name="BodyStatus" type="Window"]
+[node name="MedInfo" type="Window"]
 disable_3d = true
 title = "Medinfo"
 initial_position = 2
 size = Vector2i(300, 400)
 min_size = Vector2i(100, 100)
-theme = ExtResource("1_uq8rh")
-script = ExtResource("2_1h7e0")
+theme = ExtResource("1_xf48s")
+script = ExtResource("2_1qp5d")
 
 [node name="Tree" type="Tree" parent="."]
 anchors_preset = 15

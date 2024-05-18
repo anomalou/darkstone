@@ -10,8 +10,8 @@ func _ready():
 func update_log(erase_first):
 	if get_child_count() > 0:
 		if erase_first:
-			var first_child = get_child(0)
-			remove_child(first_child)
+			var last = get_child(get_child_count() - 1)
+			remove_child(last)
 	
 	var instance : Label = log_line.instantiate()
 	instance.text = Saylog.saylog.back()

@@ -24,7 +24,7 @@ Saylog="*res://Scripts/AutoLoad/Saylog.gd"
 ReagentData="*res://Scripts/AutoLoad/ReagentData.gd"
 Signals="*res://Scripts/AutoLoad/Signals.gd"
 Multiplayer="*res://Scripts/AutoLoad/Multiplayer.gd"
-GameState="*res://Scripts/AutoLoad/GUIManager.gd"
+GUIManager="*res://Scripts/AutoLoad/GUIManager.gd"
 
 [display]
 
@@ -145,6 +145,7 @@ debug={
 2d_physics/layer_3="items"
 2d_physics/layer_4="ghost"
 2d_physics/layer_5="player"
+2d_physics/layer_6="interaction"
 
 [rendering]
 

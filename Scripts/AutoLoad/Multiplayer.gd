@@ -61,6 +61,7 @@ func join_server(username, ip, port):
 	await  multiplayer.connected_to_server
 	
 	_server_info.discover_player.rpc_id(1, _username)
+	
 	music_player.play_current()
 
 func when_connect():

@@ -14,8 +14,8 @@ var is_covered : bool = false
 
 @export var entrails_component : EntrailsComponent
 
-@export var tag : Body.BodyPartTag
-@export var connections : Array[Body.BodyPartTag]
+@export var tag : PartsComponent.Part
+@export var connections : Array[PartsComponent.Part]
 var texture_name : String
 
 func get_health():

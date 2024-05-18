@@ -22,9 +22,8 @@ properties/5/path = NodePath(".:time_left")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="ServerInfo" type="Node" node_paths=PackedStringArray("_root")]
+[node name="ServerInfo" type="Node"]
 script = ExtResource("1_5pqcc")
-_root = NodePath("")
 
 [node name="Timer" type="Timer" parent="."]
 

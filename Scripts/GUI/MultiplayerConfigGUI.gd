@@ -37,7 +37,7 @@ func _on_host_button_pressed():
 	var username = username_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
 	Multiplayer.host(username, port)
-	GameState.toggle_lobby_gui(true)
+	GUIManager.toggle_lobby_gui(true)
 	hide()
 
 func _on_connect_button_pressed():
@@ -45,5 +45,5 @@ func _on_connect_button_pressed():
 	var ip = ip_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
 	Multiplayer.join_server(username, ip, port)
-	GameState.toggle_lobby_gui(true)
+	GUIManager.toggle_lobby_gui(true)
 	hide()

@@ -7,7 +7,6 @@ input_name = "texture"
 source = 5
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_k3orv"]
-expanded_output_ports = [0]
 input_name = "uv"
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_wrnjg"]
@@ -15,7 +14,7 @@ default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0), 2,
 op_type = 5
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_q26qy"]
-parameter_name = "Mask"
+parameter_name = "mask"
 color_default = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gm6jl"]
@@ -26,7 +25,7 @@ source = 5
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
-uniform sampler2D Mask : hint_default_black;
+uniform sampler2D mask : hint_default_black;
 
 
 
@@ -42,7 +41,7 @@ void fragment() {
 
 	vec4 n_out8p0;
 // Texture2D:8
-	n_out8p0 = texture(Mask, n_out5p0);
+	n_out8p0 = texture(mask, n_out5p0);
 	float n_out8p1 = n_out8p0.r;
 
 
@@ -57,7 +56,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(283, 265)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1100, 300)

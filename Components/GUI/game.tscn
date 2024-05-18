@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/GUI/GameControlGUI.gd" id="1_h2lu4"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/GUI/hands.tscn" id="1_ipmtr"]
-[ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/GUI/body_status.tscn" id="3_bphdo"]
+[ext_resource type="PackedScene" uid="uid://cjvhmhas5a327" path="res://Components/GUI/med_info.tscn" id="3_3djba"]
 [ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/GUI/intents.tscn" id="4_q5xx8"]
 
 [node name="Game" type="Control"]
@@ -21,7 +21,7 @@ offset_left = -102.0
 offset_top = -100.0
 offset_right = 102.0
 
-[node name="BodyStatus" parent="." instance=ExtResource("3_bphdo")]
+[node name="MedInfo" parent="." instance=ExtResource("3_3djba")]
 visible = false
 
 [node name="Intents" parent="." instance=ExtResource("4_q5xx8")]

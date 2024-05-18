@@ -4,7 +4,7 @@ var debug : bool = OS.is_debug_build()
 
 @onready var debug_overlay : Control = get_node(Constants.debug)
 
-@onready var game_overlay : Control = get_node(Constants.game)
+@onready var game_overlay : GameControl = get_node(Constants.game)
 @onready var menu_overlay : Control = get_node(Constants.main_menu)
 @onready var lobby_overlay : Control = get_node(Constants.lobby)
 @onready var saylog_overlay : Control = get_node(Constants.saylog)

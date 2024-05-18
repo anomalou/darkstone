@@ -5,7 +5,7 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_irkpq"]
 properties/0/path = NodePath(".:current_song_name")
 properties/0/spawn = true
-properties/0/replication_mode = 2
+properties/0/replication_mode = 1
 
 [node name="MusicPlayer" type="Node"]
 script = ExtResource("1_f5x65")
