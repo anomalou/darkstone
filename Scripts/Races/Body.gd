@@ -45,6 +45,8 @@ func _process_animation():
 		animation["parameters/conditions/walk"] = false
 		animation["parameters/conditions/idle"] = true
 	
+	parts_component.update_parts_direction(velocity_component.direction)
+	
 	#animation["parameters/conditions/fell"] = in_critical() or is_dead() or velocity_component.is_crawl
 	#animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead() and not velocity_component.is_crawl
 
@@ -85,6 +87,16 @@ func is_dead():
 func in_critical():
 	return state_component.in_critical
 
+func get_leading_hand():
+	return parts_component.leading_hand
+
+func get_selected_hand():
+	return parts_component.selected_arm
+
+@rpc("any_peer", "call_local")
+func equip(item : NodePath, slot):
+	parts_component.set_slot(slot, item)
+
 @warning_ignore("unused_parameter")
 func attach_part(part):
 	# attach missing part here
@@ -95,18 +107,18 @@ func detache_part(part):
 	# detache body part here
 	pass
 
-func get_part(part_tag : PartsComponent.Part) -> BodyPart:
+func get_part(part_tag) -> BodyPart:
 	return parts_component.get_part(part_tag)
 
 func get_parts():
 	return parts_component.get_parts()
 
 @rpc("any_peer", "call_local")
-func do_brute_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+func do_brute_damage(value : float, target = PartsComponent.Tag.MISSING):
 	parts_component.do_brute_damage(value, target)
 
 @rpc("any_peer", "call_local")
-func do_burn_damage(value : float, target : PartsComponent.Part = PartsComponent.Part.MISSING):
+func do_burn_damage(value : float, target = PartsComponent.Tag.MISSING):
 	parts_component.do_burn_damage(value, target)
 
 @rpc("any_peer", "call_local")
@@ -132,9 +144,9 @@ func get_suff_damage():
 func get_total_damage():
 	return get_brute_damage() + get_burn_damage() + get_toxin_damage() + get_suff_damage()
 
-func get_slot(part_tag : PartsComponent.Part) -> SlotComponent:
+func get_slot(part_tag) -> SlotComponent:
 	return parts_component.get_slot(part_tag)
 
 @rpc("any_peer", "call_local")
-func set_slot(part_tag : PartsComponent.Part, value):
+func set_slot(part_tag, value):
 	parts_component.set_slot(part_tag, value)

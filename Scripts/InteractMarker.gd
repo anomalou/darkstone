@@ -24,16 +24,16 @@ func get_collider():
 		return discovery_ray.get_collider()
 	return
 
-func interact(intent):
+func interact(body, intent):
 	var col = get_collider()
 	if col is InteractionComponent:
-		col.do_action(intent)
+		col.do_action(body, intent)
 	
 	queue_free()
 
-func examine():
+func examine(body):
 	var col = get_collider()
 	if col:
-		col.examine()
+		col.examine(body)
 	
 	queue_free()

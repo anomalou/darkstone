@@ -122,7 +122,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 physics_object_picking = true
-size = Vector2i(1280, 640)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GUI/Render/Viewport/LitView"]
@@ -210,5 +210,5 @@ music = {
 main_menu_music = ExtResource("14_q6urh")
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
+_spawnable_scenes = PackedStringArray("res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
 spawn_path = NodePath("../GUI/Render/Viewport/LitView/Network")

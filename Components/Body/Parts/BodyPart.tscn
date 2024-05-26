@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://buidvyg6ojpyh"]
+[gd_scene load_steps=5 format=3 uid="uid://buidvyg6ojpyh"]
 
 [ext_resource type="Script" path="res://Scripts/Races/BodyPart.gd" id="1_wiibh"]
 [ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="2_gs185"]
+[ext_resource type="PackedScene" uid="uid://biavnldl3ehm3" path="res://Components/Properties/SpriteComponent.tscn" id="2_yjrnx"]
 [ext_resource type="PackedScene" uid="uid://crnqctcrcxgus" path="res://Components/Properties/HealthComponent.tscn" id="3_flang"]
 
-[node name="Part" type="Sprite2D" node_paths=PackedStringArray("brute_damage", "burn_damage", "health")]
+[node name="Part" type="Node2D" node_paths=PackedStringArray("brute_damage", "burn_damage", "health")]
 y_sort_enabled = true
 script = ExtResource("1_wiibh")
 brute_damage = NodePath("BruteDamage")
 burn_damage = NodePath("BurnDamage")
 health = NodePath("HealthComponent")
+
+[node name="SpriteComponent" parent="." instance=ExtResource("2_yjrnx")]
 
 [node name="BruteDamage" parent="." instance=ExtResource("2_gs185")]
 

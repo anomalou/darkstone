@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8shon656v7c0"]
+
+[ext_resource type="PackedScene" uid="uid://be2lme5twesdc" path="res://Components/Properties/Specials/Actions/Action.tscn" id="1_qjg1c"]
+[ext_resource type="Script" path="res://Scripts/Components/Actions/MedInfoAction.gd" id="2_h1vdf"]
+
+[node name="MedInfoAction" instance=ExtResource("1_qjg1c")]
+script = ExtResource("2_h1vdf")

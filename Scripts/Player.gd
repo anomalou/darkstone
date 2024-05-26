@@ -95,17 +95,13 @@ func _physics_process(delta):
 	if interaction:
 		interaction.transform = _body.transform
 
-func init_interact():
+func create_marker():
 	var mouse_pos = get_global_mouse_position()
 	
 	var marker : InteractMarker = interact_marker.instantiate()
 	marker.position = mouse_pos
 	network.add_child(marker)
 	return marker
-
-func interact_with(node):
-	if node is Body:
-		game_control.body_status.show_info(node)
 
 func change_intent(intent_id):
 	intent = intent_id
@@ -115,6 +111,6 @@ func _input(event):
 		return
 	
 	if event.is_action_pressed("examine"):
-		init_interact().examine()
+		create_marker().examine(body)
 	elif event.is_action_pressed("left_click"):
-		init_interact().interact(intent)
+		create_marker().interact(body, intent)

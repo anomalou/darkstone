@@ -1,7 +1,7 @@
 extends Node
 class_name PartsComponent
 
-enum Part {
+enum Tag{
 	MISSING,
 	HEAD,
 	UPPER_BODY,
@@ -11,6 +11,13 @@ enum Part {
 	LEFT_LEG,
 	RIGHT_LEG
 }
+
+@export var leading_hand = PartsComponent.Tag.RIGHT_ARM
+var selected_arm = PartsComponent.Tag.RIGHT_ARM
+
+func update_parts_direction(_direction):
+	print_debug("Not implemented")
+	pass
 
 func attach_part(part):
 	print_debug("Not implemented")
@@ -22,7 +29,7 @@ func detache_part(part):
 	# detache body part here
 	pass
 
-func get_part(part_tag : Part) -> BodyPart:
+func get_part(part_tag) -> BodyPart:
 	print_debug("Not implemented")
 	return null
 
@@ -34,11 +41,11 @@ func cound_alive_parts():
 	print_debug("Not implemented")
 	pass
 
-func do_brute_damage(value : float, target : Part = Part.MISSING):
+func do_brute_damage(value : float, target = PartsComponent.Tag.MISSING):
 	print_debug("Not implemented")
 	pass
 
-func do_burn_damage(value : float, target : Part = Part.MISSING):
+func do_burn_damage(value : float, target = PartsComponent.Tag.MISSING):
 	print_debug("Not implemented")
 	pass
 
@@ -50,10 +57,10 @@ func get_burn_damage():
 	print_debug("Not implemented")
 	pass
 
-func get_slot(tag : Part) -> SlotComponent:
+func get_slot(tag) -> SlotComponent:
 	print_debug("Not implemented")
 	return null
 
-func set_slot(tag : Part, value):
+func set_slot(tag, value):
 	print_debug("Not implemented")
 	pass

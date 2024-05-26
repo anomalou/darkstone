@@ -19,15 +19,21 @@ func _process(_delta):
 	if not body:
 		return
 	
-	left_slot = body.get_slot(PartsComponent.Part.LEFT_ARM)
-	right_slot = body.get_slot(PartsComponent.Part.RIGHT_ARM)
+	left_slot = body.get_slot(PartsComponent.Tag.LEFT_ARM)
+	right_slot = body.get_slot(PartsComponent.Tag.RIGHT_ARM)
 	
-	if left_slot:
-		if left_slot.get_slot():
-			left.texture = load(Constants.slot_sprites + left_slot.get_slot() + ".tres")
-	if right_slot:
-		if right_slot.get_slot():
-			right.texture = load(Constants.slot_sprites + right_slot.get_slot() + ".tres")
+	var left_item : Item = left_slot.get_item()
+	var right_item : Item = right_slot.get_item()
+	
+	if left_item:
+		left.texture = left_item.get_sprite()
+	else:
+		left.texture = null
+	
+	if right_item:
+		right.texture = right_item.get_sprite()
+	else:
+		left.texture = null
 
 func _on_gui_input(event : InputEvent):
 	pass # Replace with function body.

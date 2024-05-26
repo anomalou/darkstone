@@ -55,7 +55,7 @@ func critical_process(alive):
 	return true
 
 func is_head_alive():
-	var head = body.get_part(PartsComponent.Part.HEAD)
+	var head = body.get_part(PartsComponent.Tag.HEAD)
 	
 	if not head:
 		return false
@@ -72,7 +72,7 @@ func is_upper_body_alive(is_alive):
 	if not is_alive:
 		return false
 	
-	var upper_body = body.get_part(PartsComponent.Part.UPPER_BODY)
+	var upper_body = body.get_part(PartsComponent.Tag.UPPER_BODY)
 	
 	if not upper_body.has_organ(EntrailsComponent.OrganTags.HEART) or not upper_body.has_organ(EntrailsComponent.OrganTags.LUNGS):
 		body.do_suff_damage(randf() * 5.0)
@@ -83,7 +83,7 @@ func is_groin_alive(is_alive):
 	if not is_alive:
 		return false
 	
-	var groin = body.get_part(PartsComponent.Part.GROIN)
+	var groin = body.get_part(PartsComponent.Tag.GROIN)
 	
 	if not groin.has_organ(EntrailsComponent.OrganTags.LIVER):
 		body.do_toxin_damage(randf() * 2.0)

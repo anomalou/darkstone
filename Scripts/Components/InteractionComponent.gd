@@ -8,21 +8,21 @@ class_name InteractionComponent
 
 @export var examine_action : Action
 
-func do_action(intent):
+func do_action(player, intent):
 	match intent:
 		0:
 			if help_action:
-				help_action.do()
+				help_action.do(player)
 		1:
 			if hurt_action:
-				hurt_action.do()
+				hurt_action.do(player)
 		2:
 			if resist_action:
-				resist_action.do()
+				resist_action.do(player)
 		3:
 			if grab_action:
-				grab_action.do()
+				grab_action.do(player)
 
-func examine():
+func examine(player):
 	if examine_action:
-		examine_action.do()
+		examine_action.do(player)

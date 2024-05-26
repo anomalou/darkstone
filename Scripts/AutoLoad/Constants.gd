@@ -1,5 +1,12 @@
 extends Node
 
+enum Direction {
+	NORTH,
+	WEST,
+	EAST,
+	SOUTH
+}
+
 # Utils
 @onready var server_info : NodePath = "/root/World/ServerInfo"
 

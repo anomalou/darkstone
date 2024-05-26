@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 class_name BodyPart
 
 @export var brute_damage : DamageComponent
@@ -11,12 +11,15 @@ var is_bone_broken : bool = false
 var size : int
 var is_covered : bool = false
 @export var slot_component : SlotComponent
-
+@export var sprite_component : SpriteComponent
 @export var entrails_component : EntrailsComponent
 
-@export var tag : PartsComponent.Part
-@export var connections : Array[PartsComponent.Part]
-var texture_name : String
+@export var tag : PartsComponent.Tag = PartsComponent.Tag.MISSING
+@export var connections : Array[PartsComponent.Tag]
+
+func update_direction(_direction):
+	sprite_component.update_direction(_direction)
+	slot_component.update_direction(_direction)
 
 func get_health():
 	return health.get_value()

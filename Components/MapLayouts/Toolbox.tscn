@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://m8as3p6qukoc"]
+
+[ext_resource type="Texture2D" uid="uid://bbk3qutks7ayo" path="res://Sprites/Ground/toolbox.tres" id="1_8oxe5"]
+[ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_ixuws"]
+[ext_resource type="Texture2D" uid="uid://dilm1bkig1amc" path="res://Sprites/items_asp.png" id="3_sj5nh"]
+[ext_resource type="Script" path="res://Scripts/Components/Actions/ExamineAction.gd" id="3_wdsfx"]
+[ext_resource type="Script" path="res://Scripts/Components/Actions/PickUpAction.gd" id="4_87bt3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omma8"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rkk2"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e66g4"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohe4f"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nadn"]
+size = Vector2(23, 12)
+
+[node name="Toolbox" instance=ExtResource("1_ixuws")]
+
+[node name="SpriteComponent" parent="." index="0"]
+ground = ExtResource("1_8oxe5")
+north = SubResource("AtlasTexture_omma8")
+west = SubResource("AtlasTexture_4rkk2")
+east = SubResource("AtlasTexture_e66g4")
+south = SubResource("AtlasTexture_ohe4f")
+
+[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("help_action", "examine_action")]
+help_action = NodePath("PickUpAction")
+examine_action = NodePath("ExamineAction")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_2nadn")
+
+[node name="ExamineAction" type="Node" parent="InteractionComponent" index="1"]
+script = ExtResource("3_wdsfx")
+examine = "Robust "
+
+[node name="PickUpAction" type="Node" parent="InteractionComponent" index="2" node_paths=PackedStringArray("item")]
+script = ExtResource("4_87bt3")
+item = NodePath("../..")

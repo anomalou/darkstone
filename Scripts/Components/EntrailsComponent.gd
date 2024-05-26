@@ -14,9 +14,6 @@ enum OrganTags {
 @export var required_organs : Array[OrganTags]
 @export var allowed_organs : Array[OrganTags]
 
-@export var toxin_component : DamageComponent
-@export var suff_component : DamageComponent
-
 func inject(organ : OrganComponent):
 	if organ.type in allowed_organs:
 		add_child(organ)
