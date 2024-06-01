@@ -14,7 +14,7 @@ var blood_level : float
 
 func _ready():
 	blood_level = max_blood_level
-	group = randi_range(0, 3)
+	group = randi_range(0, 3) as Group
 
 func drain(value : float):
 	blood_level = max(0, blood_level - value)

@@ -17,6 +17,7 @@ var ready_players : Dictionary # id : path
 var game_countdown : int = 180
 var time_left : int = 0
 var is_game_started : bool = false
+var is_local_server : bool = false
 
 
 func _ready():
@@ -66,6 +67,7 @@ func not_ready():
 
 @rpc("any_peer", "call_local")
 func update_path(path):
+	print_debug("Not working for not host player") #TODO
 	var id = Multiplayer.get_multiplayer_authority()
 	if ready_players.has(id):
 		ready_players[id] = path
@@ -75,6 +77,10 @@ func start_game():
 	if ready_players.size() <= 0:
 		Saylog.add.rpc("No ready players. Cant start game")
 		return
+	
+	if ready_players.size() == 1:
+		is_local_server = true
+		Saylog.add("Starting local server")
 	
 	_timer.stop()
 	
@@ -94,5 +100,5 @@ func start_game_for(id):
 	player.set_body.rpc_id(id, body.get_path())
 	player.set_alive.rpc_id(id, true)
 	
-	update_path.rpc_id(id, player.get_path())
+	update_path.rpc(player.get_path())
 	GUIManager.toggle_game_gui.rpc_id(id, true)

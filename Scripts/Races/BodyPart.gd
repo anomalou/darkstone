@@ -11,13 +11,13 @@ var is_bone_broken : bool = false
 var size : int
 var is_covered : bool = false
 @export var slot_component : SlotComponent
-@export var sprite_component : ObjectSpriteComponent
+@export var sprite_component : BodyPartSpriteComponent
 @export var entrails_component : EntrailsComponent
 
 @export var tag : PartsComponent.Tag = PartsComponent.Tag.MISSING
 @export var connections : Array[PartsComponent.Tag]
 
-func _process(delta):
+func _process(_delta):
 	if material is ShaderMaterial:
 		material.set_shader_parameter("damage", health.get_value())
 
@@ -67,5 +67,5 @@ func eject(organ : EntrailsComponent.OrganTags):
 func get_organs():
 	return entrails_component.get_organs()
 
-func has_organ(tag : EntrailsComponent.OrganTags):
-	return entrails_component.has_organ(tag)
+func has_organ(_tag : EntrailsComponent.OrganTags):
+	return entrails_component.has_organ(_tag)

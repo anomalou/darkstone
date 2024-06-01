@@ -38,7 +38,7 @@ func _ready():
 	if not is_multiplayer_authority():
 		animation.active = false
 
-func _process(delta):
+func _process(_delta):
 	if is_multiplayer_authority():
 		_process_animation()
 
@@ -70,7 +70,7 @@ func _destroy_body():
 	if _body:
 		_body.queue_free()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_multiplayer_authority():
 		return
 	

@@ -1,12 +1,15 @@
 extends Area2D
 class_name InteractionComponent
 
+@export_group("Intents")
 @export var help_action : Action
 @export var hurt_action : Action
 @export var resist_action : Action
 @export var grab_action : Action
 
+@export_group("", "")
 @export var examine_action : Action
+@export var default_action : Action
 
 func do_action(player, intent):
 	var action : Action = null

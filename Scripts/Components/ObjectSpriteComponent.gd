@@ -3,19 +3,19 @@ class_name ObjectSpriteComponent
 
 @export var ground : Texture2D
 
-@export_group("Equiped sprites")
+@export_group("Equiped sprites", "equip_")
 @export var equip_north : Texture2D
 @export var equip_west : Texture2D
 @export var equip_east : Texture2D
 @export var equip_south : Texture2D
 
-@export_group("Hand sprites")
+@export_group("Hand sprites", "hand_")
 @export var hand_north : Texture2D
 @export var hand_west : Texture2D
 @export var hand_east : Texture2D
 @export var hand_south : Texture2D
 
-var direction
+var direction : Constants.Direction
 var mirror : bool = false
 var on_ground : bool = false
 var in_hand : bool = true
@@ -29,7 +29,7 @@ func update_direction(_direction, h_flip = false, v_flip = false):
 		flip_h = not h_flip
 	flip_v = v_flip
 
-func _process(delta):
+func _process(_delta):
 	if on_ground:
 		texture = ground
 	else:

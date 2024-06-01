@@ -69,7 +69,7 @@ func cound_alive_parts():
 	return number
 
 func _do_damage(callback, value : float, target = PartsComponent.Tag.MISSING):
-	var splash_damage : float = value / cound_alive_parts()
+	var _splash_damage : float = value / cound_alive_parts() # TODO imnplement splash
 	
 	match target:
 		PartsComponent.Tag.HEAD:

@@ -41,7 +41,7 @@ func damage_process(alive):
 	
 	var total = body.get_total_damage()
 	
-	if body.get_total_damage() >= damage_limit:
+	if total >= damage_limit:
 		in_critical = true
 	else:
 		in_critical = false

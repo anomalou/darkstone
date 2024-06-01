@@ -1,21 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://deb8ffhqg6sfq"]
+[gd_scene load_steps=8 format=3 uid="uid://deb8ffhqg6sfq"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_jf24b"]
 [ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="2_8dm8b"]
 [ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="2_edcnr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_naqf0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_45ht5"]
 atlas = ExtResource("2_8dm8b")
 region = Rect2(0, 32, 32, 32)
 
-[node name="RightLeg" node_paths=PackedStringArray("slot_component", "sprite_component") instance=ExtResource("1_jf24b")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv0sg"]
+atlas = ExtResource("2_8dm8b")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfdjr"]
+atlas = ExtResource("2_8dm8b")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b10wx"]
+atlas = ExtResource("2_8dm8b")
+region = Rect2(64, 32, 32, 32)
+
+[node name="RightLeg" node_paths=PackedStringArray("slot_component") instance=ExtResource("1_jf24b")]
 z_index = 1
 slot_component = NodePath("SlotComponent")
-sprite_component = NodePath("SpriteComponent")
 tag = 7
 connections = Array[int]([5])
 
-[node name="SpriteComponent" parent="." index="0"]
-texture = SubResource("AtlasTexture_naqf0")
+[node name="BodyPartSpriteComponent" parent="." index="0"]
+texture = SubResource("AtlasTexture_45ht5")
+north = SubResource("AtlasTexture_wv0sg")
+west = SubResource("AtlasTexture_mfdjr")
+east = SubResource("AtlasTexture_b10wx")
+south = SubResource("AtlasTexture_45ht5")
 
 [node name="SlotComponent" parent="." index="1" instance=ExtResource("2_edcnr")]

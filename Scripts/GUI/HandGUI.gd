@@ -50,9 +50,9 @@ func _process(_delta):
 		left_animation.stop()
 
 
-func _on_left_gui_input(event):
+func _on_left_gui_input(_event):
 	pass # Replace with function body.
 
 
-func _on_right_gui_input(event):
+func _on_right_gui_input(_event):
 	pass # Replace with function body.

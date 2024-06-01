@@ -1,18 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://buidvyg6ojpyh"]
 
 [ext_resource type="Script" path="res://Scripts/Races/BodyPart.gd" id="1_wiibh"]
+[ext_resource type="PackedScene" uid="uid://cp4l8n7kqjmts" path="res://Components/Properties/BodyPartSpriteComponent.tscn" id="2_dmr4j"]
 [ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="2_gs185"]
-[ext_resource type="PackedScene" uid="uid://biavnldl3ehm3" path="res://Components/Properties/ObjectSpriteComponent.tscn" id="2_gtyth"]
 [ext_resource type="PackedScene" uid="uid://crnqctcrcxgus" path="res://Components/Properties/HealthComponent.tscn" id="3_flang"]
 
-[node name="Part" type="Node2D" node_paths=PackedStringArray("brute_damage", "burn_damage", "health")]
+[node name="Part" type="Node2D" node_paths=PackedStringArray("brute_damage", "burn_damage", "health", "sprite_component")]
 y_sort_enabled = true
 script = ExtResource("1_wiibh")
 brute_damage = NodePath("BruteDamage")
 burn_damage = NodePath("BurnDamage")
 health = NodePath("HealthComponent")
+sprite_component = NodePath("BodyPartSpriteComponent")
 
-[node name="SpriteComponent" parent="." instance=ExtResource("2_gtyth")]
+[node name="BodyPartSpriteComponent" parent="." instance=ExtResource("2_dmr4j")]
 
 [node name="BruteDamage" parent="." instance=ExtResource("2_gs185")]
 

@@ -26,7 +26,7 @@ func _enter_tree():
 func _ready():
 	animation.active = true
 
-func _process(delta):
+func _process(_delta):
 	_process_animation()
 	
 	if not is_multiplayer_authority():
@@ -72,7 +72,7 @@ func _process_animation():
 		#toxin_damage += absorbed * 1.5
 
 # need move reagent behaviour to separated class
-func process_sorbent(sorbent, absorbed):
+func process_sorbent(_sorbent, _absorbed):
 	# sorbent behaviour realization
 	pass
 

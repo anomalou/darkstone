@@ -1,20 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://6cwsj50utmhb"]
+[gd_scene load_steps=8 format=3 uid="uid://6cwsj50utmhb"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_vhsk3"]
 [ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="2_e5pfs"]
 [ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="2_hnuo4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3j6fg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_48y4o"]
+atlas = ExtResource("2_e5pfs")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llc3g"]
 atlas = ExtResource("2_e5pfs")
 region = Rect2(32, 64, 32, 32)
 
-[node name="Groin" node_paths=PackedStringArray("slot_component", "sprite_component") instance=ExtResource("1_vhsk3")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7ytq"]
+atlas = ExtResource("2_e5pfs")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rxmo"]
+atlas = ExtResource("2_e5pfs")
+region = Rect2(64, 64, 32, 32)
+
+[node name="Groin" node_paths=PackedStringArray("slot_component") instance=ExtResource("1_vhsk3")]
 slot_component = NodePath("SlotComponent")
-sprite_component = NodePath("SpriteComponent")
 tag = 5
 connections = Array[int]([2, 6, 7])
 
-[node name="SpriteComponent" parent="." index="0"]
-texture = SubResource("AtlasTexture_3j6fg")
+[node name="BodyPartSpriteComponent" parent="." index="0"]
+texture = SubResource("AtlasTexture_48y4o")
+north = SubResource("AtlasTexture_llc3g")
+west = SubResource("AtlasTexture_u7ytq")
+east = SubResource("AtlasTexture_4rxmo")
+south = SubResource("AtlasTexture_48y4o")
 
 [node name="SlotComponent" parent="." index="1" instance=ExtResource("2_hnuo4")]
