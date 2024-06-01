@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dg68v36jm6ehl"]
+
+[ext_resource type="Shader" path="res://Shaders/blood.gdshader" id="1_sek5j"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hgg0s"]
+noise_type = 2
+frequency = 0.1507
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sjiit"]
+width = 128
+height = 224
+noise = SubResource("FastNoiseLite_hgg0s")
+
+[resource]
+shader = ExtResource("1_sek5j")
+shader_parameter/damage = 1.0
+shader_parameter/decal = SubResource("NoiseTexture2D_sjiit")

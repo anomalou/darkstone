@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_8q052"]
 [ext_resource type="PackedScene" uid="uid://dfq72ojkr6bwa" path="res://Components/Properties/InteractionComponent.tscn" id="1_hqh5v"]
-[ext_resource type="PackedScene" uid="uid://biavnldl3ehm3" path="res://Components/Properties/SpriteComponent.tscn" id="2_8tyip"]
+[ext_resource type="PackedScene" uid="uid://biavnldl3ehm3" path="res://Components/Properties/ObjectSpriteComponent.tscn" id="2_m2d2k"]
 
 [node name="Item" type="Node2D" node_paths=PackedStringArray("interaction_component", "sprite_component")]
 script = ExtResource("1_8q052")
 interaction_component = NodePath("InteractionComponent")
 sprite_component = NodePath("SpriteComponent")
 
-[node name="SpriteComponent" parent="." instance=ExtResource("2_8tyip")]
+[node name="SpriteComponent" parent="." instance=ExtResource("2_m2d2k")]
 
 [node name="InteractionComponent" parent="." instance=ExtResource("1_hqh5v")]

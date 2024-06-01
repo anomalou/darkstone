@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://biavnldl3ehm3"]
+
+[ext_resource type="Script" path="res://Scripts/Components/ObjectSpriteComponent.gd" id="1_ub1gr"]
+
+[node name="ObjectSpriteComponent" type="Sprite2D"]
+script = ExtResource("1_ub1gr")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djq4es6nanhu5"]
+[gd_scene load_steps=9 format=3 uid="uid://djq4es6nanhu5"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_0ixhv"]
 [ext_resource type="PackedScene" uid="uid://dso5jxilojvhv" path="res://Components/Body/Human.tscn" id="3_pphan"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b8cjkbbtxyhc0" path="res://Components/MapLayouts/wall.tscn" id="5_0jdyr"]
 [ext_resource type="PackedScene" uid="uid://m8as3p6qukoc" path="res://Components/MapLayouts/Toolbox.tscn" id="6_16d7d"]
 [ext_resource type="AudioStream" uid="uid://doijfwsgxmrh2" path="res://Music/ss14.mp3" id="6_kkt8r"]
+[ext_resource type="PackedScene" uid="uid://co2b2ibsj5a4" path="res://Components/MapLayouts/Jumpsuit.tscn" id="7_odm4r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cdksv"]
 light_mode = 2
@@ -89,3 +90,6 @@ position = Vector2(-256, 16)
 
 [node name="Toolbox2" parent="." instance=ExtResource("6_16d7d")]
 position = Vector2(48, 240)
+
+[node name="Jumpsuit" parent="." instance=ExtResource("7_odm4r")]
+position = Vector2(-288, 64)

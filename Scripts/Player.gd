@@ -5,8 +5,6 @@ class_name Player
 
 var in_body_fov : PointLight2D
 var camera : Node2D
-@onready var interaction : Node2D = $Interaction
-@onready var ghost_fov : DirectionalLight2D = $Interaction/GhostFOV
 
 var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
 @export var interact_range : float = 54.0 # 1.5 tile
@@ -91,9 +89,6 @@ func _physics_process(delta):
 	
 	if in_body_fov:
 		in_body_fov.transform = _body.transform
-	
-	if interaction:
-		interaction.transform = _body.transform
 
 func create_marker():
 	var mouse_pos = get_global_mouse_position()
@@ -110,7 +105,10 @@ func _input(event):
 	if not is_multiplayer_authority():
 		return
 	
+	var object = create_marker().get_object()
+	
 	if event.is_action_pressed("examine"):
-		create_marker().examine(body)
+		Utils.option(object, func(o): o.examine(body), func(): print("Nothing to examine"))
 	elif event.is_action_pressed("left_click"):
-		create_marker().interact(body, intent)
+		if not Utils.option(object, func(o): o.do_action(body, intent)):
+			pass

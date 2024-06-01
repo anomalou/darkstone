@@ -6,40 +6,40 @@
 [ext_resource type="Script" path="res://Scripts/Components/Actions/ExamineAction.gd" id="3_wdsfx"]
 [ext_resource type="Script" path="res://Scripts/Components/Actions/PickUpAction.gd" id="4_87bt3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_omma8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wui8w"]
 atlas = ExtResource("3_sj5nh")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(192, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4rkk2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q42ov"]
 atlas = ExtResource("3_sj5nh")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e66g4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6601x"]
 atlas = ExtResource("3_sj5nh")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(224, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ohe4f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t12fq"]
 atlas = ExtResource("3_sj5nh")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nadn"]
-size = Vector2(23, 12)
+size = Vector2(26, 12)
 
 [node name="Toolbox" instance=ExtResource("1_ixuws")]
 
 [node name="SpriteComponent" parent="." index="0"]
+texture = ExtResource("1_8oxe5")
 ground = ExtResource("1_8oxe5")
-north = SubResource("AtlasTexture_omma8")
-west = SubResource("AtlasTexture_4rkk2")
-east = SubResource("AtlasTexture_e66g4")
-south = SubResource("AtlasTexture_ohe4f")
+hand_north = SubResource("AtlasTexture_wui8w")
+hand_west = SubResource("AtlasTexture_q42ov")
+hand_east = SubResource("AtlasTexture_6601x")
+hand_south = SubResource("AtlasTexture_t12fq")
 
 [node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("help_action", "examine_action")]
 help_action = NodePath("PickUpAction")
 examine_action = NodePath("ExamineAction")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
-position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_2nadn")
 
 [node name="ExamineAction" type="Node" parent="InteractionComponent" index="1"]

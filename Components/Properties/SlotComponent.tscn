@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/Components/SlotComponent.gd" id="1_0102g"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4ufex"]
-properties/0/path = NodePath(".:slot")
+properties/0/path = NodePath(".:item_path")
 properties/0/spawn = true
-properties/0/replication_mode = 2
+properties/0/replication_mode = 1
 
 [node name="SlotComponent" type="Node2D"]
 script = ExtResource("1_0102g")

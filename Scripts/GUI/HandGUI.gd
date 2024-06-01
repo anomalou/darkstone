@@ -4,6 +4,9 @@ class_name Hands
 @onready var left : TextureRect = $Left/Texture
 @onready var right : TextureRect = $Right/Texture
 
+@onready var left_animation : AnimationPlayer = $Left/Frame/Animation
+@onready var right_animation : AnimationPlayer = $Right/Frame/Animation
+
 @onready var server_info : ServerInfo = get_node(Constants.server_info)
 
 var left_slot : SlotComponent
@@ -33,7 +36,23 @@ func _process(_delta):
 	if right_item:
 		right.texture = right_item.get_sprite()
 	else:
-		left.texture = null
+		right.texture = null
+	
+	var selected_hand = body.get_selected_hand()
+	
+	if selected_hand == PartsComponent.Tag.LEFT_ARM:
+		if not left_animation.is_playing():
+			left_animation.play()
+		right_animation.stop()
+	if selected_hand == PartsComponent.Tag.RIGHT_ARM:
+		if not right_animation.is_playing():
+			right_animation.play()
+		left_animation.stop()
 
-func _on_gui_input(event : InputEvent):
+
+func _on_left_gui_input(event):
+	pass # Replace with function body.
+
+
+func _on_right_gui_input(event):
 	pass # Replace with function body.

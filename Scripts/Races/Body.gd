@@ -46,7 +46,6 @@ func _process_animation():
 		animation["parameters/conditions/idle"] = true
 	
 	parts_component.update_parts_direction(velocity_component.direction)
-	
 	#animation["parameters/conditions/fell"] = in_critical() or is_dead() or velocity_component.is_crawl
 	#animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead() and not velocity_component.is_crawl
 
@@ -150,3 +149,6 @@ func get_slot(part_tag) -> SlotComponent:
 @rpc("any_peer", "call_local")
 func set_slot(part_tag, value):
 	parts_component.set_slot(part_tag, value)
+
+func is_slot_empty(part_tag) -> bool:
+	return parts_component.get_slot(part_tag).get_item() == null

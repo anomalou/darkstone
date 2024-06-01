@@ -11,11 +11,15 @@ var is_bone_broken : bool = false
 var size : int
 var is_covered : bool = false
 @export var slot_component : SlotComponent
-@export var sprite_component : SpriteComponent
+@export var sprite_component : ObjectSpriteComponent
 @export var entrails_component : EntrailsComponent
 
 @export var tag : PartsComponent.Tag = PartsComponent.Tag.MISSING
 @export var connections : Array[PartsComponent.Tag]
+
+func _process(delta):
+	if material is ShaderMaterial:
+		material.set_shader_parameter("damage", health.get_value())
 
 func update_direction(_direction):
 	sprite_component.update_direction(_direction)

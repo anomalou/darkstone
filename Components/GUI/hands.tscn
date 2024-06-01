@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgdxghnfowkb7"]
+[gd_scene load_steps=9 format=3 uid="uid://bgdxghnfowkb7"]
 
 [ext_resource type="Texture2D" uid="uid://bxw4oqwucq7id" path="res://Sprites/ui.png" id="1_6r3mx"]
 [ext_resource type="Script" path="res://Scripts/GUI/HandGUI.gd" id="2_j7tcc"]
@@ -6,6 +6,35 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3pfx"]
 atlas = ExtResource("1_6r3mx")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_153eg"]
+atlas = ExtResource("1_6r3mx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m736m"]
+atlas = ExtResource("1_6r3mx")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="Animation" id="Animation_yjl04"]
+resource_name = "selection"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_153eg"), SubResource("AtlasTexture_m736m")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gykpd"]
+_data = {
+"selection": SubResource("Animation_yjl04")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bvjbb"]
 atlas = ExtResource("1_6r3mx")
@@ -39,6 +68,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Frame" type="TextureRect" parent="Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_153eg")
+
+[node name="Animation" type="AnimationPlayer" parent="Left/Frame"]
+libraries = {
+"": SubResource("AnimationLibrary_gykpd")
+}
+autoplay = "selection"
+
 [node name="Right" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -52,5 +96,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="draw" from="Left/Texture" to="Left/Texture" method="_on_draw"]
-[connection signal="draw" from="Right/Texture" to="Right/Texture" method="_on_draw"]
+[node name="Frame" type="TextureRect" parent="Right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_153eg")
+
+[node name="Animation" type="AnimationPlayer" parent="Right/Frame"]
+libraries = {
+"": SubResource("AnimationLibrary_gykpd")
+}
+autoplay = "selection"
+
+[connection signal="gui_input" from="Left/Texture" to="." method="_on_left_gui_input"]
+[connection signal="gui_input" from="Right/Texture" to="." method="_on_right_gui_input"]

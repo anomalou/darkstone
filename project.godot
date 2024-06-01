@@ -25,6 +25,7 @@ ReagentData="*res://Scripts/AutoLoad/ReagentData.gd"
 Signals="*res://Scripts/AutoLoad/Signals.gd"
 Multiplayer="*res://Scripts/AutoLoad/Multiplayer.gd"
 GUIManager="*res://Scripts/AutoLoad/GUIManager.gd"
+Utils="*res://Scripts/Utils.gd"
 
 [display]
 

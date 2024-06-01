@@ -9,20 +9,19 @@ class_name InteractionComponent
 @export var examine_action : Action
 
 func do_action(player, intent):
+	var action : Action = null
+	
 	match intent:
 		0:
-			if help_action:
-				help_action.do(player)
+			action = help_action
 		1:
-			if hurt_action:
-				hurt_action.do(player)
+			action = hurt_action
 		2:
-			if resist_action:
-				resist_action.do(player)
+			action = resist_action
 		3:
-			if grab_action:
-				grab_action.do(player)
+			action = grab_action
+	
+	return Utils.option(action, func(a): return a.do(player, null));
 
 func examine(player):
-	if examine_action:
-		examine_action.do(player)
+	return Utils.option(examine_action, func(a): return a.do(player));

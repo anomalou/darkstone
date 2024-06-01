@@ -4,7 +4,7 @@ class_name Item
 var is_equiped : bool = false
 
 @export var interaction_component : InteractionComponent
-@export var sprite_component : SpriteComponent
+@export var sprite_component : ObjectSpriteComponent
 
 func _ready():
 	update_sprite()
@@ -12,7 +12,8 @@ func _ready():
 func get_sprite():
 	return sprite_component.ground
 
-func update_direction(_direction):
+func update_direction(_direction, mirror = false):
+	sprite_component.mirror = mirror
 	sprite_component.update_direction(_direction)
 
 func set_equiped():

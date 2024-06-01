@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bed1xqwwuhj1k"]
+[gd_scene load_steps=5 format=3 uid="uid://bed1xqwwuhj1k"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_yan18"]
 [ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="2_8i7j4"]
@@ -8,19 +8,9 @@
 atlas = ExtResource("2_rswyu")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_een86"]
-atlas = ExtResource("2_rswyu")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dxafh"]
-atlas = ExtResource("2_rswyu")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yy22q"]
-atlas = ExtResource("2_rswyu")
-region = Rect2(64, 128, 32, 32)
-
 [node name="RightArm" node_paths=PackedStringArray("slot_component", "sprite_component") instance=ExtResource("1_yan18")]
+z_index = 4
+y_sort_enabled = false
 slot_component = NodePath("SlotComponent")
 sprite_component = NodePath("SpriteComponent")
 tag = 4
@@ -28,9 +18,5 @@ connections = Array[int]([2])
 
 [node name="SpriteComponent" parent="." index="0"]
 texture = SubResource("AtlasTexture_gn0p1")
-north = SubResource("AtlasTexture_een86")
-west = SubResource("AtlasTexture_dxafh")
-east = SubResource("AtlasTexture_yy22q")
-south = SubResource("AtlasTexture_gn0p1")
 
 [node name="SlotComponent" parent="." index="1" instance=ExtResource("2_8i7j4")]

@@ -145,6 +145,7 @@ left_leg = NodePath("LeftLeg")
 right_leg = NodePath("RightLeg")
 
 [node name="Head" parent="HumanPartsComponent" index="0" node_paths=PackedStringArray("entrails_component") instance=ExtResource("2_l7n8h")]
+material = null
 entrails_component = NodePath("../UpperBody/EntrailsComponent")
 
 [node name="EntrailsComponent" parent="HumanPartsComponent/Head" index="5" instance=ExtResource("4_p4jxx")]

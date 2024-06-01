@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt1jsnwr853lh"]
+[gd_scene load_steps=7 format=3 uid="uid://bt1jsnwr853lh"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/IntentGUI.gd" id="1_8gxxw"]
+[ext_resource type="Texture2D" uid="uid://g5jl6bhgd6n4" path="res://Sprites/intents.png" id="1_xe4ol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_777vi"]
+atlas = ExtResource("1_xe4ol")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjs2w"]
+atlas = ExtResource("1_xe4ol")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4o01"]
+atlas = ExtResource("1_xe4ol")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifgii"]
+atlas = ExtResource("1_xe4ol")
+region = Rect2(48, 0, 16, 16)
 
 [node name="Intents" type="TabBar"]
 anchors_preset = 12
@@ -13,10 +30,14 @@ grow_vertical = 0
 tab_count = 4
 tab_alignment = 2
 scrolling_enabled = false
-tab_0/title = "Help"
-tab_1/title = "Hurt"
-tab_2/title = "Resist"
-tab_3/title = "Grab"
+tab_0/title = ""
+tab_0/icon = SubResource("AtlasTexture_777vi")
+tab_1/title = ""
+tab_1/icon = SubResource("AtlasTexture_jjs2w")
+tab_2/title = ""
+tab_2/icon = SubResource("AtlasTexture_n4o01")
+tab_3/title = ""
+tab_3/icon = SubResource("AtlasTexture_ifgii")
 script = ExtResource("1_8gxxw")
 
 [connection signal="tab_clicked" from="." to="." method="_on_tab_clicked"]

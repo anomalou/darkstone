@@ -8,7 +8,7 @@ func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
 	
-	if Input.is_action_pressed("swap_hand"):
+	if Input.is_action_just_pressed("swap_hand"):
 		if parts_component.selected_arm == PartsComponent.Tag.RIGHT_ARM:
 			parts_component.selected_arm = PartsComponent.Tag.LEFT_ARM
 		else:
