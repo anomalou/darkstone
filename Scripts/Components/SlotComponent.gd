@@ -12,7 +12,6 @@ func _find_item():
 	
 	if not item:
 		item = get_node(item_path)
-		item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	return item
 
@@ -36,6 +35,7 @@ func set_slot(path : NodePath):
 	
 	add_child(_item)
 	_item.set_equiped()
+	_item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	item_path = _item.get_path()
 	

@@ -1,0 +1,180 @@
+[gd_scene load_steps=10 format=3 uid="uid://dk8doovsio0wn"]
+
+[ext_resource type="Texture2D" uid="uid://bxw4oqwucq7id" path="res://Sprites/ui.png" id="1_mb487"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws7fl"]
+atlas = ExtResource("1_mb487")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpxe6"]
+atlas = ExtResource("1_mb487")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itr05"]
+atlas = ExtResource("1_mb487")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyu0a"]
+atlas = ExtResource("1_mb487")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjtvh"]
+atlas = ExtResource("1_mb487")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0i4j"]
+atlas = ExtResource("1_mb487")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umaph"]
+atlas = ExtResource("1_mb487")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnks6"]
+atlas = ExtResource("1_mb487")
+region = Rect2(96, 96, 32, 32)
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -308.0
+offset_right = 308.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+columns = 3
+
+[node name="Space" type="Control" parent="Panel/GridContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Head" type="TextureRect" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/Head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_jpxe6")
+
+[node name="Space2" type="Control" parent="Panel/GridContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LeftArm" type="TextureRect" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/LeftArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_itr05")
+
+[node name="UpperBody" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/UpperBody"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_oyu0a")
+
+[node name="RightArm" type="TextureRect" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/RightArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fjtvh")
+
+[node name="LeftLeg" type="TextureRect" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/LeftLeg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_b0i4j")
+
+[node name="Groin" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/Groin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_umaph")
+
+[node name="RightLeg" type="TextureRect" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 0
+texture = SubResource("AtlasTexture_ws7fl")
+
+[node name="Icon" type="TextureRect" parent="Panel/GridContainer/RightLeg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_qnks6")

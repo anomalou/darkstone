@@ -92,6 +92,12 @@ func get_leading_hand():
 func get_selected_hand():
 	return parts_component.selected_arm
 
+func get_hand(tag : PartsComponent.Tag) -> Hand:
+	var hand = parts_component.get_part(tag)
+	if hand is Hand:
+		return hand
+	return null
+
 @rpc("any_peer", "call_local")
 func equip(item : NodePath, slot):
 	parts_component.set_slot(slot, item)

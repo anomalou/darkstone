@@ -10,7 +10,7 @@ var is_bone_broken : bool = false
 
 var size : int
 var is_covered : bool = false
-@export var slot_component : SlotComponent
+@export var clothing_slot : SlotComponent
 @export var sprite_component : BodyPartSpriteComponent
 @export var entrails_component : EntrailsComponent
 
@@ -23,7 +23,7 @@ func _process(_delta):
 
 func update_direction(_direction):
 	sprite_component.update_direction(_direction)
-	slot_component.update_direction(_direction)
+	clothing_slot.update_direction(_direction)
 
 func get_health():
 	return health.get_value()
@@ -50,13 +50,14 @@ func has_entrails():
 	return entrails_component != null
 
 func has_slot():
-	return slot_component != null
+	return clothing_slot != null
 
 func get_slot():
-	return slot_component
+	return clothing_slot
 
+@rpc("any_peer", "call_local")
 func set_slot(value):
-	slot_component.set_slot(value)
+	clothing_slot.set_slot(value)
 
 func inject(organ):
 	entrails_component.inject(organ)

@@ -1,12 +1,19 @@
 extends Node2D
 class_name Player
 
+enum Intent {
+	HELP,
+	HURT,
+	RESIST,
+	GRAB
+}
+
 # multiplayer configuration
 
 var in_body_fov : PointLight2D
 var camera : Node2D
 
-var intent : int = 0 # 0 - help, 1 - hurt, 2 - resist, 3 - grab
+var intent : Intent = Intent.HELP
 @export var interact_range : float = 54.0 # 1.5 tile
 
 @onready var interact_marker : PackedScene = preload("res://Scenes/interact.tscn")
@@ -109,6 +116,6 @@ func _input(event):
 	
 	if event.is_action_pressed("examine"):
 		Utils.option(object, func(o): o.examine(body), func(): print("Nothing to examine"))
-	elif event.is_action_pressed("left_click"):
+	elif event.is_action_pressed("primary"):
 		if not Utils.option(object, func(o): o.do_action(body, intent)):
 			pass

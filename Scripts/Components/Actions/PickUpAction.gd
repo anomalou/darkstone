@@ -6,7 +6,6 @@ class_name PickUpAction
 func do(_player, _item = null): # data is body nodepath that shound pick up item
 	var _body : Body = get_node(_player)
 	
-	if _body.is_slot_empty(_body.get_selected_hand()):
-		_body.equip.rpc(self.item.get_path(), _body.get_selected_hand())
-		return true
-	return false
+	var hand = _body.get_hand(_body.get_selected_hand())
+	
+	return Utils.option(hand, func(h): return h.take_item(item.get_path()))

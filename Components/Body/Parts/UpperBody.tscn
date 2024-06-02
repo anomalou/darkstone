@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlcttmoxiwufr"]
+[gd_scene load_steps=9 format=3 uid="uid://dlcttmoxiwufr"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_gy0x2"]
 [ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="2_4bh66"]
 [ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="2_fjqe8"]
+[ext_resource type="Script" path="res://Scripts/Races/BodyPartAccessory.gd" id="2_jawmm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_un1xn"]
 atlas = ExtResource("2_4bh66")
@@ -20,9 +21,11 @@ region = Rect2(96, 96, 32, 32)
 atlas = ExtResource("2_4bh66")
 region = Rect2(64, 96, 32, 32)
 
-[node name="UpperBody" node_paths=PackedStringArray("slot_component") instance=ExtResource("1_gy0x2")]
+[node name="UpperBody" node_paths=PackedStringArray("accessory_slot", "clothing_slot") instance=ExtResource("1_gy0x2")]
 z_index = 2
-slot_component = NodePath("SlotComponent")
+script = ExtResource("2_jawmm")
+accessory_slot = NodePath("AccessorySlot")
+clothing_slot = NodePath("ClothingSlot")
 tag = 2
 connections = Array[int]([1, 3, 4, 5])
 
@@ -33,4 +36,6 @@ west = SubResource("AtlasTexture_bdojp")
 east = SubResource("AtlasTexture_3bdox")
 south = SubResource("AtlasTexture_un1xn")
 
-[node name="SlotComponent" parent="." index="1" instance=ExtResource("2_fjqe8")]
+[node name="ClothingSlot" parent="." index="1" instance=ExtResource("2_fjqe8")]
+
+[node name="AccessorySlot" parent="." index="2" instance=ExtResource("2_fjqe8")]

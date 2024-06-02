@@ -9,8 +9,8 @@ class_name Hands
 
 @onready var server_info : ServerInfo = get_node(Constants.server_info)
 
-var left_slot : SlotComponent
-var right_slot : SlotComponent
+var left_hand : Hand
+var right_hand : Hand
 
 func _process(_delta):
 	if not server_info.is_game_started:
@@ -22,11 +22,11 @@ func _process(_delta):
 	if not body:
 		return
 	
-	left_slot = body.get_slot(PartsComponent.Tag.LEFT_ARM)
-	right_slot = body.get_slot(PartsComponent.Tag.RIGHT_ARM)
+	left_hand = body.get_hand(PartsComponent.Tag.LEFT_ARM)
+	right_hand = body.get_hand(PartsComponent.Tag.RIGHT_ARM)
 	
-	var left_item : Item = left_slot.get_item()
-	var right_item : Item = right_slot.get_item()
+	var left_item : Item = Utils.option(left_hand, func(l): return l.get_hand_item(), func(): return null)
+	var right_item : Item = Utils.option(right_hand, func(r): return r.get_hand_item(), func(): return null)
 	
 	if left_item:
 		left.texture = left_item.get_sprite()

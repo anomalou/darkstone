@@ -20,9 +20,9 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("2_8dm8b")
 region = Rect2(64, 32, 32, 32)
 
-[node name="RightLeg" node_paths=PackedStringArray("slot_component") instance=ExtResource("1_jf24b")]
+[node name="RightLeg" node_paths=PackedStringArray("clothing_slot") instance=ExtResource("1_jf24b")]
 z_index = 1
-slot_component = NodePath("SlotComponent")
+clothing_slot = NodePath("ClothingSlot")
 tag = 7
 connections = Array[int]([5])
 
@@ -33,4 +33,4 @@ west = SubResource("AtlasTexture_mfdjr")
 east = SubResource("AtlasTexture_b10wx")
 south = SubResource("AtlasTexture_45ht5")
 
-[node name="SlotComponent" parent="." index="1" instance=ExtResource("2_edcnr")]
+[node name="ClothingSlot" parent="." index="1" instance=ExtResource("2_edcnr")]
