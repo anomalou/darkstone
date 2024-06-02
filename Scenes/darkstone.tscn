@@ -185,7 +185,6 @@ visible = false
 [node name="MusicPlayer" parent="GUI" instance=ExtResource("16_c506d")]
 
 [node name="Inventory" parent="GUI" instance=ExtResource("18_uv86y")]
-visible = false
 
 [node name="MusicPlayer" parent="." instance=ExtResource("13_m5li0")]
 music = {

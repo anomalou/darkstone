@@ -24,7 +24,10 @@ func do_action(player, intent):
 		3:
 			action = grab_action
 	
-	return Utils.option(action, func(a): return a.do(player, null));
+	return Utils.option(
+			action, func(a): return a.do(player, null), 
+			func(): return Utils.option(default_action, func(a): return a.do(player, null))
+		);
 
 func examine(player):
 	return Utils.option(examine_action, func(a): return a.do(player));

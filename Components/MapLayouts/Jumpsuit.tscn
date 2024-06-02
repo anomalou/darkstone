@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://co2b2ibsj5a4"]
+[gd_scene load_steps=14 format=3 uid="uid://co2b2ibsj5a4"]
 
 [ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_q2i8m"]
 [ext_resource type="Texture2D" uid="uid://dilm1bkig1amc" path="res://Sprites/items_asp.png" id="2_j2chm"]
-[ext_resource type="PackedScene" uid="uid://dlpbixiu3e7r0" path="res://Components/Properties/Specials/Actions/PickUpAction.tscn" id="3_yvpxh"]
 [ext_resource type="PackedScene" uid="uid://ib3qeji8r6r0" path="res://Components/Properties/Specials/Actions/ExamineAction.tscn" id="4_2pilk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86hor"]
@@ -58,16 +57,12 @@ hand_west = SubResource("AtlasTexture_lh621")
 hand_east = SubResource("AtlasTexture_x2p0a")
 hand_south = SubResource("AtlasTexture_uvuca")
 
-[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("help_action", "examine_action")]
-help_action = NodePath("PickUpAction")
+[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("examine_action")]
 examine_action = NodePath("ExamineAction")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_raaw8")
 
-[node name="PickUpAction" parent="InteractionComponent" index="1" node_paths=PackedStringArray("item") instance=ExtResource("3_yvpxh")]
-item = NodePath("../..")
-
-[node name="ExamineAction" parent="InteractionComponent" index="2" instance=ExtResource("4_2pilk")]
+[node name="ExamineAction" parent="InteractionComponent" index="1" instance=ExtResource("4_2pilk")]
 examine = "Robust jumpsuit"
