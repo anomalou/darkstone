@@ -20,6 +20,7 @@ var intent : Intent = Intent.HELP
 @export var is_ghost : bool = false
 
 @export var body : NodePath
+var _body_cache : Body
 @onready var ghost : Node2D = $Ghost
 var brain : Node2D # for future
 
@@ -58,7 +59,12 @@ func _process_animation():
 	animation["parameters/conditions/restore"] = not _body.in_critical() and not _body.is_dead()
 
 func get_body() -> Body:
-	return get_node(body)
+	if body:
+		if not _body_cache:
+			_body_cache = get_node(body)
+		return _body_cache
+	else:
+		return null
 
 @rpc("any_peer", "call_local")
 func set_body(path):

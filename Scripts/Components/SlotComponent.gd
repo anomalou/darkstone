@@ -1,13 +1,13 @@
 extends Node
 class_name SlotComponent
 
-var item_path : NodePath
+var item_path : NodePath = NodePath()
 var item : Item
 
 @export var mirror_item : bool = false
 
 func _find_item():
-	if not item_path:
+	if item_path.is_empty():
 		return
 	
 	if not item:
@@ -34,7 +34,7 @@ func set_slot(path : NodePath):
 		old_parent.remove_child(_item)
 	
 	add_child(_item)
-	_item.set_equiped()
+	_item.pick_up()
 	_item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	item_path = _item.get_path()
@@ -43,3 +43,7 @@ func set_slot(path : NodePath):
 
 func get_item():
 	return _find_item()
+
+func remove_item():
+	item_path = NodePath()
+	item = null

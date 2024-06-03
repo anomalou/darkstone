@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk8doovsio0wn"]
+[gd_scene load_steps=11 format=3 uid="uid://dk8doovsio0wn"]
 
 [ext_resource type="Texture2D" uid="uid://bxw4oqwucq7id" path="res://Sprites/ui.png" id="1_mb487"]
+[ext_resource type="Script" path="res://Scripts/InventorySlot.gd" id="2_pfaws"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ws7fl"]
 atlas = ExtResource("1_mb487")
@@ -70,6 +71,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 1
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/Head"]
 layout_mode = 1
@@ -81,6 +84,14 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_jpxe6")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/Head"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Space2" type="Control" parent="Panel/GridContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -90,6 +101,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 3
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/LeftArm"]
 layout_mode = 1
@@ -101,10 +114,20 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_itr05")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/LeftArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="UpperBody" type="TextureRect" parent="Panel/GridContainer"]
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 2
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/UpperBody"]
 layout_mode = 1
@@ -116,11 +139,21 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_oyu0a")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/UpperBody"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RightArm" type="TextureRect" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 4
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/RightArm"]
 layout_mode = 1
@@ -132,11 +165,21 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_fjtvh")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/RightArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="LeftLeg" type="TextureRect" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 6
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/LeftLeg"]
 layout_mode = 1
@@ -148,10 +191,20 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_b0i4j")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/LeftLeg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Groin" type="TextureRect" parent="Panel/GridContainer"]
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 5
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/Groin"]
 layout_mode = 1
@@ -163,11 +216,21 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_umaph")
 
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/Groin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RightLeg" type="TextureRect" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("AtlasTexture_ws7fl")
+script = ExtResource("2_pfaws")
+slot_tag = 7
 
 [node name="Icon" type="TextureRect" parent="Panel/GridContainer/RightLeg"]
 layout_mode = 1
@@ -178,3 +241,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_qnks6")
+
+[node name="Sprite" type="TextureRect" parent="Panel/GridContainer/RightLeg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="gui_input" from="Panel/GridContainer/Head" to="Panel/GridContainer/Head" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/LeftArm" to="Panel/GridContainer/LeftArm" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/UpperBody" to="Panel/GridContainer/UpperBody" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/RightArm" to="Panel/GridContainer/RightArm" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/LeftLeg" to="Panel/GridContainer/LeftLeg" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/Groin" to="Panel/GridContainer/Groin" method="_on_gui_input"]
+[connection signal="gui_input" from="Panel/GridContainer/RightLeg" to="Panel/GridContainer/RightLeg" method="_on_gui_input"]

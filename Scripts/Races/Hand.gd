@@ -17,3 +17,6 @@ func take_item(item_path) -> bool:
 	
 	hand_slot.set_slot(item_path)
 	return true
+
+func remove_item():
+	hand_slot.remove_item()

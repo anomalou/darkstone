@@ -17,7 +17,7 @@ class_name ObjectSpriteComponent
 
 var direction : Constants.Direction
 var mirror : bool = false
-var on_ground : bool = false
+var on_ground : bool = true
 var in_hand : bool = true
 
 

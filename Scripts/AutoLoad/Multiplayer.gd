@@ -14,7 +14,7 @@ var _server_info : ServerInfo
 var _is_connected : bool = false
 
 var _username : String
-#var _local_player_path : NodePath
+var _player_cache : Player
 
 func _ready():
 	_root = get_node(Constants.network)
@@ -69,7 +69,9 @@ func when_connect():
 	
 func when_disconnected():
 	_is_connected = false
+	_player_cache = null
 
 func get_player() -> Player:
-	var player = get_node(str(Constants.network) + "/" + str(get_multiplayer_authority()) + "_player")
-	return player
+	if not _player_cache:
+		_player_cache = get_node(str(Constants.network) + "/" + str(get_multiplayer_authority()) + "_player")
+	return _player_cache
