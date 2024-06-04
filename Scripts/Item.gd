@@ -12,11 +12,10 @@ func update_direction(_direction, mirror = false):
 	sprite_component.update_direction(_direction)
 
 func set_equiped():
-	pick_up()
 	sprite_component.in_hand = false
 
 func set_unequiped():
-	drop()
+	sprite_component.in_hand = true
 
 func pick_up():
 	sprite_component.on_ground = false

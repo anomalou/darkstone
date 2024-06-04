@@ -38,10 +38,16 @@ func _on_gui_input(event : InputEvent):
 				Utils.option(body, func(b): return b.get_selected_hand(), func(): return PartsComponent.Tag.MISSING)
 			))
 		
-		var item = Utils.option(hand, func(h): return h.get_hand_item(), func(): return null)
-		if not item:
-			return
+		if not hand:
+			return 
 		
-		if Utils.option(slot, func(s): return s.set_slot(item.get_path())):
+		var hand_slot : SlotComponent = hand.get_hand_slot()
+		
+		var item = Utils.move_item(hand_slot, slot)
+		if item:
 			item.set_equiped()
-			hand.remove_item()
+		else:
+			item = Utils.move_item(slot, hand_slot)
+			if item:
+				item.set_unequiped()
+		

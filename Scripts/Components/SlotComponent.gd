@@ -34,7 +34,6 @@ func set_slot(path : NodePath):
 		old_parent.remove_child(_item)
 	
 	add_child(_item)
-	_item.pick_up()
 	_item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	item_path = _item.get_path()
