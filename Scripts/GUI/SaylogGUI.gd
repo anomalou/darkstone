@@ -1,7 +1,7 @@
 extends Control
 class_name SaylogGUI
 
-@export var log_line : PackedScene
+@export var line : PackedScene
 
 @onready var chat : LineEdit = $VSplitContainer/Chat/VContainer/Chat
 @onready var saylog : VBoxContainer = $VSplitContainer/Chat/VContainer/ScrollContainer/Messages
@@ -21,9 +21,8 @@ func _input(event):
 		grab_focus()
 	if event.is_action_pressed("send"):
 		release_focus()
-		if Multiplayer.is_connected:
-			chat.text = Multiplayer._username + ": " + chat.text
-		Saylog.add.rpc(chat.text)
+			
+		Saylog.add.rpc(chat.text, Utils.option(Multiplayer._is_connected, func(b): return Multiplayer._username, func(): return null))
 		chat.clear()
 
 func update_log(erase_first):
@@ -32,10 +31,14 @@ func update_log(erase_first):
 			var last = saylog.get_child(get_child_count() - 1)
 			saylog.remove_child(last)
 	
-	var instance : Label = log_line.instantiate()
-	instance.text = Saylog.saylog.back()
+	var instance : SaylogLine = line.instantiate()
+	var item : SaylogItem = Saylog.back()
+	
+	if not item:
+		return
 	
 	saylog.add_child(instance)
+	instance.set_text(item.get_title(), item.get_text())
 
 func handle_scrollbar_change():
 	if auto_update_scroll:

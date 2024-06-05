@@ -40,6 +40,19 @@ movie_writer/fps=75
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[file_customization]
+
+folder_colors={
+"res://Components/": "blue",
+"res://Maps/": "green",
+"res://Music/": "yellow",
+"res://Resources/": "teal",
+"res://Scenes/": "purple",
+"res://Scripts/": "red",
+"res://Shaders/": "teal",
+"res://Sprites/": "teal"
+}
+
 [importer_defaults]
 
 animation_library={
