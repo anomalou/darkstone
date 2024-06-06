@@ -20,13 +20,16 @@ func update_direction(_direction):
 	if _item:
 		_item.update_direction(_direction, mirror_item)
 
+@rpc("any_peer", "call_local")
 func set_slot(path : NodePath):
 	if item:
 		return
 	
 	var _item : Item = get_node(path)
 	if not _item:
-		return false
+		return
+	
+	_item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	item = null
 	var old_parent = _item.get_parent()
@@ -34,15 +37,13 @@ func set_slot(path : NodePath):
 		old_parent.remove_child(_item)
 	
 	add_child(_item)
-	_item.set_multiplayer_authority(get_multiplayer_authority())
 	
 	item_path = _item.get_path()
-	
-	return true
 
 func get_item():
 	return _find_item()
 
+@rpc("any_peer", "call_local")
 func remove_item():
 	item_path = NodePath()
 	item = null

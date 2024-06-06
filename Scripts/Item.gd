@@ -12,21 +12,21 @@ func update_direction(_direction, mirror = false):
 	sprite_component.update_direction(_direction)
 
 func set_equiped():
-	sprite_component.in_hand = false
+	sprite_component.set_in_hand.rpc(false)
 
 func set_unequiped():
-	sprite_component.in_hand = true
+	sprite_component.set_in_hand.rpc(true)
 
 func pick_up():
-	sprite_component.on_ground = false
-	sprite_component.in_hand = true
+	sprite_component.set_on_ground.rpc(false)
+	sprite_component.set_in_hand.rpc(true)
 	interaction_component.hide()
 	interaction_component.process_mode = Node.PROCESS_MODE_DISABLED
 	position = Vector2.ZERO
 
 func drop():
-	sprite_component.on_ground = true
-	sprite_component.in_hand = true
+	sprite_component.set_on_ground.rpc(true)
+	sprite_component.set_in_hand.rpc(true)
 	interaction_component.show()
 	interaction_component.process_mode = Node.PROCESS_MODE_PAUSABLE
 

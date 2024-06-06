@@ -15,5 +15,5 @@ func set_accessory_slot(item_path) -> bool:
 	if accessory_slot.item_path != null:
 		return false
 	
-	accessory_slot.set_slot(item_path)
+	accessory_slot.set_slot.rpc(item_path)
 	return true

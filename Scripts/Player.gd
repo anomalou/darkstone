@@ -25,7 +25,6 @@ var _body_cache : Body
 var brain : Node2D # for future
 
 @onready var game_control : GameControl = GUIManager.game_overlay
-@onready var animation : AnimationTree = $AnimationTree
 
 @onready var network : Node2D = get_node(Constants.network)
 
@@ -40,11 +39,6 @@ func _ready():
 		camera = get_node(Constants.camera)
 	
 	Signals.intent_change.connect(change_intent)
-	
-	animation.active = true
-	
-	if not is_multiplayer_authority():
-		animation.active = false
 
 func _process(_delta):
 	if is_multiplayer_authority():
@@ -54,9 +48,6 @@ func _process_animation():
 	var _body = get_body()
 	if not _body:
 		return
-	
-	animation["parameters/conditions/reduce"] = _body.in_critical() or _body.is_dead()
-	animation["parameters/conditions/restore"] = not _body.in_critical() and not _body.is_dead()
 
 func get_body() -> Body:
 	if body:

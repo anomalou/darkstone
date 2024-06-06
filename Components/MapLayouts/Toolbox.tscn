@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bbk3qutks7ayo" path="res://Sprites/Ground/toolbox.tres" id="1_8oxe5"]
 [ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_ixuws"]
 [ext_resource type="Texture2D" uid="uid://dilm1bkig1amc" path="res://Sprites/items_asp.png" id="3_sj5nh"]
-[ext_resource type="Script" path="res://Scripts/Components/Actions/ExamineAction.gd" id="3_wdsfx"]
+[ext_resource type="PackedScene" uid="uid://ib3qeji8r6r0" path="res://Components/Properties/Specials/Actions/ExamineAction.tscn" id="4_sa65x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wui8w"]
 atlas = ExtResource("3_sj5nh")
@@ -40,6 +40,5 @@ examine_action = NodePath("ExamineAction")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
 shape = SubResource("RectangleShape2D_2nadn")
 
-[node name="ExamineAction" type="Node" parent="InteractionComponent" index="1"]
-script = ExtResource("3_wdsfx")
-examine = "Robust "
+[node name="ExamineAction" parent="InteractionComponent" index="1" instance=ExtResource("4_sa65x")]
+examine = "Robust"

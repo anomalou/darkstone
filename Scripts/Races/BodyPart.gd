@@ -57,7 +57,7 @@ func get_slot():
 
 @rpc("any_peer", "call_local")
 func set_slot(value):
-	clothing_slot.set_slot(value)
+	clothing_slot.set_slot.rpc(value)
 
 func inject(organ):
 	entrails_component.inject(organ)

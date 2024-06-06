@@ -4,9 +4,17 @@ class_name ControlComponent
 @export var velocity_component : VelocityComponent
 @export var parts_component : PartsComponent 
 
+@onready var body : Body = $".."
+
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
+	
+	if Input.is_action_just_pressed("drop"):
+		var hand : Hand = body.get_hand(body.get_selected_hand())
+		
+		if hand:
+			hand.drop_item.rpc()
 	
 	if Input.is_action_just_pressed("swap_hand"):
 		if parts_component.selected_arm == PartsComponent.Tag.RIGHT_ARM:

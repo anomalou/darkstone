@@ -130,16 +130,16 @@ func get_slot(tag) -> SlotComponent:
 func set_slot(tag, value):
 	match tag:
 		PartsComponent.Tag.HEAD:
-			_part_wrap(head, func(p): p.set_slot(value))
+			_part_wrap(head, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.UPPER_BODY:
-			_part_wrap(upper_body, func(p): p.set_slot(value))
+			_part_wrap(upper_body, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.LEFT_ARM:
-			_part_wrap(left_arm, func(p): p.set_slot(value))
+			_part_wrap(left_arm, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.RIGHT_ARM:
-			_part_wrap(right_arm, func(p): p.set_slot(value))
+			_part_wrap(right_arm, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.GROIN:
-			_part_wrap(groin, func(p): p.set_slot(value))
+			_part_wrap(groin, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.LEFT_LEG:
-			_part_wrap(left_leg, func(p): p.set_slot(value))
+			_part_wrap(left_leg, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.RIGHT_LEG:
-			_part_wrap(right_leg, func(p): p.set_slot(value))
+			_part_wrap(right_leg, func(p): p.set_slot.rpc(value))

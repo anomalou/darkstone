@@ -20,6 +20,13 @@ var mirror : bool = false
 var on_ground : bool = true
 var in_hand : bool = true
 
+@rpc("any_peer", "call_local")
+func set_on_ground(value):
+	on_ground = value
+
+@rpc("any_peer", "call_local")
+func set_in_hand(value):
+	in_hand = value
 
 func update_direction(_direction, h_flip = false, v_flip = false):
 	direction = _direction

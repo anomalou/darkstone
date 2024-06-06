@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdvgyvt112yq4"]
+[gd_scene load_steps=4 format=3 uid="uid://cdvgyvt112yq4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5tpwv"]
 [ext_resource type="PackedScene" uid="uid://cqrkoi43tiym1" path="res://Components/ghost.tscn" id="3_uesuc"]
@@ -13,72 +13,6 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(".:intent")
 properties/2/spawn = true
 properties/2/replication_mode = 2
-
-[sub_resource type="Animation" id="Animation_stp1q"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_od4d6"]
-resource_name = "from_critical_state"
-
-[sub_resource type="Animation" id="Animation_3l446"]
-resource_name = "idle"
-length = 0.1
-
-[sub_resource type="Animation" id="Animation_vf3ox"]
-resource_name = "screen_shake"
-length = 0.6
-
-[sub_resource type="Animation" id="Animation_tcsfh"]
-resource_name = "to_critical_state"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nl6l3"]
-_data = {
-"RESET": SubResource("Animation_stp1q"),
-"from_critical_state": SubResource("Animation_od4d6"),
-"idle": SubResource("Animation_3l446"),
-"screen_shake": SubResource("Animation_vf3ox"),
-"to_critical_state": SubResource("Animation_tcsfh")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r1d3w"]
-animation = &"from_critical_state"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqnxa"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0uji7"]
-animation = &"to_critical_state"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvun7"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6uwan"]
-advance_mode = 2
-advance_condition = &"reduce"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_py4yv"]
-switch_mode = 1
-advance_mode = 2
-advance_condition = &"restore"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spmak"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5vb8u"]
-priority = 2
-switch_mode = 1
-advance_mode = 2
-advance_condition = &"reduce"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xvlxy"]
-states/from_critical_state/node = SubResource("AnimationNodeAnimation_r1d3w")
-states/from_critical_state/position = Vector2(508, 160)
-states/idle/node = SubResource("AnimationNodeAnimation_gqnxa")
-states/idle/position = Vector2(318, 88)
-states/to_critical_state/node = SubResource("AnimationNodeAnimation_0uji7")
-states/to_critical_state/position = Vector2(509, 53)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lvun7"), "idle", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_6uwan"), "to_critical_state", "from_critical_state", SubResource("AnimationNodeStateMachineTransition_py4yv"), "from_critical_state", "idle", SubResource("AnimationNodeStateMachineTransition_spmak"), "from_critical_state", "to_critical_state", SubResource("AnimationNodeStateMachineTransition_5vb8u")]
 
 [node name="Player" type="Node2D"]
 z_index = 1
@@ -96,18 +30,3 @@ motion_mode = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d4o7n")
-
-[node name="FOVAnimator" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_nl6l3")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
-libraries = {
-"": SubResource("AnimationLibrary_nl6l3")
-}
-tree_root = SubResource("AnimationNodeStateMachine_xvlxy")
-anim_player = NodePath("../FOVAnimator")
-parameters/conditions/reduce = false
-parameters/conditions/restore = false

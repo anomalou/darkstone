@@ -39,15 +39,20 @@ func _physics_process(_delta):
 
 func _process_animation():
 	if velocity != Vector2.ZERO:
-		animation["parameters/conditions/walk"] = true
-		animation["parameters/conditions/idle"] = false
+		animation["parameters/Walking/conditions/walk"] = true
+		animation["parameters/Walking/conditions/idle"] = false
 	else:
-		animation["parameters/conditions/walk"] = false
-		animation["parameters/conditions/idle"] = true
+		animation["parameters/Walking/conditions/walk"] = false
+		animation["parameters/Walking/conditions/idle"] = true
+	
+	if velocity_component.is_crawl:
+		animation["parameters/Crawling/conditions/crawl"] = true
+		animation["parameters/Crawling/conditions/stand"] = false
+	else:
+		animation["parameters/Crawling/conditions/crawl"] = false
+		animation["parameters/Crawling/conditions/stand"] = true
 	
 	parts_component.update_parts_direction(velocity_component.direction)
-	#animation["parameters/conditions/fell"] = in_critical() or is_dead() or velocity_component.is_crawl
-	#animation["parameters/conditions/stand_up"] = not in_critical() and not is_dead() and not velocity_component.is_crawl
 
 #func _absorb_reagents(tick_coef):
 	#for reagent in reagents:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dso5jxilojvhv"]
+[gd_scene load_steps=38 format=3 uid="uid://dso5jxilojvhv"]
 
 [ext_resource type="PackedScene" uid="uid://cjje8xhmliet6" path="res://Components/Body/Body.tscn" id="1_ai40p"]
 [ext_resource type="PackedScene" uid="uid://dfq72ojkr6bwa" path="res://Components/Properties/InteractionComponent.tscn" id="2_4v8l4"]
@@ -47,6 +47,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractionComponent:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InteractionComponent:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicalCollider:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PhysicalCollider:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_hdrvh"]
 resource_name = "walking"
@@ -77,36 +125,161 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_75m83"]
+resource_name = "crawl"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanPartsComponent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HumanPartsComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractionComponent:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InteractionComponent:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicalCollider:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PhysicalCollider:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vhp3q"]
 _data = {
 "RESET": SubResource("Animation_mmovy"),
+"crawl": SubResource("Animation_75m83"),
 "walking": SubResource("Animation_hdrvh")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ddnm"]
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_jk5im"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bwkef"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aaoj3"]
-animation = &"walking"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8t1dw"]
+animation = &"crawl"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rhtpv"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mokam"]
+animation = &"crawl"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jpre4"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u1ty"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tkpxe"]
+advance_mode = 2
+advance_condition = &"crawl"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_doo1u"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"stand"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4phej"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rb5fc"]
+states/RESET/node = SubResource("AnimationNodeAnimation_bwkef")
+states/RESET/position = Vector2(351, 102)
+states/Start/position = Vector2(174, 113)
+states/crawl/node = SubResource("AnimationNodeAnimation_8t1dw")
+states/crawl/position = Vector2(507, 97)
+states/stand/node = SubResource("AnimationNodeAnimation_mokam")
+states/stand/position = Vector2(476, 201)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_jpre4"), "RESET", "crawl", SubResource("AnimationNodeStateMachineTransition_tkpxe"), "crawl", "stand", SubResource("AnimationNodeStateMachineTransition_doo1u"), "stand", "RESET", SubResource("AnimationNodeStateMachineTransition_4phej")]
+graph_offset = Vector2(-50, 26)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u3rcv"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c1x11"]
+animation = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_74v13"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ln70l"]
 advance_mode = 2
 advance_condition = &"walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tocfk"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmq5y"]
 advance_mode = 2
 advance_condition = &"idle"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rwuon"]
-states/RESET/node = SubResource("AnimationNodeAnimation_5ddnm")
-states/RESET/position = Vector2(370, 96)
-states/walking/node = SubResource("AnimationNodeAnimation_aaoj3")
-states/walking/position = Vector2(494, 88)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_rhtpv"), "RESET", "walking", SubResource("AnimationNodeStateMachineTransition_3u1ty"), "walking", "RESET", SubResource("AnimationNodeStateMachineTransition_tocfk")]
-graph_offset = Vector2(-6, 14)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2k53c"]
+states/RESET/node = SubResource("AnimationNodeAnimation_u3rcv")
+states/RESET/position = Vector2(352, 112)
+states/walking/node = SubResource("AnimationNodeAnimation_c1x11")
+states/walking/position = Vector2(500, 116)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_74v13"), "RESET", "walking", SubResource("AnimationNodeStateMachineTransition_ln70l"), "walking", "RESET", SubResource("AnimationNodeStateMachineTransition_hmq5y")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p4vcu"]
+graph_offset = Vector2(-691.613, 101.241)
+nodes/Add/node = SubResource("AnimationNodeAdd2_jk5im")
+nodes/Add/position = Vector2(0, 60)
+nodes/Crawling/node = SubResource("AnimationNodeStateMachine_rb5fc")
+nodes/Crawling/position = Vector2(-360, 200)
+nodes/Walking/node = SubResource("AnimationNodeStateMachine_2k53c")
+nodes/Walking/position = Vector2(-360, 0)
+node_connections = [&"Add", 0, &"Walking", &"Add", 1, &"Crawling", &"output", 0, &"Add"]
 
 [node name="Human" node_paths=PackedStringArray("parts_component", "state_component") instance=ExtResource("1_ai40p")]
 parts_component = NodePath("HumanPartsComponent")
@@ -200,7 +373,10 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_vhp3q")
 }
-tree_root = SubResource("AnimationNodeStateMachine_rwuon")
+tree_root = SubResource("AnimationNodeBlendTree_p4vcu")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/idle = false
-parameters/conditions/walk = false
+parameters/Add/add_amount = 1.0
+parameters/Crawling/conditions/crawl = false
+parameters/Crawling/conditions/stand = false
+parameters/Walking/conditions/idle = false
+parameters/Walking/conditions/walk = false
