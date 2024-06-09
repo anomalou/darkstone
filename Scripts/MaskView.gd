@@ -2,7 +2,7 @@ extends SubViewport
 
 @onready var fov : FOV = $FOV
 
-func _ready():
+func _process(delta):
 	update()
 
 func update():

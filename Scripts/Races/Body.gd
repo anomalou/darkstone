@@ -10,6 +10,7 @@ class_name Body
 
 @export var parts_component : PartsComponent
 @export var state_component : StateComponent
+@export var control_component : ControlComponent
 @export var velocity_component : VelocityComponent
 
 var temperature : float
@@ -33,8 +34,9 @@ func _process(_delta):
 		return
 	state_component.calculate(self)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not state_component.is_dead:
+		control_component.control(delta)
 		velocity_component.move(self)
 
 func _process_animation():

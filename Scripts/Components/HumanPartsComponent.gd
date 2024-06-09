@@ -143,3 +143,10 @@ func set_slot(tag, value):
 			_part_wrap(left_leg, func(p): p.set_slot.rpc(value))
 		PartsComponent.Tag.RIGHT_LEG:
 			_part_wrap(right_leg, func(p): p.set_slot.rpc(value))
+
+func has_vision() -> bool:
+	var head : BodyPart = get_part(Tag.HEAD)
+	if not head:
+		return false
+	
+	return head.has_organ(EntrailsComponent.OrganTags.EYES)

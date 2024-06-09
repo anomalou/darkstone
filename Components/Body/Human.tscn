@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://dso5jxilojvhv"]
 
-[ext_resource type="PackedScene" uid="uid://cjje8xhmliet6" path="res://Components/Body/Body.tscn" id="1_vfu8f"]
+[ext_resource type="PackedScene" uid="uid://cjje8xhmliet6" path="res://Components/Body/Body.tscn" id="1_pfj6m"]
 [ext_resource type="PackedScene" uid="uid://dfq72ojkr6bwa" path="res://Components/Properties/InteractionComponent.tscn" id="2_4v8l4"]
 [ext_resource type="PackedScene" uid="uid://mtfh7xajql02" path="res://Components/Properties/Specials/StateComponent.tscn" id="2_c3jrx"]
 [ext_resource type="PackedScene" uid="uid://dtykq73f1nejt" path="res://Components/Body/Parts/Head.tscn" id="2_l7n8h"]
@@ -280,7 +280,7 @@ nodes/Walking/node = SubResource("AnimationNodeStateMachine_2k53c")
 nodes/Walking/position = Vector2(-360, 0)
 node_connections = [&"Add", 0, &"Walking", &"Add", 1, &"Crawling", &"output", 0, &"Add"]
 
-[node name="Human" node_paths=PackedStringArray("parts_component", "state_component") instance=ExtResource("1_vfu8f")]
+[node name="Human" node_paths=PackedStringArray("parts_component", "state_component") instance=ExtResource("1_pfj6m")]
 parts_component = NodePath("HumanPartsComponent")
 state_component = NodePath("StateComponent")
 
@@ -369,6 +369,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+libraries = {
+"": SubResource("AnimationLibrary_vhp3q")
+}
 tree_root = SubResource("AnimationNodeBlendTree_p4vcu")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add/add_amount = 1.0

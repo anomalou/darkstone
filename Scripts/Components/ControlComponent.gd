@@ -5,10 +5,21 @@ class_name ControlComponent
 @export var parts_component : PartsComponent 
 
 @onready var body : Body = $".."
+@onready var fov : FOV = get_node(Constants.fov)
 
-func _physics_process(delta):
+# TODO test eyes
+var eyes_state = true
+
+func control(delta):
 	if not is_multiplayer_authority():
 		return
+	
+	if Input.is_action_just_pressed("toggle_eyes"):
+		if eyes_state:
+			fov.close_eyes()
+		else:
+			fov.open_eyes()
+		eyes_state = not eyes_state
 	
 	if Input.is_action_just_pressed("drop"):
 		var hand : Hand = body.get_hand(body.get_selected_hand())

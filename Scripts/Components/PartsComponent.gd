@@ -64,3 +64,7 @@ func get_slot(_tag) -> SlotComponent:
 func set_slot(_tag, _value):
 	print_debug("Not implemented")
 	pass
+
+func has_vision():
+	print_debug("Not implemented")
+	pass

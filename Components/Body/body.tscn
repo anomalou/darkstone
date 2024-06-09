@@ -27,7 +27,7 @@ properties/4/path = NodePath(".:reagents")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Body" type="CharacterBody2D" node_paths=PackedStringArray("name_component", "blood_component", "toxin_damage", "suff_damage", "velocity_component")]
+[node name="Body" type="CharacterBody2D" node_paths=PackedStringArray("name_component", "blood_component", "toxin_damage", "suff_damage", "control_component", "velocity_component")]
 z_index = 1
 y_sort_enabled = true
 collision_layer = 2
@@ -39,6 +39,7 @@ name_component = NodePath("NameComponent")
 blood_component = NodePath("BloodComponent")
 toxin_damage = NodePath("ToxinDamage")
 suff_damage = NodePath("SuffDamage")
+control_component = NodePath("ControlComponent")
 velocity_component = NodePath("VelocityComponent")
 
 [node name="NameComponent" parent="." instance=ExtResource("2_tejr6")]

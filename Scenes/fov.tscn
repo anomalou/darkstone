@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyxeohp5k5vjd"]
+[gd_scene load_steps=17 format=3 uid="uid://dyxeohp5k5vjd"]
 
 [ext_resource type="Script" path="res://Scripts/FOV.gd" id="1_5ue1i"]
 
 [sub_resource type="Gradient" id="Gradient_k378r"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.704142)
+offsets = PackedFloat32Array(0.584775, 0.730104)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
 gradient = SubResource("Gradient_k378r")
 width = 512
 height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_7rwsv"]
@@ -23,6 +24,78 @@ gradient = SubResource("Gradient_7rwsv")
 width = 512
 height = 512
 
+[sub_resource type="Animation" id="Animation_274jf"]
+resource_name = "close_eyes"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:vision_percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.03]
+}
+
+[sub_resource type="Animation" id="Animation_gby7w"]
+resource_name = "stop"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:vision_percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkub0"]
+_data = {
+"close_eyes": SubResource("Animation_274jf"),
+"stop": SubResource("Animation_gby7w")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aj7ky"]
+animation = &"close_eyes"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dsnhb"]
+animation = &"close_eyes"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8wg0"]
+animation = &"stop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0teoq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ofq27"]
+advance_mode = 2
+advance_condition = &"close"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2mx7o"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4dvw6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0ovt1"]
+states/close_eyes/node = SubResource("AnimationNodeAnimation_aj7ky")
+states/close_eyes/position = Vector2(510, 60)
+states/open_eyes/node = SubResource("AnimationNodeAnimation_dsnhb")
+states/open_eyes/position = Vector2(440, 171)
+states/stop/node = SubResource("AnimationNodeAnimation_v8wg0")
+states/stop/position = Vector2(343, 97)
+transitions = ["Start", "stop", SubResource("AnimationNodeStateMachineTransition_0teoq"), "stop", "close_eyes", SubResource("AnimationNodeStateMachineTransition_ofq27"), "close_eyes", "open_eyes", SubResource("AnimationNodeStateMachineTransition_2mx7o"), "open_eyes", "stop", SubResource("AnimationNodeStateMachineTransition_4dvw6")]
+
 [node name="FOV" type="PointLight2D"]
 blend_mode = 1
 shadow_enabled = true
@@ -34,3 +107,17 @@ zoom = Vector2(2, 2)
 
 [node name="BlockAlpha (beta)" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_jkbxy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jkub0")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jkub0")
+}
+tree_root = SubResource("AnimationNodeStateMachine_0ovt1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/close = false
+parameters/conditions/open = true

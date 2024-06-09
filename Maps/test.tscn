@@ -23,14 +23,8 @@ position = Vector2(-146, -143)
 [node name="Human2" parent="." instance=ExtResource("3_pphan")]
 position = Vector2(80, -399)
 
-[node name="Human3" parent="." node_paths=PackedStringArray("name_component", "blood_component", "toxin_damage", "suff_damage", "state_component", "velocity_component") instance=ExtResource("3_pphan")]
+[node name="Human3" parent="." instance=ExtResource("3_pphan")]
 position = Vector2(-113, 329)
-name_component = NodePath("../Human2/NameComponent")
-blood_component = NodePath("../Human2/BloodComponent")
-toxin_damage = NodePath("../Human2/ToxinDamage")
-suff_damage = NodePath("../Human2/SuffDamage")
-state_component = NodePath("../Human2/StateComponent")
-velocity_component = NodePath("../Human2/VelocityComponent")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("CanvasItemMaterial_cdksv")
