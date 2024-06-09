@@ -38,6 +38,8 @@ east = SubResource("AtlasTexture_bnqnt")
 south = SubResource("AtlasTexture_sev3f")
 
 [node name="ClothingSlot" parent="." index="1" instance=ExtResource("2_76vfp")]
+z_level = 3
 
 [node name="HandSlot" parent="." index="2" instance=ExtResource("2_76vfp")]
+z_level = 10
 mirror_item = true

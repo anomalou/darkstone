@@ -34,3 +34,4 @@ east = SubResource("AtlasTexture_b10wx")
 south = SubResource("AtlasTexture_45ht5")
 
 [node name="ClothingSlot" parent="." index="1" instance=ExtResource("2_edcnr")]
+z_level = 2

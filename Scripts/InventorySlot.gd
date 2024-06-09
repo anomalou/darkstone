@@ -43,11 +43,23 @@ func _on_gui_input(event : InputEvent):
 		
 		var hand_slot : SlotComponent = hand.get_hand_slot()
 		
-		var item = Utils.move_item(hand_slot, slot)
-		if item:
+		var equip = true
+		var item_path = Utils.move_item(hand_slot, slot)
+		
+		if not item_path: # slot is allready contain item
+			if not hand_slot.get_item_path():
+				if not slot.get_item_path():
+					return
+				
+				item_path = Utils.move_item(slot, hand_slot)
+				if not item_path:
+					return
+				equip = false
+		
+		var item : Item = get_node(item_path)
+		
+		if equip:
 			item.set_equiped()
 		else:
-			item = Utils.move_item(slot, hand_slot)
-			if item:
-				item.set_unequiped()
+			item.set_unequiped()
 		
