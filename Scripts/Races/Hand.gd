@@ -17,7 +17,7 @@ func get_hand_slot():
 
 @rpc("any_peer", "call_local")
 func take_item(item_path) -> bool:
-	if hand_slot.item_path == null:
+	if hand_slot.is_empty() == null:
 		return false
 	
 	hand_slot.set_slot.rpc(item_path)
@@ -36,10 +36,6 @@ func drop_item():
 	if not item:
 		return
 	
-	hand_slot.remove_child(item)
-	root.add_child(item)
-	
-	item.global_position = global_position
 	item.drop()
 	
 	item.set_multiplayer_authority(1)

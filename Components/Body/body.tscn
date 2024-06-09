@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cjje8xhmliet6"]
 
-[ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_co8ix"]
-[ext_resource type="PackedScene" uid="uid://ge2ca3bxa5qn" path="res://Components/Properties/BloodComponent.tscn" id="2_f42at"]
-[ext_resource type="PackedScene" uid="uid://b5aeg6dptty7b" path="res://Components/Properties/NameComponent.tscn" id="2_p7xgc"]
-[ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="3_7yh33"]
-[ext_resource type="PackedScene" uid="uid://cdy5wsixfec7j" path="res://Components/Properties/VelocityComponent.tscn" id="5_pk5fx"]
-[ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_j1pta"]
+[ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_bl4tv"]
+[ext_resource type="PackedScene" uid="uid://b5aeg6dptty7b" path="res://Components/Properties/NameComponent.tscn" id="2_tejr6"]
+[ext_resource type="PackedScene" uid="uid://ge2ca3bxa5qn" path="res://Components/Properties/BloodComponent.tscn" id="3_3jevg"]
+[ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="4_tr35j"]
+[ext_resource type="PackedScene" uid="uid://cdy5wsixfec7j" path="res://Components/Properties/VelocityComponent.tscn" id="5_jaiww"]
+[ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_6omjj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
 radius = 8.0
@@ -34,26 +34,26 @@ collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 floor_block_on_wall = false
-script = ExtResource("1_co8ix")
+script = ExtResource("1_bl4tv")
 name_component = NodePath("NameComponent")
 blood_component = NodePath("BloodComponent")
 toxin_damage = NodePath("ToxinDamage")
 suff_damage = NodePath("SuffDamage")
 velocity_component = NodePath("VelocityComponent")
 
-[node name="NameComponent" parent="." instance=ExtResource("2_p7xgc")]
+[node name="NameComponent" parent="." instance=ExtResource("2_tejr6")]
 
-[node name="BloodComponent" parent="." instance=ExtResource("2_f42at")]
+[node name="BloodComponent" parent="." instance=ExtResource("3_3jevg")]
 
-[node name="ToxinDamage" parent="." instance=ExtResource("3_7yh33")]
+[node name="ToxinDamage" parent="." instance=ExtResource("4_tr35j")]
 
-[node name="SuffDamage" parent="." instance=ExtResource("3_7yh33")]
+[node name="SuffDamage" parent="." instance=ExtResource("4_tr35j")]
 
-[node name="VelocityComponent" parent="." instance=ExtResource("5_pk5fx")]
+[node name="VelocityComponent" parent="." instance=ExtResource("5_jaiww")]
 walk_speed = 6000.0
 run_mod = 2.0
 
-[node name="ControlComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_j1pta")]
+[node name="ControlComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_6omjj")]
 velocity_component = NodePath("../VelocityComponent")
 
 [node name="PhysicalCollider" type="CollisionShape2D" parent="."]

@@ -21,6 +21,12 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:direction")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:is_run")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:is_crawl")
+properties/7/spawn = true
+properties/7/replication_mode = 2
 
 [node name="VelocityComponent" type="Node"]
 script = ExtResource("1_ykycl")
