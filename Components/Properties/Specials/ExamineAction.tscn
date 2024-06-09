@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ib3qeji8r6r0"]
-
-[ext_resource type="PackedScene" uid="uid://be2lme5twesdc" path="res://Components/Properties/Specials/Action.tscn" id="1_duaw6"]
-[ext_resource type="Script" path="res://Scripts/Components/Actions/ExamineAction.gd" id="2_vrl45"]
-
-[node name="ExamineAction" instance=ExtResource("1_duaw6")]
-script = ExtResource("2_vrl45")
-examine = ""
-substitutes = []

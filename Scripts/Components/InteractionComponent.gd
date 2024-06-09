@@ -1,28 +1,33 @@
 extends Area2D
 class_name InteractionComponent
 
+@export_group("Intents")
 @export var help_action : Action
 @export var hurt_action : Action
 @export var resist_action : Action
 @export var grab_action : Action
 
+@export_group("", "")
 @export var examine_action : Action
+@export var default_action : Action
 
-func do_action(intent):
+func do_action(player, intent):
+	var action : Action = null
+	
 	match intent:
 		0:
-			if help_action:
-				help_action.do()
+			action = help_action
 		1:
-			if hurt_action:
-				hurt_action.do()
+			action = hurt_action
 		2:
-			if resist_action:
-				resist_action.do()
+			action = resist_action
 		3:
-			if grab_action:
-				grab_action.do()
+			action = grab_action
+	
+	return Utils.option(
+			action, func(a): return a.do(player, null), 
+			func(): return Utils.option(default_action, func(a): return a.do(player, null))
+		);
 
-func examine():
-	if examine_action:
-		examine_action.do()
+func examine(player):
+	return Utils.option(examine_action, func(a): return a.do(player));

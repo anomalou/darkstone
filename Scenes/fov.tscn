@@ -30,7 +30,7 @@ texture = SubResource("GradientTexture2D_hq1qo")
 script = ExtResource("1_5ue1i")
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2, 2)
 
 [node name="BlockAlpha (beta)" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_jkbxy")

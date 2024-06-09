@@ -1,7 +1,7 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://camckj7rclmus"]
 
-[ext_resource type="Texture2D" uid="uid://cwofjipk8alh0" path="res://Sprites/human.png" id="1_2fqla"]
+[ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="1_kxel5"]
 
 [resource]
-atlas = ExtResource("1_2fqla")
-region = Rect2(0, 165, 33, 33)
+atlas = ExtResource("1_kxel5")
+region = Rect2(0, 0, 32, 32)

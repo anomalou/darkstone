@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=34 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_686lb"]
 [ext_resource type="Script" path="res://Scripts/MaskView.gd" id="1_pdsk8"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dyxeohp5k5vjd" path="res://Scenes/fov.tscn" id="4_kwyvx"]
 [ext_resource type="Shader" uid="uid://ddl8sstnbvb3j" path="res://Shaders/fov_visual.tres" id="4_ofe1k"]
 [ext_resource type="PackedScene" uid="uid://civxfssd814bg" path="res://Components/GUI/game.tscn" id="4_xvxp1"]
-[ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/GUI/saylog.tscn" id="4_yis7i"]
+[ext_resource type="PackedScene" uid="uid://bfrxxnt1w0nv0" path="res://Components/GUI/Saylog.tscn" id="4_yis7i"]
 [ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/main_menu.tscn" id="5_vs0bm"]
 [ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="6_7ga24"]
 [ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/pick_up_list.tscn" id="6_gx8n0"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://doijfwsgxmrh2" path="res://Music/ss14.mp3" id="18_iit50"]
 [ext_resource type="AudioStream" uid="uid://b6vf6pm6sm6ex" path="res://Music/title1.ogg" id="19_27agx"]
 [ext_resource type="AudioStream" uid="uid://bxka7krpthcq4" path="res://Music/spaced.ogg" id="20_cecdm"]
+[ext_resource type="AudioStream" uid="uid://byab7vwx3gy6s" path="res://Music/greytide.mp3" id="24_qijnn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6urq0"]
 shader = ExtResource("2_kbqhn")
@@ -122,40 +123,23 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 physics_object_picking = true
-size = Vector2i(1280, 640)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GUI/Render/Viewport/LitView"]
 color = Color(0.152941, 0.152941, 0.152941, 1)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="GUI/Render/Viewport/LitView"]
-scroll_offset = Vector2(5, 0)
+scroll_offset = Vector2(5, 5)
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="GUI/Render/Viewport/LitView/ParallaxBackground"]
+motion_mirroring = Vector2(1024, 1024)
 
 [node name="Space" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
 material = SubResource("ShaderMaterial_ibl2g")
-position = Vector2(-512, -512)
 texture = ExtResource("6_7ga24")
-region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
-
-[node name="Space2" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
-material = SubResource("ShaderMaterial_ibl2g")
-position = Vector2(512, -512)
-texture = ExtResource("6_7ga24")
-region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
-
-[node name="Space3" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
-material = SubResource("ShaderMaterial_ibl2g")
-position = Vector2(-512, 512)
-texture = ExtResource("6_7ga24")
-region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
-
-[node name="Space4" type="Sprite2D" parent="GUI/Render/Viewport/LitView/ParallaxBackground/ParallaxLayer"]
-material = SubResource("ShaderMaterial_ibl2g")
-position = Vector2(512, 512)
-texture = ExtResource("6_7ga24")
+centered = false
 region_rect = Rect2(190.939, 125.346, 617.957, 662.836)
 
 [node name="Camera" parent="GUI/Render/Viewport/LitView" instance=ExtResource("8_nkj6p")]
@@ -202,6 +186,7 @@ visible = false
 [node name="MusicPlayer" parent="." instance=ExtResource("13_m5li0")]
 music = {
 "endless_space": ExtResource("16_07b1n"),
+"greytide": ExtResource("24_qijnn"),
 "marhaba": ExtResource("17_gipua"),
 "spaced": ExtResource("20_cecdm"),
 "ss14": ExtResource("18_iit50"),
@@ -210,5 +195,5 @@ music = {
 main_menu_music = ExtResource("14_q6urh")
 
 [node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Components/item.tscn", "res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn")
+_spawnable_scenes = PackedStringArray("res://Components/ghost.tscn", "res://Components/player.tscn", "res://Components/Body/Human.tscn", "res://Components/MapLayouts/Toolbox.tscn")
 spawn_path = NodePath("../GUI/Render/Viewport/LitView/Network")

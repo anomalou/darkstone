@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_j1pta"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
-radius = 9.0
+radius = 8.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_523fx"]
 properties/0/path = NodePath(".:position")

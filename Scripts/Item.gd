@@ -1,46 +1,32 @@
-extends RigidBody2D
+extends Node2D
 class_name Item
 
-@export var id : String
+@export var interaction_component : InteractionComponent
+@export var sprite_component : ObjectSpriteComponent
 
-var accumlated_force : Vector2 = Vector2.ZERO
+func get_sprite():
+	return sprite_component.ground
 
-func _ready():
-	gravity_scale = 0
+func update_direction(_direction, mirror = false):
+	sprite_component.mirror = mirror
+	sprite_component.update_direction(_direction)
 
-func _process(_delta):
-	if id != null:
-		var texture_name = ItemData.get_ground_texture_name(id)
-		var tex = load("res://Sprites/Ground/" + texture_name + ".tres")
-		var sprite : Sprite2D = get_child(1)
-		sprite.texture = tex
+func set_equiped():
+	sprite_component.set_in_hand.rpc(false)
 
-# rewrite to signal
-func raise_up():
-	var player = Multiplayer.get_player()
-	if not player:
-		return
-	
-	if player.is_ghost:
-		return
-	
-	var player_body : Body = player.get_body()
-	if not player_body:
-		return
-	if player_body:
-		if player_body.set_slot(PartsComponent.Part.LEFT_ARM, id):
-			Saylog.add.rpc(ItemData.get_pickup_message(id))
-			queue_free()
+func set_unequiped():
+	sprite_component.set_in_hand.rpc(true)
 
-@rpc("any_peer", "call_local")
-func apply_force_rpc(force):
-	apply_force(force)
+func pick_up():
+	sprite_component.set_on_ground.rpc(false)
+	sprite_component.set_in_hand.rpc(true)
+	interaction_component.hide()
+	interaction_component.process_mode = Node.PROCESS_MODE_DISABLED
+	position = Vector2.ZERO
 
-func examine():
-	Saylog.add(ItemData.get_description(id))
+func drop():
+	sprite_component.set_on_ground.rpc(true)
+	sprite_component.set_in_hand.rpc(true)
+	interaction_component.show()
+	interaction_component.process_mode = Node.PROCESS_MODE_PAUSABLE
 
-func _on_input_event(_viewport, event : InputEvent, _shape_idx):
-	if event.is_action_pressed("examine"):
-		examine()
-	elif event.is_action_pressed("left_click"):
-		raise_up()

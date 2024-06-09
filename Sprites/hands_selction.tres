@@ -1,0 +1,17 @@
+[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://11m54j4try1i"]
+
+[ext_resource type="Texture2D" uid="uid://bxw4oqwucq7id" path="res://Sprites/ui.png" id="1_v28tp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq553"]
+atlas = ExtResource("1_v28tp")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhamq"]
+atlas = ExtResource("1_v28tp")
+region = Rect2(32, 32, 32, 32)
+
+[resource]
+frames = 2
+frame_0/texture = SubResource("AtlasTexture_bq553")
+frame_1/texture = SubResource("AtlasTexture_fhamq")
+frame_1/duration = 1.0

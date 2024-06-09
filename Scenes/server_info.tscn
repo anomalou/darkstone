@@ -21,6 +21,9 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:time_left")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:is_local_server")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
 [node name="ServerInfo" type="Node"]
 script = ExtResource("1_5pqcc")

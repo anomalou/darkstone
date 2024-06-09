@@ -1,9 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckirg5heqnofw"]
+[gd_scene load_steps=8 format=3 uid="uid://ckirg5heqnofw"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_vjcah"]
-[ext_resource type="Texture2D" uid="uid://camckj7rclmus" path="res://Sprites/Body/human/left_leg.tres" id="2_sypjt"]
+[ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="2_2uog0"]
+[ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="2_skceo"]
 
-[node name="LeftLeg" instance=ExtResource("1_vjcah")]
-texture = ExtResource("2_sypjt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6xvl"]
+atlas = ExtResource("2_2uog0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4svhw"]
+atlas = ExtResource("2_2uog0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1q7l"]
+atlas = ExtResource("2_2uog0")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b670a"]
+atlas = ExtResource("2_2uog0")
+region = Rect2(64, 0, 32, 32)
+
+[node name="LeftLeg" node_paths=PackedStringArray("clothing_slot") instance=ExtResource("1_vjcah")]
+z_index = 1
+clothing_slot = NodePath("ClothingSlot")
 tag = 6
 connections = Array[int]([5])
+
+[node name="BodyPartSpriteComponent" parent="." index="0"]
+texture = SubResource("AtlasTexture_b6xvl")
+north = SubResource("AtlasTexture_4svhw")
+west = SubResource("AtlasTexture_l1q7l")
+east = SubResource("AtlasTexture_b670a")
+south = SubResource("AtlasTexture_b6xvl")
+
+[node name="ClothingSlot" parent="." index="1" instance=ExtResource("2_skceo")]

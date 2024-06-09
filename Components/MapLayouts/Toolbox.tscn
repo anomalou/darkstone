@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://m8as3p6qukoc"]
+
+[ext_resource type="Texture2D" uid="uid://bbk3qutks7ayo" path="res://Sprites/Ground/toolbox.tres" id="1_8oxe5"]
+[ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_ixuws"]
+[ext_resource type="Texture2D" uid="uid://dilm1bkig1amc" path="res://Sprites/items_asp.png" id="3_sj5nh"]
+[ext_resource type="PackedScene" uid="uid://ib3qeji8r6r0" path="res://Components/Properties/Specials/Actions/ExamineAction.tscn" id="4_sa65x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wui8w"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q42ov"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6601x"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t12fq"]
+atlas = ExtResource("3_sj5nh")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nadn"]
+size = Vector2(26, 12)
+
+[node name="Toolbox" instance=ExtResource("1_ixuws")]
+
+[node name="SpriteComponent" parent="." index="0"]
+texture = ExtResource("1_8oxe5")
+ground = ExtResource("1_8oxe5")
+hand_north = SubResource("AtlasTexture_wui8w")
+hand_west = SubResource("AtlasTexture_q42ov")
+hand_east = SubResource("AtlasTexture_6601x")
+hand_south = SubResource("AtlasTexture_t12fq")
+
+[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("examine_action")]
+examine_action = NodePath("ExamineAction")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]
+shape = SubResource("RectangleShape2D_2nadn")
+
+[node name="ExamineAction" parent="InteractionComponent" index="1" instance=ExtResource("4_sa65x")]
+examine = "Robust"

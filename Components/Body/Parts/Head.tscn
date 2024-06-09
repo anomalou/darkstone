@@ -1,9 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://b26bfu8vssl2o"]
+[gd_scene load_steps=9 format=3 uid="uid://dtykq73f1nejt"]
 
 [ext_resource type="PackedScene" uid="uid://buidvyg6ojpyh" path="res://Components/Body/Parts/BodyPart.tscn" id="1_md8qp"]
-[ext_resource type="Texture2D" uid="uid://rkmu057wuhvb" path="res://Sprites/Body/human/head.tres" id="2_s0x2k"]
+[ext_resource type="Texture2D" uid="uid://pcbflud1jxac" path="res://Sprites/human_asp.png" id="2_kup5f"]
+[ext_resource type="Material" uid="uid://dg68v36jm6ehl" path="res://Shaders/BloodMaterial.tres" id="2_lbgbd"]
+[ext_resource type="PackedScene" uid="uid://q6jjehm6a6fm" path="res://Components/Properties/SlotComponent.tscn" id="3_pot62"]
 
-[node name="Head" instance=ExtResource("1_md8qp")]
-texture = ExtResource("2_s0x2k")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dm1rg"]
+atlas = ExtResource("2_kup5f")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66ppi"]
+atlas = ExtResource("2_kup5f")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le118"]
+atlas = ExtResource("2_kup5f")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m8vb"]
+atlas = ExtResource("2_kup5f")
+region = Rect2(64, 192, 32, 32)
+
+[node name="Head" node_paths=PackedStringArray("clothing_slot") instance=ExtResource("1_md8qp")]
+z_index = 3
+material = ExtResource("2_lbgbd")
+clothing_slot = NodePath("ClothingSlot")
 tag = 1
-connections = Array[int]([2])
+
+[node name="BodyPartSpriteComponent" parent="." index="0"]
+texture = SubResource("AtlasTexture_dm1rg")
+north = SubResource("AtlasTexture_66ppi")
+west = SubResource("AtlasTexture_le118")
+east = SubResource("AtlasTexture_5m8vb")
+south = SubResource("AtlasTexture_dm1rg")
+
+[node name="ClothingSlot" parent="." index="1" instance=ExtResource("3_pot62")]

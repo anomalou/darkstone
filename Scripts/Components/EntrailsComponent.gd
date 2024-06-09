@@ -14,20 +14,18 @@ enum OrganTags {
 @export var required_organs : Array[OrganTags]
 @export var allowed_organs : Array[OrganTags]
 
-@export var toxin_component : DamageComponent
-@export var suff_component : DamageComponent
-
 func inject(organ : OrganComponent):
 	if organ.type in allowed_organs:
 		add_child(organ)
 
 func eject(organ_tag : OrganTags):
+	print_debug("eject method is broken!")
 	for organ in get_children():
 		if organ is OrganComponent:
 			remove_child(organ)
 
 func get_organs():
-	var organs : Array
+	var organs : Array = Array()
 	for organ in get_children():
 		if organ is OrganComponent:
 			organs.append(organ)

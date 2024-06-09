@@ -2,6 +2,7 @@ extends Node
 class_name VelocityComponent
 
 var _velocity : Vector2
+var direction : Constants.Direction = Constants.Direction.SOUTH
 
 @export var walk_speed : float = 3000.0
 @export var run_mod : float = 1.5
@@ -12,14 +13,25 @@ var _velocity : Vector2
 var is_run : bool
 var is_crawl : bool
 
-func accelerate_to(direction : Vector2):
+func accelerate_to(_direction : Vector2):
 	var speed : float = walk_speed
 	if is_run:
 		speed = walk_speed * run_mod
 	if is_crawl:
 		speed = walk_speed * crawl_mod
 	
-	_velocity = _velocity.lerp(direction * speed, 1)
+	if _direction != Vector2.ZERO:
+		if _direction.x < 0:
+			direction = Constants.Direction.WEST
+		else:
+			direction = Constants.Direction.EAST
+		if _direction.y != 0:
+			if _direction.y < 0:
+				direction = Constants.Direction.NORTH
+			else:
+				direction = Constants.Direction.SOUTH
+	
+	_velocity = _velocity.lerp(_direction * speed, 1)
 
 func move(body : CharacterBody2D):
 	body.velocity = _velocity

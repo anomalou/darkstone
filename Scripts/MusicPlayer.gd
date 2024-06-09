@@ -7,6 +7,7 @@ var current_song_name : String
 @export var main_menu_music : AudioStream
 
 @onready var streamer : AudioStreamPlayer2D = $Streamer
+@onready var server_info : ServerInfo = get_node(Constants.server_info)
 
 func _ready():
 	streamer.finished.connect(play_random)
@@ -30,7 +31,8 @@ func play_music(song):
 
 @rpc("authority", "call_local")
 func play_current():
-	await $MultiplayerSynchronizer.synchronized
+	if not server_info.is_local_server:
+		await $MultiplayerSynchronizer.synchronized
 	if current_song_name:
 		play_music(current_song_name)
 
