@@ -64,7 +64,6 @@ canvas_item_default_texture_filter = 0
 title = "Equipment"
 position = Vector2i(0, 250)
 size = Vector2i(308, 308)
-visible = false
 unresizable = true
 min_size = Vector2i(308, 308)
 content_scale_aspect = 4

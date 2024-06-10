@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2wj3o3job3hn"]
+
+[ext_resource type="Texture2D" uid="uid://ce12yiekmnfqx" path="res://Sprites/progress_bar.png" id="1_2bbtd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yefhc"]
+atlas = ExtResource("1_2bbtd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcbdi"]
+atlas = ExtResource("1_2bbtd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj3gx"]
+atlas = ExtResource("1_2bbtd")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="Animation" id="Animation_nndss"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(608, 248), Vector2(608, 240)]
+}
+
+[sub_resource type="Animation" id="Animation_nhmc1"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvwni"]
+_data = {
+"RESET": SubResource("Animation_nhmc1"),
+"open": SubResource("Animation_nndss")
+}
+
+[node name="ProgressBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -72.0
+offset_right = 32.0
+offset_bottom = -7.98907
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.01
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_yefhc")
+texture_over = SubResource("AtlasTexture_bcbdi")
+texture_progress = SubResource("AtlasTexture_kj3gx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvwni")
+}

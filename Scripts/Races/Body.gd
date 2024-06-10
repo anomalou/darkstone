@@ -20,6 +20,7 @@ var max_temperature : float
 var reagents : Dictionary # reagents in blood
 
 @onready var animation : AnimationTree = $AnimationTree
+@onready var fov : FOV = get_node(Constants.fov)
 
 func _enter_tree():
 	set_multiplayer_authority(name.split("_")[0].to_int())
@@ -32,9 +33,13 @@ func _process(_delta):
 	
 	if not is_multiplayer_authority():
 		return
+	
 	state_component.calculate(self)
 
 func _physics_process(delta):
+	if not is_multiplayer_authority():
+		return
+	
 	if not state_component.is_dead:
 		control_component.control(delta)
 		velocity_component.move(self)
@@ -47,12 +52,17 @@ func _process_animation():
 		animation["parameters/Walking/conditions/walk"] = false
 		animation["parameters/Walking/conditions/idle"] = true
 	
-	if velocity_component.is_crawl:
+	if velocity_component.is_crawl or state_component.in_critical or state_component.is_dead:
 		animation["parameters/Crawling/conditions/crawl"] = true
 		animation["parameters/Crawling/conditions/stand"] = false
 	else:
 		animation["parameters/Crawling/conditions/crawl"] = false
 		animation["parameters/Crawling/conditions/stand"] = true
+	
+	if state_component.in_critical or state_component.is_dead:
+		fov.close_eyes()
+	else:
+		fov.open_eyes()
 	
 	parts_component.update_parts_direction(velocity_component.direction)
 

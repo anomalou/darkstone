@@ -42,6 +42,10 @@ suff_damage = NodePath("SuffDamage")
 control_component = NodePath("ControlComponent")
 velocity_component = NodePath("VelocityComponent")
 
+[node name="ProgressBarMarker" type="Marker2D" parent="."]
+position = Vector2(0, -17)
+gizmo_extents = 5.0
+
 [node name="NameComponent" parent="." instance=ExtResource("2_tejr6")]
 
 [node name="BloodComponent" parent="." instance=ExtResource("3_3jevg")]

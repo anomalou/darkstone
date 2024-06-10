@@ -301,7 +301,7 @@ examine = "Just a robust human"
 [node name="Dummy (replace)" type="Node" parent="InteractionComponent" index="3"]
 script = ExtResource("3_lsifc")
 
-[node name="BloodComponent" parent="." index="2"]
+[node name="BloodComponent" parent="." index="3"]
 max_blood_level = 100.0
 
 [node name="StateComponent" parent="." index="4" node_paths=PackedStringArray("blood_component") instance=ExtResource("2_c3jrx")]
@@ -318,7 +318,7 @@ right_leg = NodePath("RightLeg")
 
 [node name="Head" parent="HumanPartsComponent" index="0" node_paths=PackedStringArray("entrails_component") instance=ExtResource("2_l7n8h")]
 material = null
-entrails_component = NodePath("../UpperBody/EntrailsComponent")
+entrails_component = NodePath("EntrailsComponent")
 
 [node name="EntrailsComponent" parent="HumanPartsComponent/Head" index="5" instance=ExtResource("4_p4jxx")]
 
@@ -348,7 +348,7 @@ type = 4
 [node name="Groin" parent="HumanPartsComponent" index="4" node_paths=PackedStringArray("entrails_component") instance=ExtResource("6_ba3ie")]
 entrails_component = NodePath("EntrailsComponent")
 
-[node name="EntrailsComponent" parent="HumanPartsComponent/Groin" index="5" instance=ExtResource("4_p4jxx")]
+[node name="EntrailsComponent" parent="HumanPartsComponent/Groin" index="6" instance=ExtResource("4_p4jxx")]
 
 [node name="Liver" parent="HumanPartsComponent/Groin/EntrailsComponent" index="1" instance=ExtResource("4_dpubf")]
 type = 5
@@ -360,7 +360,7 @@ type = 6
 
 [node name="RightLeg" parent="HumanPartsComponent" index="6" instance=ExtResource("8_sn4tv")]
 
-[node name="ControlComponent" parent="." index="8" node_paths=PackedStringArray("parts_component")]
+[node name="ControlComponent" parent="." index="9" node_paths=PackedStringArray("parts_component")]
 parts_component = NodePath("../HumanPartsComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]

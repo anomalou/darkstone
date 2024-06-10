@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://doijfwsgxmrh2" path="res://Music/ss14.mp3" id="18_iit50"]
 [ext_resource type="AudioStream" uid="uid://b6vf6pm6sm6ex" path="res://Music/title1.ogg" id="19_27agx"]
 [ext_resource type="AudioStream" uid="uid://bxka7krpthcq4" path="res://Music/spaced.ogg" id="20_cecdm"]
-[ext_resource type="AudioStream" uid="uid://byab7vwx3gy6s" path="res://Music/greytide.mp3" id="24_qijnn"]
+[ext_resource type="AudioStream" uid="uid://b6ewobtkvrlxi" path="res://Music/thunderdome.mp3" id="24_1qifm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6urq0"]
 shader = ExtResource("2_kbqhn")
@@ -74,7 +74,6 @@ render_target_update_mode = 4
 script = ExtResource("1_pdsk8")
 
 [node name="FOV" parent="MaskView" instance=ExtResource("4_kwyvx")]
-vision_percent = 1.0
 
 [node name="test_zone" parent="MaskView" instance=ExtResource("1_686lb")]
 material = SubResource("ShaderMaterial_6urq0")
@@ -187,10 +186,10 @@ visible = false
 [node name="MusicPlayer" parent="." instance=ExtResource("13_m5li0")]
 music = {
 "endless_space": ExtResource("16_07b1n"),
-"greytide": ExtResource("24_qijnn"),
 "marhaba": ExtResource("17_gipua"),
 "spaced": ExtResource("20_cecdm"),
 "ss14": ExtResource("18_iit50"),
+"thunderdome": ExtResource("24_1qifm"),
 "title1": ExtResource("19_27agx")
 }
 main_menu_music = ExtResource("14_q6urh")
