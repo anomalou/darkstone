@@ -9,8 +9,17 @@
 properties/0/path = NodePath(".:z_index")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
-[node name="Item" type="Node2D" node_paths=PackedStringArray("interaction_component", "sprite_component")]
+[node name="Item" type="RigidBody2D" node_paths=PackedStringArray("interaction_component", "sprite_component")]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 10.0
 script = ExtResource("1_8q052")
 interaction_component = NodePath("InteractionComponent")
 sprite_component = NodePath("SpriteComponent")

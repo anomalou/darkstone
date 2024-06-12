@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2wj3o3job3hn"]
+[gd_scene load_steps=17 format=3 uid="uid://d2wj3o3job3hn"]
 
 [ext_resource type="Texture2D" uid="uid://ce12yiekmnfqx" path="res://Sprites/progress_bar.png" id="1_2bbtd"]
+[ext_resource type="Script" path="res://Scripts/GUI/ProgressBar.gd" id="1_txllf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yefhc"]
 atlas = ExtResource("1_2bbtd")
@@ -14,13 +15,16 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("1_2bbtd")
 region = Rect2(0, 64, 32, 32)
 
+[sub_resource type="Animation" id="Animation_nhmc1"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_nndss"]
 resource_name = "open"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureProgressBar:modulate")
+tracks/0/path = NodePath("Bar:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
@@ -32,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureProgressBar:position")
+tracks/1/path = NodePath("Bar:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -42,22 +46,55 @@ tracks/1/keys = {
 "values": [Vector2(608, 248), Vector2(608, 240)]
 }
 
-[sub_resource type="Animation" id="Animation_nhmc1"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvwni"]
 _data = {
 "RESET": SubResource("Animation_nhmc1"),
 "open": SubResource("Animation_nndss")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4oorq"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6qkc"]
+animation = &"open"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u5p3b"]
+animation = &"open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xyuro"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vj3r8"]
+advance_mode = 2
+advance_condition = &"open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0w3ed"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"close"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jxip3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hpxj3"]
+states/RESET/node = SubResource("AnimationNodeAnimation_4oorq")
+states/RESET/position = Vector2(361, 100)
+states/close/node = SubResource("AnimationNodeAnimation_m6qkc")
+states/close/position = Vector2(455, 184)
+states/open/node = SubResource("AnimationNodeAnimation_u5p3b")
+states/open/position = Vector2(544, 95)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_xyuro"), "RESET", "open", SubResource("AnimationNodeStateMachineTransition_vj3r8"), "open", "close", SubResource("AnimationNodeStateMachineTransition_0w3ed"), "close", "RESET", SubResource("AnimationNodeStateMachineTransition_jxip3")]
+
 [node name="ProgressBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
+script = ExtResource("1_txllf")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-modulate = Color(1, 1, 1, 0)
+[node name="Bar" type="TextureProgressBar" parent="."]
+modulate = Color(0, 0, 0, 1)
 top_level = true
 layout_mode = 1
 anchors_preset = 8
@@ -65,10 +102,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -72.0
-offset_right = 32.0
-offset_bottom = -7.98907
+offset_right = 64.0
+offset_bottom = 64.011
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -83,3 +118,12 @@ texture_progress = SubResource("AtlasTexture_kj3gx")
 libraries = {
 "": SubResource("AnimationLibrary_gvwni")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvwni")
+}
+tree_root = SubResource("AnimationNodeStateMachine_hpxj3")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/close = false
+parameters/conditions/open = false

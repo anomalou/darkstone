@@ -62,7 +62,7 @@ script = ExtResource("1_yisoy")
 [node name="Equipment" type="Window" parent="."]
 canvas_item_default_texture_filter = 0
 title = "Equipment"
-position = Vector2i(0, 250)
+position = Vector2i(0, 152)
 size = Vector2i(308, 308)
 unresizable = true
 min_size = Vector2i(308, 308)

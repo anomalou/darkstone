@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://m8as3p6qukoc"]
+[gd_scene load_steps=11 format=3 uid="uid://m8as3p6qukoc"]
 
 [ext_resource type="Texture2D" uid="uid://bbk3qutks7ayo" path="res://Sprites/Ground/toolbox.tres" id="1_8oxe5"]
 [ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_ixuws"]
@@ -21,10 +21,14 @@ region = Rect2(224, 0, 32, 32)
 atlas = ExtResource("3_sj5nh")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_caulp"]
+size = Vector2(26, 12)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nadn"]
 size = Vector2(26, 12)
 
 [node name="Toolbox" instance=ExtResource("1_ixuws")]
+mass = 0.1
 
 [node name="SpriteComponent" parent="." index="0"]
 texture = ExtResource("1_8oxe5")
@@ -34,7 +38,10 @@ hand_west = SubResource("AtlasTexture_q42ov")
 hand_east = SubResource("AtlasTexture_6601x")
 hand_south = SubResource("AtlasTexture_t12fq")
 
-[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("examine_action")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_caulp")
+
+[node name="InteractionComponent" parent="." index="2" node_paths=PackedStringArray("examine_action")]
 examine_action = NodePath("ExamineAction")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]

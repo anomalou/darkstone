@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://co2b2ibsj5a4"]
+[gd_scene load_steps=15 format=3 uid="uid://co2b2ibsj5a4"]
 
 [ext_resource type="PackedScene" uid="uid://ymqbnfbw73ow" path="res://Components/MapLayouts/Item.tscn" id="1_q2i8m"]
 [ext_resource type="Texture2D" uid="uid://dilm1bkig1amc" path="res://Sprites/items_asp.png" id="2_j2chm"]
@@ -40,10 +40,14 @@ region = Rect2(224, 32, 32, 32)
 atlas = ExtResource("2_j2chm")
 region = Rect2(160, 32, 32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3e86t"]
+size = Vector2(12, 12)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_raaw8"]
 size = Vector2(12, 12)
 
 [node name="Jumpsuit" instance=ExtResource("1_q2i8m")]
+mass = 0.2
 
 [node name="SpriteComponent" parent="." index="0"]
 texture = SubResource("AtlasTexture_86hor")
@@ -57,7 +61,11 @@ hand_west = SubResource("AtlasTexture_lh621")
 hand_east = SubResource("AtlasTexture_x2p0a")
 hand_south = SubResource("AtlasTexture_uvuca")
 
-[node name="InteractionComponent" parent="." index="1" node_paths=PackedStringArray("examine_action")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_3e86t")
+
+[node name="InteractionComponent" parent="." index="2" node_paths=PackedStringArray("examine_action")]
 examine_action = NodePath("ExamineAction")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent" index="0"]

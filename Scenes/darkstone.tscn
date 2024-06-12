@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=35 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_686lb"]
 [ext_resource type="Script" path="res://Scripts/MaskView.gd" id="1_pdsk8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="6_7ga24"]
 [ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/pick_up_list.tscn" id="6_gx8n0"]
 [ext_resource type="Shader" path="res://Shaders/stars.gdshader" id="7_gdbnd"]
+[ext_resource type="PackedScene" uid="uid://cyb2aircb16y" path="res://Scenes/sheduler.tscn" id="7_y5pou"]
 [ext_resource type="PackedScene" uid="uid://h7eyygyu8d6g" path="res://Scenes/camera.tscn" id="8_nkj6p"]
 [ext_resource type="PackedScene" uid="uid://cie7vvid70fq4" path="res://Scenes/music_player.tscn" id="13_m5li0"]
 [ext_resource type="AudioStream" uid="uid://bk0v6k4vf2tfp" path="res://Music/space_asshole.ogg" id="14_q6urh"]
@@ -99,6 +100,8 @@ material = SubResource("ShaderMaterial_0440u")
 position = Vector2(112, -48)
 
 [node name="ServerInfo" parent="." instance=ExtResource("4_kueen")]
+
+[node name="Sheduler" parent="." instance=ExtResource("7_y5pou")]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

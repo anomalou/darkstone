@@ -58,6 +58,7 @@ script = ExtResource("2_j7tcc")
 [node name="Left" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+mouse_filter = 0
 texture = SubResource("AtlasTexture_j3pfx")
 
 [node name="Texture" type="TextureRect" parent="Left"]
@@ -67,6 +68,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Frame" type="TextureRect" parent="Left"]
 layout_mode = 1
@@ -75,6 +77,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_153eg")
 
 [node name="Animation" type="AnimationPlayer" parent="Left/Frame"]
@@ -86,6 +89,7 @@ autoplay = "selection"
 [node name="Right" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+mouse_filter = 0
 texture = SubResource("AtlasTexture_bvjbb")
 
 [node name="Texture" type="TextureRect" parent="Right"]
@@ -95,6 +99,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Frame" type="TextureRect" parent="Right"]
 layout_mode = 1
@@ -103,6 +108,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_153eg")
 
 [node name="Animation" type="AnimationPlayer" parent="Right/Frame"]
@@ -111,5 +117,5 @@ libraries = {
 }
 autoplay = "selection"
 
-[connection signal="gui_input" from="Left/Texture" to="." method="_on_left_gui_input"]
-[connection signal="gui_input" from="Right/Texture" to="." method="_on_right_gui_input"]
+[connection signal="gui_input" from="Left" to="." method="_on_left_gui_input"]
+[connection signal="gui_input" from="Right" to="." method="_on_right_gui_input"]

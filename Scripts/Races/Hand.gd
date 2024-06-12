@@ -20,7 +20,7 @@ func take_item(item_path) -> bool:
 	if hand_slot.is_empty() == null:
 		return false
 	
-	hand_slot.set_slot.rpc(item_path)
+	hand_slot.set_slot(item_path)
 	var item : Item = hand_slot.get_item()
 	
 	if item:
@@ -37,10 +37,16 @@ func drop_item():
 		return
 	
 	item.drop()
+	item.detach()
 	
-	item.set_multiplayer_authority(1)
-	
-	remove_item()
+	hand_slot.remove_item()
 
+@rpc("any_peer", "call_local")
 func remove_item():
+	var item : Item = hand_slot.get_item()
+	
+	if not item:
+		return
+	
+	item.drop()
 	hand_slot.remove_item()

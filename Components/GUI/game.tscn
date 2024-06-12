@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://civxfssd814bg"]
+[gd_scene load_steps=8 format=3 uid="uid://civxfssd814bg"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/GameControlGUI.gd" id="1_h2lu4"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/GUI/hands.tscn" id="1_ipmtr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bt1jsnwr853lh" path="res://Components/GUI/intents.tscn" id="4_q5xx8"]
 [ext_resource type="PackedScene" uid="uid://dk8doovsio0wn" path="res://Components/GUI/inventory.tscn" id="5_1j47d"]
 [ext_resource type="PackedScene" uid="uid://d2wj3o3job3hn" path="res://Components/GUI/progress_bar.tscn" id="6_07jij"]
+[ext_resource type="PackedScene" uid="uid://8gkqmt0qh5h4" path="res://Components/GUI/throw.tscn" id="7_bh8a8"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -41,3 +42,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Throw" parent="." instance=ExtResource("7_bh8a8")]
+layout_mode = 1

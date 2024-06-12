@@ -13,9 +13,9 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MusicSelector" type="Window" parent="."]
+title = "Music"
 initial_position = 1
 size = Vector2i(200, 300)
-visible = false
 min_size = Vector2i(200, 300)
 script = ExtResource("1_p1855")
 music_item_scene = ExtResource("2_hkbtr")
@@ -64,6 +64,11 @@ text = "Play
 layout_mode = 2
 text = "Stop"
 
+[node name="Volume" type="HSlider" parent="MusicSelector/Player"]
+layout_mode = 2
+min_value = -40.0
+max_value = 0.0
+
 [node name="Music" type="Button" parent="."]
 layout_mode = 1
 offset_right = 54.0
@@ -73,4 +78,5 @@ text = "Music"
 [connection signal="close_requested" from="MusicSelector" to="MusicSelector" method="_on_close_requested"]
 [connection signal="pressed" from="MusicSelector/Player/Control/Play" to="MusicSelector" method="_on_play_pressed"]
 [connection signal="pressed" from="MusicSelector/Player/Control/Stop" to="MusicSelector" method="_on_stop_pressed"]
+[connection signal="value_changed" from="MusicSelector/Player/Volume" to="MusicSelector" method="_on_volume_value_changed"]
 [connection signal="pressed" from="Music" to="MusicSelector" method="_on_music_pressed"]

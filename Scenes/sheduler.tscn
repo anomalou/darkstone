@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyb2aircb16y"]
+
+[ext_resource type="Script" path="res://Scripts/Sheduler.gd" id="1_boqmr"]
+
+[node name="Sheduler" type="Node"]
+script = ExtResource("1_boqmr")
+
+[node name="Timer" type="Timer" parent="."]

@@ -6,7 +6,7 @@ var direction : Constants.Direction = Constants.Direction.SOUTH
 
 @export var walk_speed : float = 3000.0
 @export var run_mod : float = 1.5
-@export var stand_up_speed : float = 3.0
+@export var stand_up_speed : float = 10.0
 @export var crawl_mod : float = 0.5 
 
 @export var force : float = 100.0
@@ -16,6 +16,8 @@ var is_crawl : bool
 
 var stand_up_mod : float = 1.0
 
+@onready var sheduler : Sheduler = get_node(Constants.sheduler)
+
 func accelerate_to(_direction : Vector2):
 	var speed : float = walk_speed
 	if is_run:
@@ -24,6 +26,7 @@ func accelerate_to(_direction : Vector2):
 		speed = walk_speed * crawl_mod
 	
 	if _direction != Vector2.ZERO:
+		sheduler.break_action()
 		if _direction.x < 0:
 			direction = Constants.Direction.WEST
 		else:
@@ -52,5 +55,5 @@ func move(body : CharacterBody2D):
 	accelerate_to(Vector2.ZERO)
 
 func stand_up():
-	await get_tree().create_timer(stand_up_speed * stand_up_mod).timeout
+	sheduler.start_action(round(stand_up_speed * stand_up_mod), func(): is_crawl = false)
 	

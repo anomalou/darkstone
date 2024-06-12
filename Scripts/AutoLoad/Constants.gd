@@ -9,6 +9,7 @@ enum Direction {
 
 # Utils
 @onready var server_info : NodePath = "/root/World/ServerInfo"
+@onready var sheduler : NodePath = "/root/World/Sheduler"
 
 # Function components
 @onready var network : NodePath = "/root/World/GUI/Render/Viewport/LitView/Network"

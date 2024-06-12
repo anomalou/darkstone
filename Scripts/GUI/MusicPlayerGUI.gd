@@ -7,6 +7,7 @@ class_name MusicPlayerGUI
 @onready var current_play : Label = $Player/Label
 
 @onready var player : MusicPlayer = get_node(Constants.music_player)
+@onready var volume_slider : HSlider = $Player/Volume
 
 func _ready():
 	hide()
@@ -35,3 +36,6 @@ func build():
 
 func _on_music_pressed():
 	show()
+
+func _on_volume_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume_slider.value)
