@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://civxfssd814bg"]
+[gd_scene load_steps=10 format=3 uid="uid://civxfssd814bg"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/GameControlGUI.gd" id="1_h2lu4"]
 [ext_resource type="PackedScene" uid="uid://bgdxghnfowkb7" path="res://Components/GUI/hands.tscn" id="1_ipmtr"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dk8doovsio0wn" path="res://Components/GUI/inventory.tscn" id="5_1j47d"]
 [ext_resource type="PackedScene" uid="uid://d2wj3o3job3hn" path="res://Components/GUI/progress_bar.tscn" id="6_07jij"]
 [ext_resource type="PackedScene" uid="uid://8gkqmt0qh5h4" path="res://Components/GUI/throw.tscn" id="7_bh8a8"]
+[ext_resource type="PackedScene" uid="uid://doh7jwo2hplyh" path="res://Components/GUI/doll.tscn" id="8_ba3a8"]
+[ext_resource type="PackedScene" uid="uid://cahqpriixmgqe" path="res://Components/GUI/status.tscn" id="9_t3i5h"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -44,4 +46,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Throw" parent="." instance=ExtResource("7_bh8a8")]
+layout_mode = 1
+
+[node name="Doll" parent="." instance=ExtResource("8_ba3a8")]
+layout_mode = 1
+
+[node name="Status" parent="." instance=ExtResource("9_t3i5h")]
 layout_mode = 1
