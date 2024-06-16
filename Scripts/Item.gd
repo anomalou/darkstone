@@ -2,7 +2,15 @@ extends RigidBody2D
 class_name Item
 
 @export var interaction_component : InteractionComponent
+@export var throwable_component : ThrowableComponent
 @export var sprite_component : ObjectSpriteComponent
+
+var in_air : bool = false
+
+func _physics_process(_delta):
+	if in_air:
+		if abs(linear_velocity) < 0.01:
+			in_air = false
 
 func get_sprite():
 	return sprite_component.ground

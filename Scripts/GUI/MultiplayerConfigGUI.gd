@@ -44,6 +44,6 @@ func _on_connect_button_pressed():
 	var username = username_item.get_text(1)
 	var ip = ip_item.get_text(1)
 	var port = port_item.get_text(1).to_int()
-	Multiplayer.join_server(username, ip, port)
+	await Multiplayer.join_server(username, ip, port)
 	GUIManager.toggle_lobby_gui(true)
 	hide()

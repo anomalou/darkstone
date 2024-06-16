@@ -10,6 +10,7 @@ var direction : Constants.Direction = Constants.Direction.SOUTH
 @export var crawl_mod : float = 0.5 
 
 @export var force : float = 100.0
+@export var throw_force : float = 200.0
 
 var is_run : bool
 var is_crawl : bool
@@ -39,18 +40,24 @@ func accelerate_to(_direction : Vector2):
 	
 	_velocity = _velocity.lerp(_direction * speed, 1)
 
-func move(body : CharacterBody2D):
-	body.velocity = _velocity
+func move(body : RigidBody2D):
+	#if body.test_move(body.transform, Vector2(_velocity.x, 0)):
+		#_velocity = Vector2(0, _velocity.y)
+	#
+	#if body.test_move(body.transform, Vector2(0, _velocity.y)):
+		#_velocity = Vector2(_velocity.x, 0)
+	
+	body.linear_velocity = _velocity
 	
 	var _force : float = force
 	if is_run:
 		_force = force * run_mod
 	
-	if body.move_and_slide():
-		for i in body.get_slide_collision_count():
-			var collision = body.get_slide_collision(i)
-			if collision.get_collider() is Item:
-				collision.get_collider().apply_force_rpc.rpc(collision.get_normal() * -_force)
+	#if body.move_and_slide():
+		#for i in body.get_slide_collision_count():
+			#var collision = body.get_slide_collision(i)
+			#if collision.get_collider() is Item:
+				#collision.get_collider().apply_force_rpc.rpc(collision.get_normal() * -_force)
 	
 	accelerate_to(Vector2.ZERO)
 

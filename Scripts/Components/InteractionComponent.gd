@@ -31,3 +31,4 @@ func do_action(player, intent):
 
 func examine(player):
 	return Utils.option(examine_action, func(a): return a.do(player));
+

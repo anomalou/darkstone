@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ymqbnfbw73ow"]
+[gd_scene load_steps=7 format=3 uid="uid://ymqbnfbw73ow"]
 
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="1_8q052"]
 [ext_resource type="PackedScene" uid="uid://dfq72ojkr6bwa" path="res://Components/Properties/InteractionComponent.tscn" id="1_hqh5v"]
 [ext_resource type="PackedScene" uid="uid://biavnldl3ehm3" path="res://Components/Properties/ObjectSpriteComponent.tscn" id="2_m2d2k"]
+[ext_resource type="PackedScene" uid="uid://c1sbvua5e8on5" path="res://Components/Properties/ThrowableComponent.tscn" id="3_wp8c0"]
 [ext_resource type="PackedScene" uid="uid://dlpbixiu3e7r0" path="res://Components/Properties/Specials/Actions/PickUpAction.tscn" id="4_hhq1a"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o3y32"]
@@ -16,17 +17,21 @@ properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Item" type="RigidBody2D" node_paths=PackedStringArray("interaction_component", "sprite_component")]
+[node name="Item" type="RigidBody2D" node_paths=PackedStringArray("interaction_component", "throwable_component", "sprite_component")]
 collision_layer = 4
 gravity_scale = 0.0
 linear_damp = 10.0
 script = ExtResource("1_8q052")
 interaction_component = NodePath("InteractionComponent")
+throwable_component = NodePath("ThrowableComponent")
 sprite_component = NodePath("SpriteComponent")
 
 [node name="SpriteComponent" parent="." instance=ExtResource("2_m2d2k")]
 
+[node name="ThrowableComponent" parent="." instance=ExtResource("3_wp8c0")]
+
 [node name="InteractionComponent" parent="." node_paths=PackedStringArray("default_action") instance=ExtResource("1_hqh5v")]
+collision_mask = 3
 default_action = NodePath("PickUpAction")
 
 [node name="PickUpAction" parent="InteractionComponent" node_paths=PackedStringArray("item") instance=ExtResource("4_hhq1a")]

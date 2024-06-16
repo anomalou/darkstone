@@ -24,6 +24,9 @@ properties/5/replication_mode = 2
 properties/6/path = NodePath(".:is_local_server")
 properties/6/spawn = true
 properties/6/replication_mode = 2
+properties/7/path = NodePath(".:lobby_music")
+properties/7/spawn = true
+properties/7/replication_mode = 2
 
 [node name="ServerInfo" type="Node"]
 script = ExtResource("1_5pqcc")

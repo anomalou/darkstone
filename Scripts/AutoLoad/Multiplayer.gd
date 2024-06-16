@@ -48,12 +48,14 @@ func host(username, port):
 	
 	_server_info.set_countdown(30.0)
 	music_player.play_random()
+	_server_info.lobby_music = music_player.current_song_name
 	
 
 func join_server(username, ip, port):
 	_username = username
 	
 	_peer.create_client(ip, port)
+	
 	multiplayer.multiplayer_peer = _peer
 	multiplayer.connected_to_server.connect(when_connect)
 	multiplayer.server_disconnected.connect(when_disconnected)
@@ -61,8 +63,9 @@ func join_server(username, ip, port):
 	await  multiplayer.connected_to_server
 	
 	_server_info.discover_player.rpc_id(1, _username)
+	await _server_info.sync()
 	
-	music_player.play_current()
+	music_player.play_music(_server_info.lobby_music)
 
 func when_connect():
 	_is_connected = true
@@ -75,3 +78,6 @@ func get_player() -> Player:
 	if not _player_cache:
 		_player_cache = get_node(str(Constants.network) + "/" + str(get_multiplayer_authority()) + "_player")
 	return _player_cache
+
+func is_host():
+	return get_multiplayer_authority() == 1

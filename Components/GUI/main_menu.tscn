@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/GUI/ConfigurationMenuGUI.gd" id="1_fki57"]
 [ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="2_aofle"]
 [ext_resource type="Shader" path="res://Shaders/stars.gdshader" id="2_vtr30"]
-[ext_resource type="Texture2D" uid="uid://clo0x0kmvogff" path="res://Sprites/gamemode_icons.png" id="3_tqspx"]
+[ext_resource type="Texture2D" uid="uid://i1w8mdkfsq4o" path="res://Sprites/play_button.png" id="4_gnlx0"]
 [ext_resource type="PackedScene" uid="uid://eg1buxmnfxw6" path="res://Components/GUI/multiplayer_config.tscn" id="4_sskeu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5cxq"]
@@ -20,13 +20,13 @@ shader_parameter/near_stars_color = Color(1, 1, 1, 1)
 shader_parameter/base_scroll_speed = 0.0
 shader_parameter/additional_scroll_speed = 0.02
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_khued"]
-atlas = ExtResource("3_tqspx")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_54vfu"]
+atlas = ExtResource("4_gnlx0")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sb380"]
-atlas = ExtResource("3_tqspx")
-region = Rect2(0, 128, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6h3u"]
+atlas = ExtResource("4_gnlx0")
+region = Rect2(64, 0, 64, 64)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -61,19 +61,15 @@ grow_vertical = 2
 [node name="GameModeButtons" type="VBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 
-[node name="Singleplayer" type="Button" parent="MenuContainer/GameModeButtons"]
+[node name="Play" type="TextureButton" parent="MenuContainer/GameModeButtons"]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 shortcut_in_tooltip = false
-icon = SubResource("AtlasTexture_khued")
-flat = true
-
-[node name="Multiplayer" type="Button" parent="MenuContainer/GameModeButtons"]
-layout_mode = 2
-shortcut_in_tooltip = false
-icon = SubResource("AtlasTexture_sb380")
-flat = true
+texture_normal = SubResource("AtlasTexture_54vfu")
+texture_pressed = SubResource("AtlasTexture_j6h3u")
+stretch_mode = 4
 
 [node name="MultiplayerConfig" parent="." instance=ExtResource("4_sskeu")]
 visible = false
 
-[connection signal="pressed" from="MenuContainer/GameModeButtons/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="MenuContainer/GameModeButtons/Play" to="." method="_on_multiplayer_pressed"]

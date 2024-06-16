@@ -8,3 +8,4 @@ func _on_texture_button_toggled(toggled_on):
 		push_error("Somehow player not found")
 	
 	player.throw_mode = toggled_on
+

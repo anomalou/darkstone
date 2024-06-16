@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/FOV.gd" id="1_5ue1i"]
 
 [sub_resource type="Gradient" id="Gradient_k378r"]
-offsets = PackedFloat32Array(0.584775, 0.730104)
+offsets = PackedFloat32Array(0.591695, 0.698962)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hq1qo"]
@@ -99,6 +99,7 @@ transitions = ["Start", "stop", SubResource("AnimationNodeStateMachineTransition
 [node name="FOV" type="PointLight2D"]
 blend_mode = 1
 shadow_enabled = true
+shadow_filter_smooth = 5.0
 texture = SubResource("GradientTexture2D_hq1qo")
 script = ExtResource("1_5ue1i")
 

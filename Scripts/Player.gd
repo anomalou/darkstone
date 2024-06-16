@@ -15,8 +15,9 @@ var camera : Node2D
 
 var throw_mode = false
 var intent : Intent = Intent.HELP
+var doll_selection : PartsComponent.Tag = PartsComponent.Tag.UPPER_BODY
 @export var interact_range : float = 54.0 # 1.5 tile
-@export var throw_force : float = 200.0
+
 
 @onready var interact_marker : PackedScene = preload("res://Scenes/interact.tscn")
 @export var is_ghost : bool = false
@@ -113,7 +114,7 @@ func _input(event):
 	
 	if throw_mode:
 		if event.is_action_pressed("primary"):
-			throw_item(get_global_mouse_position())
+			throw_item()
 	
 	var object = create_marker().get_object()
 	
@@ -123,22 +124,13 @@ func _input(event):
 		if not Utils.option(object, func(o): o.do_action(body, intent)):
 			pass
 
+func set_doll_selection(tag):
+	doll_selection = tag
+
 #TODO test throw move in body
-func throw_item(direction):
-	var _body : Body = get_body()
-	
+func throw_item():
+	var _body = get_body()
 	if not _body:
 		return
 	
-	var hand : Hand = _body.get_hand(_body.get_selected_hand())
-	
-	if not hand:
-		return
-	
-	var item : Item = hand.get_hand_item()
-	
-	if not item:
-		return
-	
-	hand.drop_item.rpc()
-	item.throw.rpc(Vector2(direction - _body.global_position).normalized() * throw_force)
+	_body.throw_item(get_global_mouse_position() - _body.global_position, doll_selection)

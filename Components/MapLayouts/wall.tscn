@@ -10,7 +10,6 @@ region = Rect2(32, 0, 32, 32)
 size = Vector2(32, 32)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4reav"]
-cull_mode = 2
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [node name="Sprite2D" type="Sprite2D"]

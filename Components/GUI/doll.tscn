@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://doh7jwo2hplyh"]
+[gd_scene load_steps=14 format=3 uid="uid://doh7jwo2hplyh"]
 
 [ext_resource type="Texture2D" uid="uid://4j7tokgvte5s" path="res://Sprites/doll.png" id="1_u5rkl"]
+[ext_resource type="Script" path="res://Scripts/GUI/DollPartGUI.gd" id="2_gslk4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82qt6"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -17,6 +18,34 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4k50m"]
 atlas = ExtResource("1_u5rkl")
 region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdhxx"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7t4s"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psoip"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_722ni"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62yn5"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl4bv"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gxd2"]
+atlas = ExtResource("1_u5rkl")
+region = Rect2(192, 32, 32, 32)
 
 [node name="Doll" type="Control"]
 layout_mode = 3
@@ -57,7 +86,113 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 0.00012207
+offset_top = 3.05176e-05
+offset_right = 0.00012207
+offset_bottom = 3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_4k50m")
+
+[node name="Head" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.417
+anchor_top = 0.083
+anchor_right = 0.583
+anchor_bottom = 0.25
+offset_left = -0.0320549
+offset_top = 0.0319972
+offset_right = 0.031929
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_tdhxx")
+body_tag = 1
+
+[node name="UpperBody" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.333
+anchor_top = 0.25
+anchor_right = 0.667
+anchor_bottom = 0.542
+offset_left = 0.0319595
+offset_right = -0.0320892
+offset_bottom = -0.0320206
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_k7t4s")
+body_tag = 2
+
+[node name="RightArm" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.083
+anchor_top = 0.292
+anchor_right = 0.333
+anchor_bottom = 0.625
+offset_left = 0.0319896
+offset_top = -0.032011
+offset_right = 0.0319595
+offset_bottom = -1.90735e-05
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_psoip")
+body_tag = 4
+
+[node name="LeftArm" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.667
+anchor_top = 0.292
+anchor_right = 0.917
+anchor_bottom = 0.625
+offset_left = -0.0320892
+offset_top = -0.032011
+offset_right = -0.0321198
+offset_bottom = -1.90735e-05
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_722ni")
+body_tag = 3
+
+[node name="Groin" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.333
+anchor_top = 0.542
+anchor_right = 0.667
+anchor_bottom = 0.75
+offset_left = 0.0319595
+offset_top = -0.0320206
+offset_right = -0.0320892
+offset_bottom = -3.05176e-05
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_62yn5")
+body_tag = 5
+
+[node name="RightLeg" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.25
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -3.05176e-05
+offset_top = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = -3.05176e-05
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_hl4bv")
+body_tag = 7
+
+[node name="LeftLeg" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_left = -6.10352e-05
+offset_right = -9.91821e-05
+script = ExtResource("2_gslk4")
+selection_sprite = SubResource("AtlasTexture_2gxd2")
+body_tag = 6
+
+[connection signal="gui_input" from="Background/Head" to="Background/Head" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/UpperBody" to="Background/UpperBody" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/RightArm" to="Background/RightArm" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/LeftArm" to="Background/LeftArm" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/Groin" to="Background/Groin" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/RightLeg" to="Background/RightLeg" method="_on_gui_input"]
+[connection signal="gui_input" from="Background/LeftLeg" to="Background/LeftLeg" method="_on_gui_input"]

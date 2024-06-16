@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Body
 
 @export var name_component : NameComponent
@@ -45,7 +45,7 @@ func _physics_process(delta):
 		velocity_component.move(self)
 
 func _process_animation():
-	if velocity != Vector2.ZERO:
+	if linear_velocity != Vector2.ZERO:
 		animation["parameters/Walking/conditions/walk"] = true
 		animation["parameters/Walking/conditions/idle"] = false
 	else:
@@ -87,15 +87,6 @@ func _process_animation():
 		#blood_level = minf(max_blood_level, blood_level + absorbed)
 	#else:
 		#toxin_damage += absorbed * 1.5
-
-# need move reagent behaviour to separated class
-func process_sorbent(_sorbent, _absorbed):
-	# sorbent behaviour realization
-	pass
-
-@warning_ignore("unused_parameter")
-func process_injures(tick_coef):
-	pass
 
 func is_dead():
 	return state_component.is_dead
@@ -175,3 +166,20 @@ func set_slot(part_tag, value):
 
 func is_slot_empty(part_tag) -> bool:
 	return parts_component.get_slot(part_tag).get_item() == null
+
+func get_state():
+	return state_component
+
+func throw_item(direction : Vector2, target : PartsComponent.Tag = PartsComponent.Tag.MISSING):
+	var hand : Hand = get_hand(get_selected_hand())
+	
+	if not hand:
+		return
+	
+	var item : Item = hand.get_hand_item()
+	
+	if not item:
+		return
+	
+	hand.drop_item.rpc()
+	item.throw.rpc(direction.normalized() * velocity_component.throw_force)

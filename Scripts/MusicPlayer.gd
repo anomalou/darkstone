@@ -31,7 +31,7 @@ func play_music(song):
 
 @rpc("authority", "call_local")
 func play_current():
-	if not server_info.is_local_server:
+	if not server_info.is_local_server and not Multiplayer.is_host():
 		await $MultiplayerSynchronizer.synchronized
 	if current_song_name:
 		play_music(current_song_name)

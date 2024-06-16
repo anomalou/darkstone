@@ -17,10 +17,10 @@ func _process(_delta):
 	current_play.text = player.current_song_name
 
 func _on_play_pressed():
-	player.play_current.rpc()
+	player.play_current()
 
 func _on_stop_pressed():
-	player.stop_music.rpc()
+	player.stop_music()
 
 func _on_close_requested():
 	hide()

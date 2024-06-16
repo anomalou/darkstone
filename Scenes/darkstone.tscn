@@ -1,8 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://df6nq0pn78vr6"]
+[gd_scene load_steps=36 format=3 uid="uid://df6nq0pn78vr6"]
 
 [ext_resource type="PackedScene" uid="uid://cwjaibsjbbmd5" path="res://Components/MapLayouts/test_zone.tscn" id="1_686lb"]
 [ext_resource type="Script" path="res://Scripts/MaskView.gd" id="1_pdsk8"]
-[ext_resource type="Shader" path="res://Shaders/white.gdshader" id="2_kbqhn"]
+[ext_resource type="Shader" path="res://Shaders/black.gdshader" id="2_kbqhn"]
 [ext_resource type="PackedScene" uid="uid://djq4es6nanhu5" path="res://Maps/test.tscn" id="2_tgsbp"]
 [ext_resource type="PackedScene" uid="uid://b8cjkbbtxyhc0" path="res://Components/MapLayouts/wall.tscn" id="3_3a4oe"]
 [ext_resource type="PackedScene" uid="uid://bsm4ei3hf1xeb" path="res://Components/GUI/lobby.tscn" id="3_ohlbw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://0uy8dkfg2ftu" path="res://Components/GUI/main_menu.tscn" id="5_vs0bm"]
 [ext_resource type="Texture2D" uid="uid://bt0lekdu21sth" path="res://Sprites/space.png" id="6_7ga24"]
 [ext_resource type="PackedScene" uid="uid://257g88cyc5cn" path="res://Components/GUI/pick_up_list.tscn" id="6_gx8n0"]
+[ext_resource type="Shader" uid="uid://1gh8g0sblxm5" path="res://Shaders/occlusion.tres" id="6_od5sg"]
 [ext_resource type="Shader" path="res://Shaders/stars.gdshader" id="7_gdbnd"]
 [ext_resource type="PackedScene" uid="uid://cyb2aircb16y" path="res://Scenes/sheduler.tscn" id="7_y5pou"]
 [ext_resource type="PackedScene" uid="uid://h7eyygyu8d6g" path="res://Scenes/camera.tscn" id="8_nkj6p"]
@@ -31,10 +32,10 @@
 shader = ExtResource("2_kbqhn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0440u"]
-shader = ExtResource("2_kbqhn")
+shader = ExtResource("6_od5sg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fc6cm"]
-shader = ExtResource("2_kbqhn")
+shader = ExtResource("6_od5sg")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k6vpi"]
 viewport_path = NodePath("MaskView")

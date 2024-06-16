@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsm4ei3hf1xeb"]
+[gd_scene load_steps=7 format=3 uid="uid://bsm4ei3hf1xeb"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/LobbyGUI.gd" id="1_vt5ix"]
 [ext_resource type="Theme" uid="uid://18edxng4tfw2" path="res://Resources/countdown.tres" id="2_ls8p5"]
 [ext_resource type="LabelSettings" uid="uid://vvamxfkq342" path="res://Resources/ready.tres" id="3_lmpg2"]
 [ext_resource type="LabelSettings" uid="uid://ca2baga1pgfue" path="res://Resources/not_ready.tres" id="3_ms0mk"]
+[ext_resource type="Texture2D" uid="uid://ci77mkbtxgp6i" path="res://Sprites/LobbyBackground/vetnam.png" id="5_2i5wq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xxq0t"]
 font_size = 50
@@ -24,6 +25,20 @@ players_ready = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/PlayersReadyCo
 ready_status = NodePath("CountDown/HBoxContainer/LobbyInfoLabels/ReadyStatus/ReadyStatus")
 ready_outline = ExtResource("3_lmpg2")
 not_ready_outline = ExtResource("3_ms0mk")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_2i5wq")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CharacterCreation" type="Window" parent="."]
 visible = false
@@ -139,15 +154,6 @@ layout_mode = 2
 layout_mode = 2
 text = "NOT READY"
 label_settings = ExtResource("3_ms0mk")
-
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="CountDown/HBoxContainer/VBoxContainer/Ready" to="." method="_on_ready_pressed"]

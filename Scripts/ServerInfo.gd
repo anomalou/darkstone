@@ -14,11 +14,11 @@ var host : String
 var online_players : Dictionary # id : Username
 var ready_players : Dictionary # id : path
 
-var game_countdown : int = 180
+var game_countdown : int
 var time_left : int = 0
 var is_game_started : bool = false
 var is_local_server : bool = false
-
+var lobby_music : String
 
 func _ready():
 	_timer = $Timer
@@ -28,7 +28,7 @@ func _ready():
 	_timer.timeout.connect(_countdown)
 
 @rpc("any_peer", "call_local")
-func set_countdown(value):
+func set_countdown(value = 180):
 	game_countdown = value
 	time_left = value
 	if _timer.is_stopped():
@@ -66,9 +66,8 @@ func not_ready():
 		ready_players.erase(id)
 
 @rpc("any_peer", "call_local")
-func update_path(path):
-	print_debug("Not working for not host player") #TODO
-	var id = Multiplayer.get_multiplayer_authority()
+func update_path(id, path):
+	#print_debug("Not working for not host player") #TODO
 	if ready_players.has(id):
 		ready_players[id] = path
 
@@ -96,9 +95,17 @@ func start_game_for(id):
 	
 	var player : Player = _player_scene.instantiate()
 	player.name = str(id) + "_player"
-	_root.add_child(player)
+	_root.add_child(player) # player now client authority
 	player.set_body.rpc_id(id, body.get_path())
 	player.set_alive.rpc_id(id, true)
 	
-	update_path.rpc(player.get_path())
+	update_path(id, player.get_path())
 	GUIManager.toggle_game_gui.rpc_id(id, true)
+
+func is_player_in_game(id):
+	if is_game_started and ready_players.has(id):
+		return true
+	return false
+
+func sync():
+	await $MultiplayerSynchronizer.synchronized
