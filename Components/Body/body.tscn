@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjje8xhmliet6"]
+[gd_scene load_steps=10 format=3 uid="uid://cjje8xhmliet6"]
 
 [ext_resource type="Script" path="res://Scripts/Races/Body.gd" id="1_bl4tv"]
 [ext_resource type="PackedScene" uid="uid://b5aeg6dptty7b" path="res://Components/Properties/NameComponent.tscn" id="2_tejr6"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dhgqr473bveu8" path="res://Components/Properties/DamageComponent.tscn" id="4_tr35j"]
 [ext_resource type="PackedScene" uid="uid://cdy5wsixfec7j" path="res://Components/Properties/VelocityComponent.tscn" id="5_jaiww"]
 [ext_resource type="PackedScene" uid="uid://civkor7n1gcx0" path="res://Components/Properties/ControlComponent.tscn" id="6_6omjj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ftr8e"]
+friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lamsy"]
 radius = 8.0
@@ -31,6 +34,7 @@ properties/4/replication_mode = 1
 z_index = 1
 y_sort_enabled = true
 collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_ftr8e")
 gravity_scale = 0.0
 lock_rotation = true
 continuous_cd = 1

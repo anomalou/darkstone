@@ -40,13 +40,7 @@ func accelerate_to(_direction : Vector2):
 	
 	_velocity = _velocity.lerp(_direction * speed, 1)
 
-func move(body : RigidBody2D):
-	#if body.test_move(body.transform, Vector2(_velocity.x, 0)):
-		#_velocity = Vector2(0, _velocity.y)
-	#
-	#if body.test_move(body.transform, Vector2(0, _velocity.y)):
-		#_velocity = Vector2(_velocity.x, 0)
-	
+func move(body : RigidBody2D, delta):
 	body.linear_velocity = _velocity
 	
 	var _force : float = force

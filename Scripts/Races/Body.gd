@@ -42,7 +42,7 @@ func _physics_process(delta):
 	
 	if not state_component.is_dead:
 		control_component.control(delta)
-		velocity_component.move(self)
+		velocity_component.move(self, delta)
 
 func _process_animation():
 	if linear_velocity != Vector2.ZERO:

@@ -19,18 +19,15 @@ y_sort_enabled = true
 
 [node name="Human" parent="." instance=ExtResource("3_pphan")]
 position = Vector2(-146, -143)
-motion_mode = 1
-floor_block_on_wall = false
+physics_material_override = null
 
 [node name="Human2" parent="." instance=ExtResource("3_pphan")]
 position = Vector2(80, -399)
-motion_mode = 1
-floor_block_on_wall = false
+physics_material_override = null
 
 [node name="Human3" parent="." instance=ExtResource("3_pphan")]
 position = Vector2(-113, 329)
-motion_mode = 1
-floor_block_on_wall = false
+physics_material_override = null
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("CanvasItemMaterial_cdksv")
